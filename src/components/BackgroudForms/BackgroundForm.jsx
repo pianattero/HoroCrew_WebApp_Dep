@@ -59,7 +59,7 @@ export const FormBg = () => {
                     animate={hasScrolled ? "closed" : "open"}
                     transition={{
                         ease: "easeInOut",
-                        duration: 0.5
+                        duration: 0.9
                     }}
                 />
             </defs>

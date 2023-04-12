@@ -22,24 +22,29 @@ export default function ProfileOld() {
                                         <MDBBtn outline color="dark" style={{ height: '36px', overflow: 'visible' }}>
                                             Edit profile
                                         </MDBBtn>
+                                        <MDBCardText className="mb-1 h5">{currentUser.firstName}</MDBCardText>
+
                                     </div>
 
                                 </div>
-
 
                             </div>
                             <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
                                 <div className="d-flex justify-content-end text-center py-1">
                                     <div>
-                                        <MDBCardText className="mb-1 h5">XXXXX</MDBCardText>
+                                        <MDBCardText className="mb-1 h5">{currentUser.firstName}</MDBCardText>
+                                        <MDBCardText className="small text-muted mb-0">Profile</MDBCardText>
+                                    </div>
+                                    <div>
+                                        <MDBCardText className="mb-1 h5">1</MDBCardText>
                                         <MDBCardText className="small text-muted mb-0">Posts</MDBCardText>
                                     </div>
                                     <div className="px-3">
-                                        <MDBCardText className="mb-1 h5">XXXX</MDBCardText>
+                                        <MDBCardText className="mb-1 h5">2</MDBCardText>
                                         <MDBCardText className="small text-muted mb-0">Followers</MDBCardText>
                                     </div>
                                     <div>
-                                        <MDBCardText className="mb-1 h5">XXXX</MDBCardText>
+                                        <MDBCardText className="mb-1 h5">3</MDBCardText>
                                         <MDBCardText className="small text-muted mb-0">Following</MDBCardText>
                                     </div>
                                 </div>

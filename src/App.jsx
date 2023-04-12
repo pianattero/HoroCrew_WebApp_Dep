@@ -7,21 +7,39 @@ import SocialFeed from "./views/Feeds/SocialFeed";
 import AstroFeed from "./views/Feeds/AstrologicalFeed";
 import ProtectedRoute from "./components/Misc/ProtectedRoute/ProtectedRoute";
 import ProfileOld from "./views/Users/Profile/OldProfile";
+import { FormBg } from "./components/BackgroudForms/BackgroundForm";
+import { OtherProfile } from "./views/Users/OthersProfile/OldOtherProfile";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<FormSignUp />} />
+        <Route path="/signup" element={
+          <>
+            <FormBg />
+            <FormSignUp />
+          </>
+        } />
         <Route path="/login" element={<Login />} />
+
         <Route
           path="/profile"
           element={
-            <>
+            <ProtectedRoute>
               <Navbar />
               <ProfileOld />
-            </>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/other"
+          element={
+            <ProtectedRoute>
+              <Navbar />
+              <OtherProfile />
+            </ProtectedRoute>
           }
         />
         <Route
