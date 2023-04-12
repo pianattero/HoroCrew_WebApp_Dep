@@ -14,6 +14,7 @@ export default function ProfileOld() {
                     <MDBCol lg="9" xl="7">
                         <MDBCard>
                             <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: 'black', height: '200px' }}>
+
                                 <div className="ms-4 mt-5 d-flex flex-column" style={{ backgroundColor: 'black' }} >
                                     <MDBCardImage src={Pisces}
                                         alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '80px', zIndex: '1' }} />
@@ -21,12 +22,8 @@ export default function ProfileOld() {
                                         <MDBBtn outline color="dark" style={{ height: '36px', overflow: 'visible' }}>
                                             Edit profile
                                         </MDBBtn>
-
                                     </div>
-                                    <div className="ms-3" style={{ marginTop: '130px' }}>
-                                        <MDBTypography tag="h5">Barbara</MDBTypography>
 
-                                    </div>
                                 </div>
 
 
@@ -35,7 +32,7 @@ export default function ProfileOld() {
                                 <div className="d-flex justify-content-end text-center py-1">
                                     <div>
                                         <MDBCardText className="mb-1 h5">XXXXX</MDBCardText>
-                                        <MDBCardText className="small text-muted mb-0">Photos</MDBCardText>
+                                        <MDBCardText className="small text-muted mb-0">Posts</MDBCardText>
                                     </div>
                                     <div className="px-3">
                                         <MDBCardText className="mb-1 h5">XXXX</MDBCardText>
@@ -57,7 +54,7 @@ export default function ProfileOld() {
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-between align-items-center mb-4">
-                                    <MDBCardText className="lead fw-normal mb-0">Recent photos</MDBCardText>
+                                    <MDBCardText className="lead fw-normal mb-0"> Recent Posts!</MDBCardText>
 
                                 </div>
                                 <MDBRow>
