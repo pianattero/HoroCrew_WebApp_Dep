@@ -6,7 +6,7 @@ import FormSignUp from "./views/misc/Signup/Signup";
 import SocialFeed from "./views/Feeds/SocialFeed";
 import AstroFeed from "./views/Feeds/AstrologicalFeed";
 import ProtectedRoute from "./components/Misc/ProtectedRoute/ProtectedRoute";
-import { Profile } from "./views/Users/Profile/Profile";
+import ProfileOld from "./views/Users/Profile/OldProfile";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           element={
             <>
               <Navbar />
-              <Profile />
+              <ProfileOld />
             </>
           }
         />
