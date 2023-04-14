@@ -1,7 +1,25 @@
 import { NextUIProvider, Card, Grid, Text, Link, Button, Col, Row } from '@nextui-org/react'
 import { AppBack } from '../../../components/BackgroundSigns/Background'
 import "./AstroFeed.css"
+import { horoscopeAstroInfo as horoscopeAstroInfoService } from "../../../services/Apis/HoroscopeAstro";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "../../../context/AuthContext";
+import { AboutSunSign } from "../../../components/AboutSunSign/AboutSunSign";
+
+
 const AstroFeed = () => {
+    const { currentUser } = useContext(AuthContext);
+    const [horoscopeAstroInfo, setHoroscopeAstroInfo] = useState(null);
+    const [showHoroscopeAstroInfo, setShowHoroscopeAstroInfo] = useState(false);
+    useEffect(() => {
+        if (!currentUser) return;
+        horoscopeAstroInfoService(currentUser.sunSign.name.toLowerCase())
+            .then((response) => {
+                setHoroscopeAstroInfo(response.data);
+            })
+            .catch((err) => console.error(err));
+    }, [currentUser]);
+
     return (
 
         <NextUIProvider>
@@ -45,16 +63,25 @@ const AstroFeed = () => {
                                     bottom: 0,
                                     zIndex: 1,
                                 }}>
-
-
                                 <Button
                                     icon
                                     color="dark"
                                     target="_blank"
+                                    onPress={() => {
+                                        setShowHoroscopeAstroInfo(true)
+                                    }}>
 
-                                >
-                                    Get your Sign Today
+                                    Get your horoscope today
+
                                 </Button>
+
+                                <div>
+                                    {showHoroscopeAstroInfo ? (
+                                        <AboutSunSign signData={horoscopeAstroInfo} />
+                                    ) : null}
+                                </div>
+
+                                <div></div>
 
                             </Card.Footer>
                         </Card>
