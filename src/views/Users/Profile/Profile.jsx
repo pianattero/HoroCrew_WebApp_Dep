@@ -50,18 +50,20 @@ export const Profile = () => {
 
     getCurrentUserLikes()
       .then((likes) => {
-        console.log(likes);
         setCurrentUserLikes(likes);
       })
       .catch((err) => console.error(err));
   }, [currentUser]);
 
   return (
-    <div className="gradient-custom-2" style={{ backgroundColor: "#white" }}>
+    <div
+      className="gradient-custom-2"
+      style={{ backgroundColor: "#white", minHeight: "100vh" }}
+    >
       <MDBContainer className="py-3 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="9" xl="7">
-            <MDBCard>
+            <MDBCard style={{ backgroundColor: "#white", minHeight: "100vh" }}>
               <div
                 className="rounded-top text-white d-flex flex-row"
                 style={{ backgroundColor: "black", height: "200px" }}
@@ -105,7 +107,9 @@ export const Profile = () => {
                     </MDBCardText>
                   </div>
                   <div>
-                    <MDBCardText className="mb-1 h5">1</MDBCardText>
+                    <MDBCardText className="mb-1 h5">
+                      {currentUserPosts.length}
+                    </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Posts
                     </MDBCardText>
@@ -125,7 +129,7 @@ export const Profile = () => {
                 </div>
 
                 {/* PRUEBA INICIO */}
-                <div className="d-flex justify-content-center text-center my-3">
+                <div className="d-flex justify-content-center text-center mt-3">
                   <div className="mx-2">
                     <Button
                       text="About You"
@@ -151,86 +155,93 @@ export const Profile = () => {
                       text="Your Likes"
                       onClick={() => {
                         setShowCurrentUserLikes(true);
+                        showCurrentUserAbout && setShowCurrentUserAbout(false);
                         showCurrentUserPosts && setShowCurrentUserPosts(false);
                       }}
                     />
                   </div>
                 </div>
-                {/* PRUEBA FIN */}
               </div>
-              {showCurrentUserAbout ? (
-                <MDBCardBody className="text-black p-4">
-                  <div className="mb-5">
-                    <p className="lead fw-normal">About</p>
-                    <div
-                      className="px-4 text-center"
-                      style={{ backgroundColor: "#f8f9fa" }}
-                    >
-                      <div className="my-4">
-                        <i className="bi bi-sun"></i>
-                        <MDBCardText className="font-italic mb-1">
-                          {currentUser.sunSign.sun}
-                        </MDBCardText>
-                      </div>
-                      <div className="my-4">
-                        <i className="bi bi-moon"></i>
-                        <MDBCardText className="font-italic mb-1">
-                          {currentUser.moonSign.moon}
-                        </MDBCardText>
-                      </div>
-                      <div className="my-4">
-                        <i className="bi bi-arrow-up"></i>
-                        <MDBCardText className="font-italic mb-1">
-                          {currentUser.ascendantSign.ascendant}
-                        </MDBCardText>
+              {/* PRUEBA FIN */}
+              <div>
+                {showCurrentUserAbout ? (
+                  <MDBCardBody className="text-black p-4">
+                    <div className="mb-5">
+                      <div
+                        className="px-4 text-center"
+                        style={{ backgroundColor: "#f8f9fa" }}
+                      >
+                        <div className="mb-4">
+                          <i className="bi bi-sun"></i>
+                          <MDBCardText className="font-italic mb-1">
+                            {currentUser.sunSign.sun}
+                          </MDBCardText>
+                        </div>
+                        <div className="mb-4">
+                          <i className="bi bi-moon"></i>
+                          <MDBCardText className="font-italic mb-1">
+                            {currentUser.moonSign.moon}
+                          </MDBCardText>
+                        </div>
+                        <div className="mb-4">
+                          <i className="bi bi-arrow-up"></i>
+                          <MDBCardText className="font-italic mb-1">
+                            {currentUser.ascendantSign.ascendant}
+                          </MDBCardText>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </MDBCardBody>
-              ) : null}
+                  </MDBCardBody>
+                ) : null}
+              </div>
 
-              {showCurrentUserPosts ? (
-                <div>
-                  <div className="d-flex justify-content-between align-items-center mb-4">
-                    <MDBCardText className="lead fw-normal mb-0">
-                      {" "}
-                      Recent Posts!
-                    </MDBCardText>
-                  </div>
-                  <MDBRow>
-                    <MDBCol className="mb-2">
-                      <MDBCardImage
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                        alt="image 1"
-                        className="w-100 rounded-3"
-                      />
-                    </MDBCol>
-                    <MDBCol className="mb-2">
-                      <MDBCardImage
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                        alt="image 1"
-                        className="w-100 rounded-3"
-                      />
-                    </MDBCol>
-                  </MDBRow>
-                  <MDBRow className="g-2">
-                    <MDBCol className="mb-2">
-                      <MDBCardImage
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                        alt="image 1"
-                        className="w-100 rounded-3"
-                      />
-                    </MDBCol>
-                    <MDBCol className="mb-2">
-                      <MDBCardImage
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                        alt="image 1"
-                        className="w-100 rounded-3"
-                      />
-                    </MDBCol>
-                  </MDBRow>
-                </div>
-              ) : null}
+              <div className="mx-3">
+                {showCurrentUserPosts ? (
+                  currentUserPosts.length > 0 ? (
+                    <div>
+                      {currentUserPosts.map((post) => (
+                        <Posts
+                          key={post.id}
+                          img={Pisces}
+                          firstName={currentUser.firstName}
+                          lastName={currentUser.lastName}
+                          sunSign={currentUser.sunSign.name}
+                          moonSign={currentUser.moonSign.name}
+                          ascendantSign={currentUser.ascendantSign.name}
+                          body={post.body}
+                          postImg={post.image}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    "You don't have any posts yet!"
+                  )
+                ) : null}
+              </div>
+
+              <div className="mx-3">
+                {showCurrentUserLikes ? (
+                  currentUserLikes.length > 0 ? (
+                    <div>
+                      {currentUserLikes.map((like) => (
+                        <Posts
+                          key={like._id}
+                          img={Pisces}
+                          firstName={currentUser.firstName}
+                          lastName={currentUser.lastName}
+                          sunSign={currentUser.sunSign.name}
+                          moonSign={currentUser.moonSign.name}
+                          ascendantSign={currentUser.ascendantSign.name}
+                          body={like.post.body}
+                          postImg={like.post.image}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    "You don't have any likes yet!"
+                  )
+                ) : null}
+              </div>
             </MDBCard>
           </MDBCol>
         </MDBRow>
