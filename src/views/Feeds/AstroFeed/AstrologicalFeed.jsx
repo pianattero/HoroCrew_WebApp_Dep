@@ -1,4 +1,4 @@
-import { NextUIProvider, Card, Grid, Text, Link, Button, Col, Row } from '@nextui-org/react'
+import { NextUIProvider, Card, Grid, Text, Link, Button, Col, Row, Modal, useModal } from '@nextui-org/react'
 import { AppBack } from '../../../components/BackgroundSigns/Background'
 import "./AstroFeed.css"
 import { horoscopeAstroInfo as horoscopeAstroInfoService } from "../../../services/Apis/HoroscopeAstro";
@@ -46,15 +46,6 @@ const AstroFeed = () => {
                                     alt="Card horoscope daily"
                                 />
                             </Card.Body>
-
-                            {/*
-
-                <Card.Body css={{ py: "$2" }}>
-                    <Text>
-                        <h1> Social Feed 1 </h1>
-                    </Text>
-                </Card.Body>
-    */}
                             <Card.Footer isBlurred
                                 css={{
                                     position: "absolute",
