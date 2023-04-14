@@ -1,3 +1,4 @@
+
 import { createHttp } from "./BaseService";
 
 const authenticatedHttp = createHttp(true);
@@ -8,5 +9,14 @@ export const getCurrentUserPosts = () =>
 export const getUserByIdPosts = (id) =>
   authenticatedHttp.get(`/users/${id}/posts`);
 
-export const createPost = (body) =>
-  authenticatedHttp.post("/posts/create", { body });
+
+
+export const newPost = ({
+
+    description,
+}) =>
+    authenticatedHttp.post("/post/new", {
+
+        description,
+    });
+
