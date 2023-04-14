@@ -21,6 +21,10 @@ import { horoscopeAstroInfo as horoscopeAstroInfoService } from "../../../servic
 
 import { getCurrentUserPosts } from "../../../services/PostService";
 import { getCurrentUserLikes } from "../../../services/LikeService";
+import {
+  getCurrentUserFollowers,
+  getCurrentUserFolloweds,
+} from "../../../services/FollowService";
 
 import { AboutSunSign } from "../../../components/AboutSunSign/AboutSunSign";
 import { Button } from "../../../components/Button/Button";
@@ -30,6 +34,9 @@ export const Profile = () => {
   const { currentUser } = useContext(AuthContext);
 
   const [loading, setloading] = useState(true);
+
+  const [currentUserFollowers, setCurrentUserFollowers] = useState([]);
+  const [currentUserFolloweds, setCurrentUserFolloweds] = useState([]);
 
   const [showCurrentUserAbout, setShowCurrentUserAbout] = useState(true);
 
@@ -41,6 +48,18 @@ export const Profile = () => {
 
   useEffect(() => {
     if (!currentUser) return;
+
+    getCurrentUserFollowers()
+      .then((followers) => {
+        setCurrentUserFollowers(followers);
+      })
+      .catch((err) => console.error(err));
+
+    getCurrentUserFolloweds()
+      .then((followeds) => {
+        setCurrentUserFolloweds(followeds);
+      })
+      .catch((err) => console.error(err));
 
     getCurrentUserPosts()
       .then((posts) => {
@@ -115,13 +134,17 @@ export const Profile = () => {
                     </MDBCardText>
                   </div>
                   <div className="px-3">
-                    <MDBCardText className="mb-1 h5">2</MDBCardText>
+                    <MDBCardText className="mb-1 h5">
+                      {currentUserFollowers.length}
+                    </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Followers
                     </MDBCardText>
                   </div>
                   <div>
-                    <MDBCardText className="mb-1 h5">3</MDBCardText>
+                    <MDBCardText className="mb-1 h5">
+                      {currentUserFolloweds.length}
+                    </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Following
                     </MDBCardText>
