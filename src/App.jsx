@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "./views/misc/Login/Login";
 import { Home } from "./views/misc/Home/Home";
 import { Navbar } from "./components/Misc/Navbar/Navbar";
@@ -12,9 +12,15 @@ import { OtherProfile } from "./views/Users/OthersProfile/OldOtherProfile";
 
 
 function App() {
+  const routesWithoutNav = ["/", "signup", "/login"];
+  const location = useLocation();
+
   return (
     <div className="App">
+      {!routesWithoutNav.includes(location.pathname) && <Navbar />}
+
       <Routes>
+        {/* MISC */}
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={
           <>
@@ -24,11 +30,15 @@ function App() {
         } />
         <Route path="/login" element={<Login />} />
 
+
+        {/* PROFILE */}
+   
+
+
         <Route
           path="/profile"
           element={
             <ProtectedRoute>
-              <Navbar />
               <ProfileOld />
             </ProtectedRoute>
           }
@@ -38,16 +48,15 @@ function App() {
           path="/other"
           element={
             <ProtectedRoute>
-              <Navbar />
               <OtherProfile />
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/socialfeed"
           element={
             <ProtectedRoute>
-              <Navbar />
               <SocialFeed />
             </ProtectedRoute>
           }
@@ -56,12 +65,12 @@ function App() {
           path="/astrofeed"
           element={
             <ProtectedRoute>
-              <Navbar />
               <AstroFeed />
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" />} />
+
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );
