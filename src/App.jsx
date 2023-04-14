@@ -6,10 +6,9 @@ import FormSignUp from "./views/misc/Signup/Signup";
 import SocialFeed from "./views/Feeds/SocialFeed";
 import AstroFeed from "./views/Feeds/AstrologicalFeed";
 import ProtectedRoute from "./components/Misc/ProtectedRoute/ProtectedRoute";
-import ProfileOld from "./views/Users/Profile/OldProfile";
+import { Profile } from "./views/Users/Profile/Profile";
 import { FormBg } from "./components/BackgroudForms/BackgroundForm";
 import { OtherProfile } from "./views/Users/OthersProfile/OldOtherProfile";
-
 
 function App() {
   const routesWithoutNav = ["/", "signup", "/login"];
@@ -22,24 +21,23 @@ function App() {
       <Routes>
         {/* MISC */}
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={
-          <>
-            <FormBg />
-            <FormSignUp />
-          </>
-        } />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <FormBg />
+              <FormSignUp />
+            </>
+          }
+        />
         <Route path="/login" element={<Login />} />
 
-
         {/* PROFILE */}
-   
-
-
         <Route
           path="/profile"
           element={
             <ProtectedRoute>
-              <ProfileOld />
+              <Profile />
             </ProtectedRoute>
           }
         />
