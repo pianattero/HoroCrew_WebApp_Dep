@@ -12,13 +12,34 @@ export const Posts = ({
 }) => {
   return (
     <div>
-      <img src={img} />
-      <h4>
-        {firstName} {lastName}
-      </h4>
-      <span>
-        {sunSign} {moonSign} {ascendantSign}
-      </span>
+      <div className="d-flex align-items-center">
+        <img src={img} style={{ height: "25px" }} />
+        <p className="pt-3 mx-3">
+          <strong>
+            {firstName} {lastName}
+          </strong>
+        </p>
+        <span className="d-flex">
+          <div className="px-2">
+            <small>
+              <i className="bi bi-sun px-1"></i>
+              <em>{sunSign}</em>
+            </small>
+          </div>
+          <div className="px-2">
+            <small>
+              <i className="bi bi-moon px-1"></i>
+              <em>{moonSign}</em>
+            </small>
+          </div>
+          <div className="px-2">
+            <small>
+              <i className="bi bi-arrow-up px-1"></i>
+              <em>{ascendantSign}</em>
+            </small>
+          </div>
+        </span>
+      </div>
       <div>
         <p>{body}</p>
         {postImg && <img src={postImg} />}
