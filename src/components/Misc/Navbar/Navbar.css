@@ -8,6 +8,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 0.5rem;
+    position: relative;
 }
 
 .navbar .nav-logo {
@@ -20,6 +21,11 @@
     padding: 2px;
     position: relative;
     z-index: 2;
+}
+
+.navbar .nav-links {
+    position: absolute;
+    z-index: 10000;
 }
 
 .navbar .nav-links ul {
@@ -69,7 +75,7 @@
         opacity: 0;
         transition: all 0.5s;
         margin: 4.5rem 0;
-        z-index: 1;
+        z-index: 0;
     }
 
     .navbar .nav-links.active {
@@ -78,6 +84,7 @@
         opacity: 1;
         transition: all 0.5s;
         align-content: center;
+        z-index: 1;
     }
 
     .navbar .nav-links ul {

@@ -26,9 +26,9 @@ import {
   getCurrentUserFolloweds,
 } from "../../../services/FollowService";
 
-import { AboutSunSign } from "../../../components/AboutSunSign/AboutSunSign";
 import { Button } from "../../../components/Button/Button";
 import { Posts } from "../../../components/Posts/Posts";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
   const { currentUser } = useContext(AuthContext);
@@ -127,24 +127,34 @@ export const Profile = () => {
                   </div>
                   <div>
                     <MDBCardText className="mb-1 h5">
-                      {currentUserPosts.length}
+                      {!currentUserPosts.length ? "0" : currentUserPosts.length}
                     </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Posts
                     </MDBCardText>
                   </div>
                   <div className="px-3">
-                    <MDBCardText className="mb-1 h5">
-                      {currentUserFollowers.length}
-                    </MDBCardText>
+                    <Link
+                      to="/profile/followers"
+                      className="mb-1 h5 text-decoration-none"
+                    >
+                      {!currentUserFollowers.length
+                        ? "0"
+                        : currentUserFollowers.length}
+                    </Link>
                     <MDBCardText className="small text-muted mb-0">
                       Followers
                     </MDBCardText>
                   </div>
                   <div>
-                    <MDBCardText className="mb-1 h5">
-                      {currentUserFolloweds.length}
-                    </MDBCardText>
+                    <Link
+                      to="/profile/followeds"
+                      className="mb-1 h5 text-decoration-none"
+                    >
+                      {!currentUserFolloweds.length
+                        ? "0"
+                        : currentUserFolloweds.length}
+                    </Link>
                     <MDBCardText className="small text-muted mb-0">
                       Following
                     </MDBCardText>
@@ -185,7 +195,7 @@ export const Profile = () => {
                   </div>
                 </div>
               </div>
-              {/* PRUEBA FIN */}
+
               <div>
                 {showCurrentUserAbout ? (
                   <MDBCardBody className="text-black p-4">
