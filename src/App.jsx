@@ -8,9 +8,10 @@ import AstroFeed from "./views/Feeds/AstrologicalFeed";
 import ProtectedRoute from "./components/Misc/ProtectedRoute/ProtectedRoute";
 import { Profile } from "./views/Users/Profile/Profile";
 import { FormBg } from "./components/BackgroudForms/BackgroundForm";
-import { OtherProfile } from "./views/Users/OthersProfile/OldOtherProfile";
 import { FollowersList } from "./views/Users/FollowersList/FollowersList";
 import { OthersProfile } from "./views/Users/OthersProfile/OthersProfile";
+import { Notifications } from "./views/Users/Notifications/Notifications";
+import { NewPost } from "./views/Post/NewPost";
 
 function App() {
   const routesWithoutNav = ["/", "signup", "/login"];
@@ -62,6 +63,15 @@ function App() {
           }
         />
 
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <Notifications />
+            </ProtectedRoute>
+          }
+        />
+
         {/* FEEDS */}
         <Route
           path="/socialfeed"
@@ -71,11 +81,21 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/astrofeed"
           element={
             <ProtectedRoute>
               <AstroFeed />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/new-post"
+          element={
+            <ProtectedRoute>
+              <NewPost />
             </ProtectedRoute>
           }
         />

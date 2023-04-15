@@ -23,16 +23,29 @@ export const Navbar = () => {
         <div className={click ? "nav-links active" : "nav-links"}>
           <ul>
             <li>
-              <NavLink to="/socialFeed">Social Feed</NavLink>
+              <NavLink to="/socialFeed" onClick={handleClick}>
+                Social Feed
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/astroFeed">Astro Feed</NavLink>
+              <NavLink to="/astroFeed" onClick={handleClick}>
+                Astro Feed
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/profile">Profile</NavLink>
+              <NavLink to="/profile" onClick={handleClick}>
+                Profile
+              </NavLink>
             </li>
             <li>
-              <NavLink href="#">Settings</NavLink>
+              <NavLink to="/notifications" onClick={handleClick}>
+                Notifications
+              </NavLink>
+            </li>
+            <li>
+              <NavLink href="#" onClick={handleClick}>
+                Settings
+              </NavLink>
             </li>
           </ul>
         </div>

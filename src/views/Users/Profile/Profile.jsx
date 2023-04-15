@@ -85,30 +85,28 @@ export const Profile = () => {
             <MDBCard style={{ backgroundColor: "#white", minHeight: "100vh" }}>
               <div
                 className="rounded-top text-white d-flex flex-row"
-                style={{ backgroundColor: "black", height: "200px" }}
+                style={{ height: "200px" }}
               >
-                <div
-                  className="ms-4 mt-5 d-flex flex-column"
-                  style={{ backgroundColor: "black" }}
-                >
-                  <MDBCardImage
-                    src={Pisces}
-                    alt="Generic placeholder image"
-                    className="mt-4 mb-2 img-thumbnail"
-                    fluid
-                    style={{ width: "80px", zIndex: "1" }}
-                  />
-                  <div>
-                    <MDBBtn
-                      outline
-                      color="dark"
-                      style={{ height: "36px", overflow: "visible" }}
-                    >
-                      Edit profile
-                    </MDBBtn>
-                    <MDBCardText className="mb-1 h5">
-                      {currentUser.firstName}
-                    </MDBCardText>
+                <div className="mx-4 mt-5 d-flex justify-content-between align-items-center w-100">
+                  <div className="d-flex align-items-center">
+                    <MDBCardImage
+                      src={Pisces}
+                      alt="Generic placeholder image"
+                      className="mt-4 mb-2 img-thumbnail"
+                      fluid
+                      style={{ width: "80px" }}
+                    />
+                    <div>
+                      <MDBCardText className="mt-2 mx-4 h5 text-dark">
+                        {currentUser.firstName}
+                      </MDBCardText>
+                      <MDBCardText className="mt-2 mx-4 h5 text-dark">
+                        {currentUser.lastName}
+                      </MDBCardText>
+                    </div>
+                  </div>
+                  <div className="mt-2">
+                    <Button text="Edit Profile" />
                   </div>
                 </div>
               </div>
@@ -117,14 +115,6 @@ export const Profile = () => {
                 style={{ backgroundColor: "#f8f9fa" }}
               >
                 <div className="d-flex justify-content-end text-center py-1">
-                  <div>
-                    <MDBCardText className="mb-1 mx-4 h5">
-                      {currentUser.firstName}
-                    </MDBCardText>
-                    <MDBCardText className="small text-muted mb-0">
-                      Profile
-                    </MDBCardText>
-                  </div>
                   <div>
                     <MDBCardText className="mb-1 h5">
                       {!currentUserPosts.length ? "0" : currentUserPosts.length}
