@@ -9,6 +9,8 @@ import ProtectedRoute from "./components/Misc/ProtectedRoute/ProtectedRoute";
 import { Profile } from "./views/Users/Profile/Profile";
 import { FormBg } from "./components/BackgroudForms/BackgroundForm";
 import { OtherProfile } from "./views/Users/OthersProfile/OldOtherProfile";
+import { FollowersList } from "./views/Users/FollowersList/FollowersList";
+import { OthersProfile } from "./views/Users/OthersProfile/OthersProfile";
 
 function App() {
   const routesWithoutNav = ["/", "signup", "/login"];
@@ -32,7 +34,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
 
-        {/* PROFILE */}
+        {/* PROFILES */}
         <Route
           path="/profile"
           element={
@@ -43,14 +45,24 @@ function App() {
         />
 
         <Route
-          path="/other"
+          path="/profile/followers"
           element={
             <ProtectedRoute>
-              <OtherProfile />
+              <FollowersList />
             </ProtectedRoute>
           }
         />
 
+        <Route
+          path="/profile/:id"
+          element={
+            <ProtectedRoute>
+              <OthersProfile />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* FEEDS */}
         <Route
           path="/socialfeed"
           element={

@@ -21,15 +21,22 @@ import { horoscopeAstroInfo as horoscopeAstroInfoService } from "../../../servic
 
 import { getCurrentUserPosts } from "../../../services/PostService";
 import { getCurrentUserLikes } from "../../../services/LikeService";
+import {
+  getCurrentUserFollowers,
+  getCurrentUserFolloweds,
+} from "../../../services/FollowService";
 
-import { AboutSunSign } from "../../../components/AboutSunSign/AboutSunSign";
 import { Button } from "../../../components/Button/Button";
 import { Posts } from "../../../components/Posts/Posts";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
   const { currentUser } = useContext(AuthContext);
 
   const [loading, setloading] = useState(true);
+
+  const [currentUserFollowers, setCurrentUserFollowers] = useState([]);
+  const [currentUserFolloweds, setCurrentUserFolloweds] = useState([]);
 
   const [showCurrentUserAbout, setShowCurrentUserAbout] = useState(true);
 
@@ -41,6 +48,18 @@ export const Profile = () => {
 
   useEffect(() => {
     if (!currentUser) return;
+
+    getCurrentUserFollowers()
+      .then((followers) => {
+        setCurrentUserFollowers(followers);
+      })
+      .catch((err) => console.error(err));
+
+    getCurrentUserFolloweds()
+      .then((followeds) => {
+        setCurrentUserFolloweds(followeds);
+      })
+      .catch((err) => console.error(err));
 
     getCurrentUserPosts()
       .then((posts) => {
@@ -108,20 +127,34 @@ export const Profile = () => {
                   </div>
                   <div>
                     <MDBCardText className="mb-1 h5">
-                      {currentUserPosts.length}
+                      {!currentUserPosts.length ? "0" : currentUserPosts.length}
                     </MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
                       Posts
                     </MDBCardText>
                   </div>
                   <div className="px-3">
-                    <MDBCardText className="mb-1 h5">2</MDBCardText>
+                    <Link
+                      to="/profile/followers"
+                      className="mb-1 h5 text-decoration-none"
+                    >
+                      {!currentUserFollowers.length
+                        ? "0"
+                        : currentUserFollowers.length}
+                    </Link>
                     <MDBCardText className="small text-muted mb-0">
                       Followers
                     </MDBCardText>
                   </div>
                   <div>
-                    <MDBCardText className="mb-1 h5">3</MDBCardText>
+                    <Link
+                      to="/profile/followeds"
+                      className="mb-1 h5 text-decoration-none"
+                    >
+                      {!currentUserFolloweds.length
+                        ? "0"
+                        : currentUserFolloweds.length}
+                    </Link>
                     <MDBCardText className="small text-muted mb-0">
                       Following
                     </MDBCardText>
@@ -162,7 +195,7 @@ export const Profile = () => {
                   </div>
                 </div>
               </div>
-              {/* PRUEBA FIN */}
+
               <div>
                 {showCurrentUserAbout ? (
                   <MDBCardBody className="text-black p-4">
