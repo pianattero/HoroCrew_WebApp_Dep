@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserBrief } from "../../../components/UserBrief/UserBrief";
 import AuthContext from "../../../context/AuthContext";
 
 import {
   getCurrentUserFollowers,
   getCurrentUserFolloweds,
+  createFollow,
 } from "../../../services/FollowService";
-import { getUserById } from "../../../services/UserService";
 
 export const FollowersList = () => {
   const { currentUser } = useContext(AuthContext);
-  const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const [loading, setloading] = useState(true);
 
@@ -43,7 +44,8 @@ export const FollowersList = () => {
             <UserBrief
               user={follower.follower}
               key={follower.follower.id}
-              route={`/profile/${follower.follower.id}`}
+              text="View Profile"
+              onClick={() => navigate(`/profile/${follower.follower.id}`)}
             />
           ))}
         </div>

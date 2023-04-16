@@ -8,5 +8,5 @@ export const getCurrentUserPosts = () =>
 export const getUserByIdPosts = (id) =>
   authenticatedHttp.get(`/users/${id}/posts`);
 
-export const newPost = ({ description }) =>
-  authenticatedHttp.post("/post/new", { description });
+export const newPost = ({ body }) =>
+  authenticatedHttp.post("/posts/create", { body });
