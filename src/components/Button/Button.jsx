@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 
 export const Button = ({ text, onClick }) => {
   return (
@@ -6,4 +6,4 @@ export const Button = ({ text, onClick }) => {
       {text}
     </button>
   );
-};
+};*/

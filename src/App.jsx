@@ -3,8 +3,8 @@ import Login from "./views/misc/Login/Login";
 import { Home } from "./views/misc/Home/Home";
 import { Navbar } from "./components/Misc/Navbar/Navbar";
 import FormSignUp from "./views/misc/Signup/Signup";
-import SocialFeed from "./views/Feeds/SocialFeed";
-import AstroFeed from "./views/Feeds/AstrologicalFeed";
+import SocialFeed from "./views/Feeds/SocialFeed/SocialFeed";
+import AstroFeed from "./views/Feeds/AstroFeed/AstrologicalFeed";
 import ProtectedRoute from "./components/Misc/ProtectedRoute/ProtectedRoute";
 import { Profile } from "./views/Users/Profile/Profile";
 import { FormBg } from "./components/BackgroudForms/BackgroundForm";
@@ -36,6 +36,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         {/* PROFILES */}
+
         <Route
           path="/profile"
           element={
