@@ -6,11 +6,16 @@ import FormSignUp from "./views/misc/Signup/Signup";
 import SocialFeed from "./views/Feeds/SocialFeed/SocialFeed";
 import AstroFeed from "./views/Feeds/AstroFeed/AstrologicalFeed";
 import ProtectedRoute from "./components/Misc/ProtectedRoute/ProtectedRoute";
-import ProfileOld from "./views/Users/Profile/OldProfile";
+import { Profile } from "./views/Users/Profile/Profile";
 import { FormBg } from "./components/BackgroudForms/BackgroundForm";
 import { OtherProfile } from "./views/Users/OthersProfile/OldOtherProfile";
+
 import { NewPost } from "./views/Post/Post";
 
+
+
+import { FollowersList } from "./views/Users/FollowersList/FollowersList";
+import { OthersProfile } from "./views/Users/OthersProfile/OthersProfile";
 
 
 function App() {
@@ -24,36 +29,48 @@ function App() {
       <Routes>
         {/* MISC */}
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={
-          <>
-            <FormBg />
-            <FormSignUp />
-          </>
-        } />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <FormBg />
+              <FormSignUp />
+            </>
+          }
+        />
         <Route path="/login" element={<Login />} />
 
-        {/* PROFILE */}
 
-
+        {/* PROFILES */}
 
         <Route
           path="/profile"
           element={
             <ProtectedRoute>
-              <ProfileOld />
+              <Profile />
             </ProtectedRoute>
           }
         />
 
         <Route
-          path="/other"
+          path="/profile/followers"
           element={
             <ProtectedRoute>
-              <OtherProfile />
+              <FollowersList />
             </ProtectedRoute>
           }
         />
 
+        <Route
+          path="/profile/:id"
+          element={
+            <ProtectedRoute>
+              <OthersProfile />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* FEEDS */}
         <Route
           path="/socialfeed"
           element={
