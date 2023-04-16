@@ -6,6 +6,7 @@ import {
   MDBCol,
   MDBContainer,
   MDBRow,
+  MDBCard,
   MDBCardText,
   MDBCardImage,
 } from "mdb-react-ui-kit";
@@ -13,7 +14,7 @@ import Pisces from "../../../assets/images/SignsBack/pisces.png";
 import { Link, useParams } from "react-router-dom";
 
 import { getUserById as getUserByIdService } from "../../../services/UserService";
-import { Button } from "../../../components/Button/Button";
+import { Buttons } from "../../../components/Button/Button";
 import {
   getUserFollowers,
   getUserFolloweds,
@@ -74,7 +75,6 @@ export const OthersProfile = () => {
     getUserByIdPosts(id)
       .then((posts) => {
         setUserPosts(posts);
-        console.log(posts);
       })
       .catch((err) => console.error(err));
 
@@ -109,48 +109,51 @@ export const OthersProfile = () => {
         <div
           className="gradient-custom-2"
           style={{
-            backgroundColor: "#white",
             minHeight: "100vh",
           }}
         >
           <MDBContainer className="py-3 h-100">
             <MDBRow className="justify-content-center align-items-center h-100">
               <MDBCol lg="9" xl="7">
-                <div className="mx-4 mt-5 d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center">
-                    <MDBCardImage
-                      src={Pisces}
-                      alt="Generic placeholder image"
-                      className="mt-4 mb-2 img-thumbnail"
-                      fluid
-                      style={{ width: "80px" }}
-                    />
-                    <div>
-                      <MDBCardText className="mt-2 mx-4 h5 text-dark">
-                        {user.firstName}
-                      </MDBCardText>
-                      <MDBCardText className="mt-2 mx-4 h5 text-dark">
-                        {user.lastName}
-                      </MDBCardText>
+                <MDBCard
+                  style={{
+                    paddingBottom: "50px",
+                  }}
+                >
+                  <div className="mx-4 mt-5 d-flex justify-content-between align-items-center">
+                    <div className="d-flex align-items-center">
+                      <MDBCardImage
+                        src={Pisces}
+                        alt="Generic placeholder image"
+                        className="mt-4 mb-2 img-thumbnail"
+                        fluid
+                        style={{ width: "80px" }}
+                      />
+                      <div>
+                        <MDBCardText className="mt-2 mx-4 h5 text-dark">
+                          {user.firstName}
+                        </MDBCardText>
+                        <MDBCardText className="mt-2 mx-4 h5 text-dark">
+                          {user.lastName}
+                        </MDBCardText>
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <Buttons
+                        text={
+                          userFollowers.some(
+                            (follower) =>
+                              follower.follower.id === currentUser.id
+                          )
+                            ? "Unfollow"
+                            : "Follow"
+                        }
+                        onClick={handleFollow}
+                      />
                     </div>
                   </div>
-                  <div className="mt-2">
-                    <Button
-                      text={
-                        userFollowers.some(
-                          (follower) => follower.follower.id === currentUser.id
-                        )
-                          ? "Unfollow"
-                          : "Follow"
-                      }
-                      onClick={handleFollow}
-                    />
-                  </div>
-                </div>
-                <div
-                  className="p-4 text-black"
-                  style={{ backgroundColor: "#f8f9fa" }}
-                >
+                </MDBCard>
+                <div className="p-4 text-black">
                   <div className="d-flex justify-content-end text-center py-1">
                     <div>
                       <MDBCardText className="mb-1 h5">
@@ -187,7 +190,7 @@ export const OthersProfile = () => {
 
                   <div className="d-flex justify-content-center text-center mt-3">
                     <div className="mx-2">
-                      <Button
+                      <Buttons
                         text="Compatibility"
                         onClick={() => {
                           setShowHoroscopeAstroCompatibility(true);
@@ -197,7 +200,7 @@ export const OthersProfile = () => {
                       />
                     </div>
                     <div className="mx-2">
-                      <Button
+                      <Buttons
                         text="Their Posts"
                         onClick={() => {
                           setShowUserPosts(true);
@@ -208,7 +211,7 @@ export const OthersProfile = () => {
                       />
                     </div>
                     <div className="mx-2">
-                      <Button
+                      <Buttons
                         text="Their Likes"
                         onClick={() => {
                           setShowUserLikes(true);
@@ -219,68 +222,68 @@ export const OthersProfile = () => {
                       />
                     </div>
                   </div>
+                </div>
 
-                  <div className="mx-3">
-                    {showHoroscopeAstroCompatibility &&
-                    horoscopeAstroCompatibility ? (
+                <div style={{ width: "90vw" }}>
+                  {showHoroscopeAstroCompatibility &&
+                  horoscopeAstroCompatibility ? (
+                    <div>
+                      {horoscopeAstroCompatibility.map((sections) => (
+                        <div key={sections.header}>
+                          <p>{sections.header}</p>
+                          <p>{sections.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+
+                <div style={{ width: "90vw" }}>
+                  {showUserPosts ? (
+                    userPosts.length > 0 ? (
                       <div>
-                        {horoscopeAstroCompatibility.map((sections) => (
-                          <div key={sections.header}>
-                            <p>{sections.header}</p>
-                            <p>{sections.text}</p>
-                          </div>
+                        {userPosts.map((post) => (
+                          <Posts
+                            key={post.id}
+                            img={Pisces}
+                            firstName={user.firstName}
+                            lastName={user.lastName}
+                            sunSign={user.sunSign.name}
+                            moonSign={user.moonSign.name}
+                            ascendantSign={user.ascendantSign.name}
+                            body={post.body}
+                            postImg={post.image}
+                          />
                         ))}
                       </div>
-                    ) : null}
-                  </div>
+                    ) : (
+                      `${user.firstName} doesn't have any posts yet!`
+                    )
+                  ) : null}
+                </div>
 
-                  <div className="mx-3">
-                    {showUserPosts ? (
-                      userPosts.length > 0 ? (
-                        <div>
-                          {userPosts.map((post) => (
-                            <Posts
-                              key={post.id}
-                              img={Pisces}
-                              firstName={user.firstName}
-                              lastName={user.lastName}
-                              sunSign={user.sunSign.name}
-                              moonSign={user.moonSign.name}
-                              ascendantSign={user.ascendantSign.name}
-                              body={post.body}
-                              postImg={post.image}
-                            />
-                          ))}
-                        </div>
-                      ) : (
-                        `${user.firstName} doesn't have any posts yet!`
-                      )
-                    ) : null}
-                  </div>
-
-                  <div className="mx-3">
-                    {showUserLikes ? (
-                      userLikes.length > 0 ? (
-                        <div>
-                          {userLikes.map((like) => (
-                            <Posts
-                              key={like._id}
-                              img={Pisces}
-                              firstName={user.firstName}
-                              lastName={user.lastName}
-                              sunSign={user.sunSign.name}
-                              moonSign={user.moonSign.name}
-                              ascendantSign={user.ascendantSign.name}
-                              body={like.post.body}
-                              postImg={like.post.image}
-                            />
-                          ))}
-                        </div>
-                      ) : (
-                        `${user.firstName} doesn't have any likes yet!`
-                      )
-                    ) : null}
-                  </div>
+                <div style={{ width: "90vw" }}>
+                  {showUserLikes ? (
+                    userLikes.length > 0 ? (
+                      <div>
+                        {userLikes.map((like) => (
+                          <Posts
+                            key={like._id}
+                            img={Pisces}
+                            firstName={user.firstName}
+                            lastName={user.lastName}
+                            sunSign={user.sunSign.name}
+                            moonSign={user.moonSign.name}
+                            ascendantSign={user.ascendantSign.name}
+                            body={like.post.body}
+                            postImg={like.post.image}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      `${user.firstName} doesn't have any likes yet!`
+                    )
+                  ) : null}
                 </div>
               </MDBCol>
             </MDBRow>

@@ -1,9 +1,13 @@
-/*import React from "react";
+import React from "react";
 
-export const Button = ({ text, onClick }) => {
+export const Buttons = ({ text, onClick }) => {
   return (
-    <button className="btn btn-secondary" type="button" onClick={onClick}>
+    <button
+      className="border rounded p-1 btn-sm btn"
+      type="button"
+      onClick={onClick}
+    >
       {text}
     </button>
   );
-};*/
+};

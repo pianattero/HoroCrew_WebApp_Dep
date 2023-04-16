@@ -1,11 +1,9 @@
+import React from "react";
 
-
-const SocialFeed = () => {
-    return (
-        <h1> social feed</h1>
-
-
-    )
-}
-export default SocialFeed
-
+export const SocialFeed = () => {
+  return (
+    <div>
+      <h1>See what's happening!</h1>
+    </div>
+  );
+};

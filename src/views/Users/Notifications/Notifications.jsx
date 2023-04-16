@@ -27,7 +27,6 @@ export const Notifications = () => {
 
     getNotifications()
       .then((notifications) => {
-        console.log(notifications);
         setNotifications(notifications);
         //handleRead(notifications);
       })
@@ -37,17 +36,14 @@ export const Notifications = () => {
   return (
     <div className="vh-100">
       {notifications ? (
-        <MDBContainer>
+        <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
           <h1>Notifications</h1>
           {notifications.map((notification) => (
-            <MDBRow
-              key={notification._id}
-              className="justify-content-center align-items-center"
-            >
-              <MDBCol md="9" lg="7" xl="5" className="mt-5">
+            <MDBRow key={notification._id}>
+              <MDBCol md="9" lg="7" xl="5" className="mt-2">
                 <MDBCard style={{ borderRadius: "15px" }}>
                   <MDBCardBody className="p-3">
-                    <div className="d-flex align-items-center text-black">
+                    <div className="d-flex align-items-center text-black mt-2">
                       <div className="flex-shrink-0 d-flex align-items-center">
                         <Link to={`/profile/${notification.notificator.id}`}>
                           <MDBCardImage
@@ -58,7 +54,7 @@ export const Notifications = () => {
                           />
                         </Link>
                       </div>
-                      <div className="d-flex align-items-center justify-content-between flex-grow-1 ms-3 mt-3">
+                      <div className="d-flex align-items-center justify-content-between flex-grow-1 ms-3">
                         <p className="me-4 p-0">
                           <strong>{notification.message}</strong>
                         </p>
