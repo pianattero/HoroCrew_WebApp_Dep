@@ -9,7 +9,6 @@ import {
   MDBCardText,
   MDBCardImage,
 } from "mdb-react-ui-kit";
-import Pisces from "../../../assets/images/SignsBack/pisces.png";
 import "../../../main.css";
 
 import { aztroAPI as aztroAPIService } from "../../../services/Apis/AztroAPI";
@@ -91,7 +90,7 @@ export const Profile = () => {
                 <div className="mx-2 mt-5 d-flex justify-content-between align-items-center w-100 profilBg">
                   <div className="d-flex flex-wrap align-items-center">
                     <MDBCardImage
-                      src={Pisces}
+                      src={currentUser.image}
                       alt="Generic placeholder image"
                       className="me-4 ms-1 my-2 img-thumbnail"
                       fluid
@@ -210,9 +209,8 @@ export const Profile = () => {
                     {currentUserPosts.map((post) => (
                       <Posts
                         key={post.id}
-                        img={Pisces}
+                        img={currentUser.image}
                         firstName={currentUser.firstName}
-                        lastName={currentUser.lastName}
                         sunSign={currentUser.sunSign.name}
                         moonSign={currentUser.moonSign.name}
                         ascendantSign={currentUser.ascendantSign.name}
@@ -237,12 +235,11 @@ export const Profile = () => {
                     {currentUserLikes.map((like) => (
                       <Posts
                         key={like._id}
-                        img={Pisces}
-                        firstName={currentUser.firstName}
-                        lastName={currentUser.lastName}
-                        sunSign={currentUser.sunSign.name}
-                        moonSign={currentUser.moonSign.name}
-                        ascendantSign={currentUser.ascendantSign.name}
+                        img={like.post.user.image}
+                        firstName={like.post.user.firstName}
+                        sunSign={like.post.user.sunSign.name}
+                        moonSign={like.post.user.moonSign.name}
+                        ascendantSign={like.post.user.ascendantSign.name}
                         body={like.post.body}
                         postImg={like.post.image}
                         createdAt={like.post.createdAt}

@@ -10,7 +10,6 @@ import {
 import moment from "moment";
 import AuthContext from "../../../context/AuthContext";
 import { getNotifications } from "../../../services/NotificationService";
-import Aries from "../../../../public/images/Signs/Aries.png";
 import { Link } from "react-router-dom";
 
 export const Notifications = () => {
@@ -40,15 +39,15 @@ export const Notifications = () => {
           <h1>Notifications</h1>
           {notifications.map((notification) => (
             <MDBRow key={notification._id}>
-              <MDBCol md="9" lg="7" xl="5" className="mt-2">
-                <MDBCard style={{ borderRadius: "15px" }}>
+              <MDBCol className="mt-2">
+                <MDBCard style={{ borderRadius: "15px", width: "400px" }}>
                   <MDBCardBody className="p-3">
                     <div className="d-flex align-items-center text-black mt-2">
                       <div className="flex-shrink-0 d-flex align-items-center">
                         <Link to={`/profile/${notification.notificator.id}`}>
                           <MDBCardImage
                             style={{ width: "50px", borderRadius: "10px" }}
-                            src={Aries}
+                            src={notification.notificator.image}
                             alt="Generic placeholder image"
                             fluid
                           />

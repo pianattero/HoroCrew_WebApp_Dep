@@ -32,3 +32,35 @@ export const horoscopeAstroCompatibility = (sign1, sign2) => {
   options2.params.sign2 = sign2;
   return axios.request(options2);
 };
+
+//GET 3 TAROT CARDS
+
+const options3 = {
+  method: "GET",
+  url: "https://horoscope-astrology.p.rapidapi.com/threetarotcards",
+  headers: {
+    "X-RapidAPI-Key": "6559f51934msh7dcfedf306aad75p10c4f0jsnbf280656577f",
+    "X-RapidAPI-Host": "horoscope-astrology.p.rapidapi.com",
+  },
+};
+
+export const horoscopeAstroTarot = () => {
+  return axios.request(options3);
+};
+
+//GET DAILY HORO
+
+const options4 = {
+  method: "GET",
+  url: "https://horoscope-astrology.p.rapidapi.com/horoscope",
+  params: { day: "today", sunsign: "libra" },
+  headers: {
+    "X-RapidAPI-Key": "6559f51934msh7dcfedf306aad75p10c4f0jsnbf280656577f",
+    "X-RapidAPI-Host": "horoscope-astrology.p.rapidapi.com",
+  },
+};
+
+export const horoscopeAstroDaily = (sunsign) => {
+  options4.params.sunsign = sunsign;
+  return axios.request(options4);
+};
