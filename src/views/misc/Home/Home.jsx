@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Animator, Fade, FadeIn, MoveIn, MoveOut, ScrollContainer, ScrollPage, Sticky, StickyIn, Zoom, ZoomIn, batch } from "react-scroll-motion"
 import "./Home.css";
-import imgLogo from "../../../assets/images/Backgrounds/logo2-removebg.png"
+import imgLogo from "../../../assets/images/Backgrounds/bgLogo.png"
 
 import Galaxy from "../../../components/backgrounGalaxy/BackgroundGalaxy";
 
@@ -21,19 +21,22 @@ export const Home = () => {
                 </ScrollPage>
 
                 <ScrollPage page={1}>
+                    <Galaxy />
 
                     <Animator animation={ZoomInScrollOut}>
-                        <span style={{ fontSize: "35px" }}>✨Welcome✨</span>
+                        <span style={{ fontSize: "35px", color: "white" }}>✨Welcome✨</span>
                     </Animator>
                 </ScrollPage>
 
                 <ScrollPage>
+                    <Galaxy />
                     <Animator animation={FadeUp}>
-                        <span style={{ fontSize: "20px" }}> 💑🏼🧘🏾‍♂️👨🏾‍❤️‍💋‍👨🏼 Find Your True Self 👩🏼‍❤️‍👩🏾🧘🏼‍♀️👩🏾‍❤️‍💋‍👩🏿</span>
+                        <span style={{ fontSize: "20px", color: "white" }}> 💑🏼🧘🏾‍♂️👨🏾‍❤️‍💋‍👨🏼 Find Your True Self 👩🏼‍❤️‍👩🏾🧘🏼‍♀️👩🏾‍❤️‍💋‍👩🏿</span>
                     </Animator>
                 </ScrollPage>
                 <ScrollPage>
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }} >
+                    <Galaxy />
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", color: "white" }} >
                         <span style={{ fontSize: "30px" }}>
                             <Animator animation={MoveIn(-1000, 0)}>🐐Capricorn♑</Animator>
                             <Animator animation={MoveIn(1000, 0)}>🐮Taurus♉</Animator>
@@ -51,13 +54,14 @@ export const Home = () => {
                     </div>
                 </ScrollPage>
                 <ScrollPage>
+                    <Galaxy />
                     <Animator animation={batch(Fade(), Sticky())}>
-                        <span style={{ fontSize: "80px" }}>
-                            <Link type="button" className="btn join-btn primary" aria-current="page" to="/login"> 🚨 Already have an account?🤘🏽 </Link>
+                        <span style={{ fontSize: "80px", color: "white" }}>
+                            <Link type="button" className="btn join-btn primary" aria-current="page" to="/login" color="white"> 🚨 Already have an account?🤘🏽 </Link>
                         </span>
                         <br />
-                        <span style={{ fontSize: "80px" }}>
-                            <Link type="button" className="btn join-btn primary" aria-current="page" to="/signup">Join Us ❤️‍🔥 </Link>
+                        <span style={{ fontSize: "80px", color: "white" }}>
+                            <Link type="button" className="btn join-btn primary" aria-current="page" to="/signup" color="white">Join Us ❤️‍🔥 </Link>
                         </span>
                     </Animator>
                 </ScrollPage>
