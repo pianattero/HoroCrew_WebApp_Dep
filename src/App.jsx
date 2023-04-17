@@ -14,6 +14,7 @@ import { Notifications } from "./views/Users/Notifications/Notifications";
 import { NewPost } from "./views/Post/NewPost";
 import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
 
+
 function App() {
   const routesWithoutNav = ["/", "/signup", "/login"];
   const location = useLocation();
@@ -36,6 +37,7 @@ function App() {
         />
         <Route path="/login" element={
           <>
+
             <Login />
           </>
         } />

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { logout as logoutToken } from "../../../stores/AccessTokenStore"
-
+import logo from "../../../assets/images/Backgrounds/bgLogo.png";
 import React, { useState } from "react";
 import "./Navbar.css";
 import hamburguer from "../../../assets/hamburger.svg";
@@ -15,7 +15,9 @@ export const Navbar = () => {
   return (
     <>
       <nav className="navbar">
-
+        <div className="nav-logo">
+          <img src={logo} alt="Logo" className="logo" width="32" height="32" />
+        </div>
         <button className="nav-toggle-btn" onClick={handleClick}>
           <img src={hamburguer} alt="" role="button" draggable="false" />
         </button>
