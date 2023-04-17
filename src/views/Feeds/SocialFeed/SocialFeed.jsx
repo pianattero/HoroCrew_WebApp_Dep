@@ -13,15 +13,13 @@ export const SocialFeed = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    if (!posts) return;
-
     getAllPosts()
       .then((posts) => {
         setPosts(posts);
         setloading(false);
       })
       .catch((err) => console.error(err));
-  }, [posts]);
+  }, []);
 
   return (
     <div className="min-vh-100">
