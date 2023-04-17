@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Animator, Fade, FadeIn, MoveIn, MoveOut, ScrollContainer, ScrollPage, Sticky, StickyIn, Zoom, ZoomIn, batch } from "react-scroll-motion"
 import "./Home.css";
 import imgLogo from "../../../assets/images/Backgrounds/logo2-removebg.png"
+import { AppBack } from "../../../components/BackgroundSigns/Background";
 
 const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn());
 const FadeUp = batch(Fade(), MoveIn(), MoveOut(), Sticky());
@@ -10,13 +11,16 @@ export const Home = () => {
 
         <>
             <ScrollContainer>
+                <AppBack />
                 <ScrollPage page={0}>
+
                     <Animator animation={batch(Sticky(), Fade(), MoveOut(0, -200))}>
                         <img src={imgLogo} />
                     </Animator>
                 </ScrollPage>
 
                 <ScrollPage page={1}>
+
                     <Animator animation={ZoomInScrollOut}>
                         <span style={{ fontSize: "35px" }}>✨Welcome✨</span>
                     </Animator>
