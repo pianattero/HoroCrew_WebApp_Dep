@@ -33,7 +33,9 @@ const AstroFeed = () => {
 
   return (
     <NextUIProvider>
-      <AppBack />
+      <div className="app-back-wrapper">
+        <AppBack />
+      </div>
       <ScrollContainer>
 
         <ScrollPage page={0}>
