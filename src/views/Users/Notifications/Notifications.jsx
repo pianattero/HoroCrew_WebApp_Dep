@@ -34,7 +34,7 @@ export const Notifications = () => {
   }, [currentUser]);
 
   return (
-    <div className="vh-100">
+    <div className="min-vh-100">
       {notifications ? (
         <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
           <h1>Notifications</h1>

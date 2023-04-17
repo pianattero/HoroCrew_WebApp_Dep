@@ -1,6 +1,11 @@
 import { MDBCard, MDBCardBody } from "mdb-react-ui-kit";
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  getCurrentUserPosts,
+  likePost,
+  deletePost,
+} from "../../services/PostService";
 
 export const Posts = ({
   img,
@@ -12,7 +17,23 @@ export const Posts = ({
   body,
   postImg,
   createdAt,
+  postId,
+  userId,
+  currentUser,
 }) => {
+  const [currentUserPosts, setcurrentUserPosts] = useState();
+  const [currentUserLikes, setcurrentUserLikes] = useState();
+
+  const handleDelete = () => {
+    deletePost(postId)
+      .then((res) => {
+        console.info(`Post ${postId} deleted`);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleLike = () => {};
+
   return (
     <div className="my-3">
       <MDBCard>
@@ -51,14 +72,31 @@ export const Posts = ({
               </span>
             </div>
           </div>
-          <div className="d-flex justify-content-between mt-3">
+          <div className="d-flex my-3">
+            <p className="p-0 m-0">{body}</p>
+            {postImg === ![] ? <img src={postImg} /> : null}
+          </div>
+          <div className="d-flex justify-content-between mt-1">
             <div>
-              <p className="p-0 m-0">{body}</p>
-              {postImg === ![] ? <img src={postImg} /> : null}
+              <i
+                className="bi bi-heart-fill me-3"
+                style={{ color: "#8FEBE0" }}
+              ></i>
+              {userId === currentUser ? (
+                <button
+                  style={{ border: "none" }}
+                  onClick={() => handleDelete({ postId })}
+                >
+                  <i
+                    className="bi bi-trash3-fill ms-3"
+                    style={{ color: "#2D5C6D" }}
+                  ></i>
+                </button>
+              ) : null}
             </div>
-            <p className="mt-3 p-0 m-0 text-muted">
+            <p className="p-0 m-0 text-muted">
               <small>
-                <em>{moment(createdAt).startOf(createdAt).fromNow()}</em>
+                <em>{moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}</em>
               </small>
             </p>
           </div>

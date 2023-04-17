@@ -12,6 +12,7 @@ import { FollowersList } from "./views/Users/FollowersList/FollowersList";
 import { OthersProfile } from "./views/Users/OthersProfile/OthersProfile";
 import { Notifications } from "./views/Users/Notifications/Notifications";
 import { NewPost } from "./views/Post/NewPost";
+import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
 
 function App() {
   const routesWithoutNav = ["/", "signup", "/login"];
@@ -51,6 +52,15 @@ function App() {
           element={
             <ProtectedRoute>
               <FollowersList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/profile/followeds"
+          element={
+            <ProtectedRoute>
+              <FollowedsList />
             </ProtectedRoute>
           }
         />

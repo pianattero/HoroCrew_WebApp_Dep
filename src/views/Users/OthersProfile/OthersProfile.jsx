@@ -114,46 +114,55 @@ export const OthersProfile = () => {
         >
           <MDBContainer className="py-3 h-100">
             <MDBRow className="justify-content-center align-items-center h-100">
-              <MDBCol lg="9" xl="7">
-                <MDBCard
-                  style={{
-                    paddingBottom: "50px",
-                  }}
-                >
-                  <div className="mx-4 mt-5 d-flex justify-content-between align-items-center">
-                    <div className="d-flex align-items-center">
-                      <MDBCardImage
-                        src={Pisces}
-                        alt="Generic placeholder image"
-                        className="mt-4 mb-2 img-thumbnail"
-                        fluid
-                        style={{ width: "80px" }}
-                      />
-                      <div>
-                        <MDBCardText className="mt-2 mx-4 h5 text-dark">
-                          {user.firstName}
-                        </MDBCardText>
-                        <MDBCardText className="mt-2 mx-4 h5 text-dark">
-                          {user.lastName}
-                        </MDBCardText>
+              <MDBCol>
+                <MDBCard>
+                  <div
+                    className="rounded d-flex flex-row profilBg"
+                    style={{
+                      paddingBottom: "50px",
+                    }}
+                  >
+                    <div className="mx-2 mt-5 d-flex justify-content-between align-items-center w-100 profilBg">
+                      <div className="d-flex flex-wrap align-items-center">
+                        <MDBCardImage
+                          src={Pisces}
+                          alt="Generic placeholder image"
+                          className="me-4 ms-1 my-2 img-thumbnail"
+                          fluid
+                          style={{ width: "80px" }}
+                        />
+                        <div>
+                          <MDBCardText className="mt-2 h5 text-white">
+                            {user.firstName} {user.lastName}
+                          </MDBCardText>
+                        </div>
                       </div>
-                    </div>
-                    <div className="mt-2">
-                      <Buttons
-                        text={
-                          userFollowers.some(
-                            (follower) =>
-                              follower.follower.id === currentUser.id
-                          )
-                            ? "Unfollow"
-                            : "Follow"
-                        }
-                        onClick={handleFollow}
-                      />
+                      <div className="mt-2 ms-5">
+                        <Buttons
+                          text={
+                            userFollowers.some(
+                              (follower) =>
+                                follower.follower.id === currentUser.id
+                            ) ? (
+                              <span className="d-flex text-danger">
+                                <p className="me-2 mb-0">Unfollow</p>
+                                <i class="bi bi-person-fill-dash"></i>
+                              </span>
+                            ) : (
+                              <span className="d-flex text-danger">
+                                <p className="me-2 mb-0">Follow</p>
+                                <i class="bi bi-person-fill-add"></i>
+                              </span>
+                            )
+                          }
+                          onClick={handleFollow}
+                        />
+                      </div>
                     </div>
                   </div>
                 </MDBCard>
-                <div className="p-4 text-black">
+
+                <div className="py-4 text-black">
                   <div className="d-flex justify-content-end text-center py-1">
                     <div>
                       <MDBCardText className="mb-1 h5">
@@ -187,41 +196,37 @@ export const OthersProfile = () => {
                       </MDBCardText>
                     </div>
                   </div>
+                </div>
 
-                  <div className="d-flex justify-content-center text-center mt-3">
-                    <div className="mx-2">
-                      <Buttons
-                        text="Compatibility"
-                        onClick={() => {
-                          setShowHoroscopeAstroCompatibility(true);
-                          showUserPosts && setShowUserPosts(false);
-                          showUserLikes && setShowUserLikes(false);
-                        }}
-                      />
-                    </div>
-                    <div className="mx-2">
-                      <Buttons
-                        text="Their Posts"
-                        onClick={() => {
-                          setShowUserPosts(true);
-                          showHoroscopeAstroCompatibility &&
-                            setShowHoroscopeAstroCompatibility(false);
-                          showUserLikes && setShowUserLikes(false);
-                        }}
-                      />
-                    </div>
-                    <div className="mx-2">
-                      <Buttons
-                        text="Their Likes"
-                        onClick={() => {
-                          setShowUserLikes(true);
-                          showHoroscopeAstroCompatibility &&
-                            setShowHoroscopeAstroCompatibility(false);
-                          showUserPosts && setShowUserPosts(false);
-                        }}
-                      />
-                    </div>
-                  </div>
+                <div className="d-flex justify-content-around text-center mb-3 py-2 border-top border-bottom">
+                  <Buttons
+                    text="Compatibility"
+                    onClick={() => {
+                      setShowHoroscopeAstroCompatibility(true);
+                      showUserPosts && setShowUserPosts(false);
+                      showUserLikes && setShowUserLikes(false);
+                    }}
+                  />
+
+                  <Buttons
+                    text="Their Posts"
+                    onClick={() => {
+                      setShowUserPosts(true);
+                      showHoroscopeAstroCompatibility &&
+                        setShowHoroscopeAstroCompatibility(false);
+                      showUserLikes && setShowUserLikes(false);
+                    }}
+                  />
+
+                  <Buttons
+                    text="Their Likes"
+                    onClick={() => {
+                      setShowUserLikes(true);
+                      showHoroscopeAstroCompatibility &&
+                        setShowHoroscopeAstroCompatibility(false);
+                      showUserPosts && setShowUserPosts(false);
+                    }}
+                  />
                 </div>
 
                 <div style={{ width: "90vw" }}>
@@ -253,6 +258,8 @@ export const OthersProfile = () => {
                             ascendantSign={user.ascendantSign.name}
                             body={post.body}
                             postImg={post.image}
+                            userId={post.user.id}
+                            currentUser={currentUser.id}
                           />
                         ))}
                       </div>
@@ -277,6 +284,8 @@ export const OthersProfile = () => {
                             ascendantSign={user.ascendantSign.name}
                             body={like.post.body}
                             postImg={like.post.image}
+                            userId={like.post.user}
+                            currentUser={currentUser.id}
                           />
                         ))}
                       </div>

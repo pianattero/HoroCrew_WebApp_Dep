@@ -10,7 +10,7 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import Pisces from "../../../assets/images/SignsBack/pisces.png";
-import "./Profile.css";
+import "../../../main.css";
 
 import { aztroAPI as aztroAPIService } from "../../../services/Apis/AztroAPI";
 import { horoscopeAI as horoscopeAIService } from "../../../services/Apis/HoroscopesAI";
@@ -80,41 +80,37 @@ export const Profile = () => {
     >
       <MDBContainer className="py-3 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
-          <MDBCol lg="9" xl="7">
-            <MDBCard
-              style={{
-                paddingBottom: "50px",
-              }}
-            >
+          <MDBCol>
+            <MDBCard>
               <div
-                className="rounded-top d-flex flex-row"
-                style={{ height: "200px" }}
+                className="rounded d-flex flex-row profilBg"
+                style={{
+                  paddingBottom: "50px",
+                }}
               >
-                <div className="mx-4 mt-5 d-flex justify-content-between align-items-center w-100">
-                  <div className="d-flex align-items-center">
+                <div className="mx-2 mt-5 d-flex justify-content-between align-items-center w-100 profilBg">
+                  <div className="d-flex flex-wrap align-items-center">
                     <MDBCardImage
                       src={Pisces}
                       alt="Generic placeholder image"
-                      className="mt-4 mb-2 img-thumbnail"
+                      className="me-4 ms-1 my-2 img-thumbnail"
                       fluid
                       style={{ width: "80px" }}
                     />
                     <div>
-                      <MDBCardText className="mt-2 mx-4 h5 text-dark">
-                        {currentUser.firstName}
-                      </MDBCardText>
-                      <MDBCardText className="mt-2 mx-4 h5 text-dark">
-                        {currentUser.lastName}
+                      <MDBCardText className="mt-2 h5 text-dark text-white">
+                        {currentUser.firstName} {currentUser.lastName}
                       </MDBCardText>
                     </div>
                   </div>
-                  <div className="mt-2">
+                  <div className="mt-2 ms-5">
                     <Buttons text="Edit Profile" />
                   </div>
                 </div>
               </div>
             </MDBCard>
-            <div className="p-4 text-black">
+
+            <div className="py-4 text-black">
               <div className="d-flex justify-content-end text-center py-1">
                 <div>
                   <MDBCardText className="mb-1 h5">
@@ -153,37 +149,31 @@ export const Profile = () => {
               </div>
             </div>
 
-            <div className="d-flex justify-content-center text-center mt-3">
-              <div className="mx-2">
-                <Buttons
-                  text="About You"
-                  onClick={() => {
-                    setShowCurrentUserAbout(true);
-                    showCurrentUserPosts && setShowCurrentUserPosts(false);
-                    showCurrentUserLikes && setShowCurrentUserLikes(false);
-                  }}
-                />
-              </div>
-              <div className="mx-2">
-                <Buttons
-                  text="Your Posts"
-                  onClick={() => {
-                    setShowCurrentUserPosts(true);
-                    showCurrentUserAbout && setShowCurrentUserAbout(false);
-                    showCurrentUserLikes && setShowCurrentUserLikes(false);
-                  }}
-                />
-              </div>
-              <div className="mx-2">
-                <Buttons
-                  text="Your Likes"
-                  onClick={() => {
-                    setShowCurrentUserLikes(true);
-                    showCurrentUserAbout && setShowCurrentUserAbout(false);
-                    showCurrentUserPosts && setShowCurrentUserPosts(false);
-                  }}
-                />
-              </div>
+            <div className="d-flex justify-content-around text-center mb-3 py-2 border-top border-bottom">
+              <Buttons
+                text="About You"
+                onClick={() => {
+                  setShowCurrentUserAbout(true);
+                  showCurrentUserPosts && setShowCurrentUserPosts(false);
+                  showCurrentUserLikes && setShowCurrentUserLikes(false);
+                }}
+              />
+              <Buttons
+                text="Your Posts"
+                onClick={() => {
+                  setShowCurrentUserPosts(true);
+                  showCurrentUserAbout && setShowCurrentUserAbout(false);
+                  showCurrentUserLikes && setShowCurrentUserLikes(false);
+                }}
+              />
+              <Buttons
+                text="Your Likes"
+                onClick={() => {
+                  setShowCurrentUserLikes(true);
+                  showCurrentUserAbout && setShowCurrentUserAbout(false);
+                  showCurrentUserPosts && setShowCurrentUserPosts(false);
+                }}
+              />
             </div>
 
             <div style={{ width: "90vw" }}>
@@ -229,6 +219,8 @@ export const Profile = () => {
                         body={post.body}
                         postImg={post.image}
                         createdAt={post.createdAt}
+                        userId={post.user}
+                        currentUser={currentUser.id}
                       />
                     ))}
                   </div>
@@ -254,6 +246,8 @@ export const Profile = () => {
                         body={like.post.body}
                         postImg={like.post.image}
                         createdAt={like.post.createdAt}
+                        userId={like.post.user.id}
+                        currentUser={currentUser.id}
                       />
                     ))}
                   </div>

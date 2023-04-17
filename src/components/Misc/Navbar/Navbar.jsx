@@ -44,7 +44,7 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink href="#" onClick={handleClick}>
-                Settings
+                <i className="bi bi-gear-fill"></i>
               </NavLink>
             </li>
           </ul>
