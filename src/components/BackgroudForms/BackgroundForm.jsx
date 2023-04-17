@@ -36,7 +36,7 @@ export const FormBg = () => {
     return (
         <svg
             id="home__svg"
-            style={{ left: 0, top: "-10px" }}
+            style={{ left: 0, top: "-8px" }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1450 960"
         >

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import "./Navbar.css";
 import hamburguer from "../../../assets/hamburger.svg";
-import logo from "../../../assets/images/Backgrounds/logo2-removebg.png";
+
 
 export const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -12,9 +12,6 @@ export const Navbar = () => {
   return (
     <>
       <nav className="navbar">
-        <div className="nav-logo">
-          <img src={logo} alt="Logo" className="logo" width="50" height="50" />
-        </div>
 
         <button className="nav-toggle-btn" onClick={handleClick}>
           <img src={hamburguer} alt="" role="button" draggable="false" />

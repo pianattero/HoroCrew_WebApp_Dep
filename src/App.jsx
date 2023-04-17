@@ -15,7 +15,7 @@ import { NewPost } from "./views/Post/NewPost";
 import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
 
 function App() {
-  const routesWithoutNav = ["/", "signup", "/login"];
+  const routesWithoutNav = ["/", "/signup", "/login"];
   const location = useLocation();
 
   return (
