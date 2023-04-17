@@ -4,7 +4,7 @@ import "./Home.css";
 import imgLogo from "../../../assets/images/Backgrounds/bgLogo.png"
 import { Button, Grid, Link, Spacer } from "@nextui-org/react";
 
-import Galaxy from "../../../components/backgrounGalaxy/BackgroundGalaxy";
+import Galaxy from "../../../components/Backgrounds/backgrounGalaxy/BackgroundGalaxy";
 
 const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn());
 const FadeUp = batch(Fade(), MoveIn(), MoveOut(), Sticky());
@@ -62,7 +62,7 @@ export const Home = () => {
                         <Grid.Container gap={5}>
                             <Grid>
                                 <Link href="/signup">
-                                    <Button shadow color="success" auto>
+                                    <Button size="lg" shadow color="secondary" auto>
                                         Join Us!
                                     </Button>
                                 </Link>
@@ -70,8 +70,8 @@ export const Home = () => {
 
                             <Grid>
                                 <Link href="/login">
-                                    <Button shadow color="primary" auto>
-                                        Already Have An Account?
+                                    <Button size="lg" shadow color="primary" auto>
+                                        Already have an account? Sign In!
                                     </Button>
                                 </Link>
                             </Grid>

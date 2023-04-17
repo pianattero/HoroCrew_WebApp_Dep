@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { logout as logoutToken } from "../../../stores/AccessTokenStore"
 
 import React, { useState } from "react";
 import "./Navbar.css";
@@ -9,6 +10,8 @@ export const Navbar = () => {
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
+
+
   return (
     <>
       <nav className="navbar">
@@ -42,6 +45,11 @@ export const Navbar = () => {
             <li>
               <NavLink href="#" onClick={handleClick}>
                 <i className="bi bi-gear-fill"></i>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/" onClick={logoutToken}>
+                Logout
               </NavLink>
             </li>
           </ul>

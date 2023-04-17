@@ -10,7 +10,7 @@ import {
   Modal,
   useModal,
 } from "@nextui-org/react";
-import { AppBack } from "../../../components/BackgroundSigns/Background";
+import { AppBack } from "../../../components/Backgrounds/BackgroundSigns/Background";
 import "./AstroFeed.css";
 import { horoscopeAstroInfo as horoscopeAstroInfoService } from "../../../services/Apis/HoroscopeAstro";
 import { useContext, useEffect, useState } from "react";

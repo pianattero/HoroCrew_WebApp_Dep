@@ -7,7 +7,7 @@ import { SocialFeed } from "./views/Feeds/SocialFeed/SocialFeed";
 import AstroFeed from "./views/Feeds/AstroFeed/AstrologicalFeed";
 import ProtectedRoute from "./components/Misc/ProtectedRoute/ProtectedRoute";
 import { Profile } from "./views/Users/Profile/Profile";
-import { FormBg } from "./components/BackgroudForms/BackgroundForm";
+import { FormBg } from "./components/Backgrounds/BackgroudForms/BackgroundForm";
 import { FollowersList } from "./views/Users/FollowersList/FollowersList";
 import { OthersProfile } from "./views/Users/OthersProfile/OthersProfile";
 import { Notifications } from "./views/Users/Notifications/Notifications";
@@ -35,7 +35,10 @@ function App() {
           }
         />
         <Route path="/login" element={
-          <Login />} />
+          <>
+            <Login />
+          </>
+        } />
 
         {/* PROFILES */}
 
