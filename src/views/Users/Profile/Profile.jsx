@@ -211,11 +211,12 @@ export const Profile = () => {
                         key={post.id}
                         img={currentUser.image}
                         firstName={currentUser.firstName}
+                        lastName={currentUser.lastName}
                         sunSign={currentUser.sunSign.name}
                         moonSign={currentUser.moonSign.name}
                         ascendantSign={currentUser.ascendantSign.name}
                         body={post.body}
-                        postImg={post.image}
+                        postImgs={post.images}
                         createdAt={post.createdAt}
                         userId={post.user}
                         currentUser={currentUser.id}
@@ -237,11 +238,12 @@ export const Profile = () => {
                         key={like._id}
                         img={like.post.user.image}
                         firstName={like.post.user.firstName}
+                        lastName={like.post.user.lastName}
                         sunSign={like.post.user.sunSign.name}
                         moonSign={like.post.user.moonSign.name}
                         ascendantSign={like.post.user.ascendantSign.name}
                         body={like.post.body}
-                        postImg={like.post.image}
+                        postImgs={like.post.images}
                         createdAt={like.post.createdAt}
                         userId={like.post.user.id}
                         currentUser={currentUser.id}

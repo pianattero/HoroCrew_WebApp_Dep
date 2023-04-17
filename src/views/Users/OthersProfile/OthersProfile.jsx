@@ -10,8 +10,7 @@ import {
   MDBCardText,
   MDBCardImage,
 } from "mdb-react-ui-kit";
-import Pisces from "../../../assets/images/SignsBack/pisces.png";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { getUserById as getUserByIdService } from "../../../services/UserService";
 import { Buttons } from "../../../components/Button/Button";
@@ -28,6 +27,8 @@ import { Posts } from "../../../components/Posts/Posts";
 export const OthersProfile = () => {
   const { currentUser } = useContext(AuthContext);
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
 
@@ -80,7 +81,6 @@ export const OthersProfile = () => {
 
     getUserByIdLikes(id)
       .then((likes) => {
-        console.log(likes);
         setUserLikes(likes);
       })
       .catch((err) => console.error(err));
@@ -98,7 +98,6 @@ export const OthersProfile = () => {
       user.sunSign.name
     )
       .then((response) => {
-        console.log(response.data);
         setHoroscopeAstroCompatibility(response.data);
       })
       .catch((err) => console.error(err));
@@ -138,7 +137,7 @@ export const OthersProfile = () => {
                           </MDBCardText>
                         </div>
                       </div>
-                      <div className="mt-2 ms-5">
+                      <div className="mt-2 ms-5 d-flex flex-column align-items-center">
                         <Buttons
                           text={
                             userFollowers.some(
@@ -147,17 +146,25 @@ export const OthersProfile = () => {
                             ) ? (
                               <span className="d-flex text-danger">
                                 <p className="me-2 mb-0">Unfollow</p>
-                                <i class="bi bi-person-fill-dash mt-1"></i>
+                                <i className="bi bi-person-fill-dash"></i>
                               </span>
                             ) : (
                               <span className="d-flex text-danger">
                                 <p className="me-2 mb-0">Follow</p>
-                                <i class="bi bi-person-fill-add mt-1"></i>
+                                <i className="bi bi-person-fill-add"></i>
                               </span>
                             )
                           }
                           onClick={handleFollow}
                         />
+                        <div>
+                          <i
+                            onClick={() => {
+                              navigate(`/chat/${user.id}`);
+                            }}
+                            className="bi bi-chat"
+                          ></i>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -252,11 +259,12 @@ export const OthersProfile = () => {
                             key={post.id}
                             img={user.image}
                             firstName={user.firstName}
+                            lastName={user.lastName}
                             sunSign={user.sunSign.name}
                             moonSign={user.moonSign.name}
                             ascendantSign={user.ascendantSign.name}
                             body={post.body}
-                            postImg={post.image}
+                            postImgs={post.images}
                             userId={post.user.id}
                             currentUser={currentUser.id}
                           />
@@ -276,12 +284,13 @@ export const OthersProfile = () => {
                           <Posts
                             key={like._id}
                             img={like.post.user.image}
-                            firstName={user.firstName}
-                            sunSign={user.sunSign.name}
-                            moonSign={user.moonSign.name}
-                            ascendantSign={user.ascendantSign.name}
+                            firstName={like.post.user.firstName}
+                            lastName={like.post.user.lastName}
+                            sunSign={like.post.user.sunSign.name}
+                            moonSign={like.post.user.moonSign.name}
+                            ascendantSign={like.post.user.ascendantSign.name}
                             body={like.post.body}
-                            postImg={like.post.image}
+                            postImgs={like.post.images}
                             userId={like.post.user}
                             currentUser={currentUser.id}
                           />

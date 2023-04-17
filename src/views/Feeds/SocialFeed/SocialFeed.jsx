@@ -49,7 +49,7 @@ export const SocialFeed = () => {
                       moonSign={post.user.moonSign.name}
                       ascendantSign={post.user.ascendantSign.name}
                       body={post.body}
-                      postImg={post.image}
+                      postImgs={post.images}
                       createdAt={post.createdAt}
                       postId={post.id}
                       userId={post.user.id}

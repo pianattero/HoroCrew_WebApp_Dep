@@ -15,7 +15,7 @@ export const Posts = ({
   moonSign,
   ascendantSign,
   body,
-  postImg,
+  postImgs,
   createdAt,
   isLiked,
   postId,
@@ -45,10 +45,14 @@ export const Posts = ({
     <div className="my-3">
       <MDBCard>
         <MDBCardBody>
-          <div className="d-flex align-items-center justify-content-between">
+          <div className="d-flex align-items-center justify-content-between flex-wrap">
             <div className="d-flex">
-              <img src={img} style={{ height: "25px" }} />
-              <p className="mx-3 p-0 my-0">
+              <img
+                className="border rounded-circle"
+                src={img}
+                style={{ height: "30px" }}
+              />
+              <p className="mx-3 p-0 my-0 mt-1">
                 <small>
                   <strong>
                     {firstName} {lastName}
@@ -57,8 +61,8 @@ export const Posts = ({
               </p>
             </div>
             <div>
-              <span className="d-flex flex-wrap align-items-center justify-content-center">
-                <div className="px-2">
+              <span className="d-flex  align-items-center justify-content-center pt-2">
+                <div className="pe-2">
                   <small>
                     <i className="bi bi-sun px-1"></i>
                     <em>{sunSign}</em>
@@ -79,9 +83,13 @@ export const Posts = ({
               </span>
             </div>
           </div>
-          <div className="d-flex my-3">
+          <div className="d-flex flex-column align-items-start my-3">
             <p className="p-0 m-0">{body}</p>
-            {postImg === ![] ? <img src={postImg} /> : null}
+            <div className="d-flex">
+              {postImgs.map((img) => (
+                <img style={{ height: "100px" }} key={img} src={img} />
+              ))}
+            </div>
           </div>
           <div className="d-flex justify-content-between mt-1">
             <div>
