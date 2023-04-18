@@ -7,10 +7,9 @@ import {
   MDBCardBody,
   MDBCardImage,
 } from "mdb-react-ui-kit";
-import Aries from "../../../public/images/Signs/Aries.png";
 import { Buttons } from "../Button/Button";
 
-export const UserBrief = ({ user, text, onClick }) => {
+export const UserBrief = ({ user, text, onClick, img }) => {
   return (
     <div>
       <MDBContainer className="d-flex align-items-start min-vw-100">
@@ -22,7 +21,7 @@ export const UserBrief = ({ user, text, onClick }) => {
                   <div className="d-flex align-items-center">
                     <MDBCardImage
                       style={{ width: "80px", borderRadius: "10px" }}
-                      src={Aries}
+                      src={img}
                       alt="Generic placeholder image"
                       fluid
                     />

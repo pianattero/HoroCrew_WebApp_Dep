@@ -17,6 +17,7 @@ export const Posts = ({
   body,
   postImg,
   createdAt,
+  isLiked,
   postId,
   userId,
   currentUser,
@@ -32,7 +33,13 @@ export const Posts = ({
       .catch((err) => console.error(err));
   };
 
-  const handleLike = () => {};
+  const handleLike = () => {
+    likePost(postId)
+      .then((res) => {
+        console.info(res);
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className="my-3">
@@ -78,10 +85,23 @@ export const Posts = ({
           </div>
           <div className="d-flex justify-content-between mt-1">
             <div>
-              <i
-                className="bi bi-heart-fill me-3"
-                style={{ color: "#8FEBE0" }}
-              ></i>
+              <button
+                style={{ border: "none" }}
+                onClick={() => handleLike({ postId })}
+              >
+                {isLiked ? (
+                  <i
+                    className="bi bi-heart-fill me-3"
+                    style={{ color: "#8FEBE0" }}
+                  ></i>
+                ) : (
+                  <i
+                    className="bi bi-heart me-3"
+                    style={{ color: "#8FEBE0" }}
+                  ></i>
+                )}
+              </button>
+
               {userId === currentUser ? (
                 <button
                   style={{ border: "none" }}

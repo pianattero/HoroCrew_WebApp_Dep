@@ -80,6 +80,7 @@ export const OthersProfile = () => {
 
     getUserByIdLikes(id)
       .then((likes) => {
+        console.log(likes);
         setUserLikes(likes);
       })
       .catch((err) => console.error(err));
@@ -125,7 +126,7 @@ export const OthersProfile = () => {
                     <div className="mx-2 mt-5 d-flex justify-content-between align-items-center w-100 profilBg">
                       <div className="d-flex flex-wrap align-items-center">
                         <MDBCardImage
-                          src={Pisces}
+                          src={user.image}
                           alt="Generic placeholder image"
                           className="me-4 ms-1 my-2 img-thumbnail"
                           fluid
@@ -146,12 +147,12 @@ export const OthersProfile = () => {
                             ) ? (
                               <span className="d-flex text-danger">
                                 <p className="me-2 mb-0">Unfollow</p>
-                                <i class="bi bi-person-fill-dash"></i>
+                                <i class="bi bi-person-fill-dash mt-1"></i>
                               </span>
                             ) : (
                               <span className="d-flex text-danger">
                                 <p className="me-2 mb-0">Follow</p>
-                                <i class="bi bi-person-fill-add"></i>
+                                <i class="bi bi-person-fill-add mt-1"></i>
                               </span>
                             )
                           }
@@ -166,7 +167,6 @@ export const OthersProfile = () => {
                   <div className="d-flex justify-content-end text-center py-1">
                     <div>
                       <MDBCardText className="mb-1 h5">
-                        {" "}
                         {!userPosts.length ? "0" : userPosts.length}
                       </MDBCardText>
                       <MDBCardText className="small text-muted mb-0">
@@ -250,9 +250,8 @@ export const OthersProfile = () => {
                         {userPosts.map((post) => (
                           <Posts
                             key={post.id}
-                            img={Pisces}
+                            img={user.image}
                             firstName={user.firstName}
-                            lastName={user.lastName}
                             sunSign={user.sunSign.name}
                             moonSign={user.moonSign.name}
                             ascendantSign={user.ascendantSign.name}
@@ -276,9 +275,8 @@ export const OthersProfile = () => {
                         {userLikes.map((like) => (
                           <Posts
                             key={like._id}
-                            img={Pisces}
+                            img={like.post.user.image}
                             firstName={user.firstName}
-                            lastName={user.lastName}
                             sunSign={user.sunSign.name}
                             moonSign={user.moonSign.name}
                             ascendantSign={user.ascendantSign.name}

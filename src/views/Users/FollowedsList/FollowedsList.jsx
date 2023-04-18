@@ -36,6 +36,7 @@ export const FollowedsList = () => {
                 <MDBCol>
                   <UserBrief
                     user={followed.followed}
+                    img={followed.followed.image}
                     key={followed.followed.id}
                     text="View Profile"
                     onClick={() => navigate(`/profile/${followed.followed.id}`)}

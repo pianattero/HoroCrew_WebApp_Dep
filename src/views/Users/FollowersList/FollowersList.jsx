@@ -20,6 +20,7 @@ export const FollowersList = () => {
 
     getCurrentUserFollowers()
       .then((followers) => {
+        console.log(followers);
         setCurrentUserFollowers(followers);
         setloading(false);
       })
@@ -36,6 +37,7 @@ export const FollowersList = () => {
                 <MDBCol>
                   <UserBrief
                     key={follower._id}
+                    img={follower.follower.image}
                     user={follower.follower}
                     text="View Profile"
                     onClick={() => navigate(`/profile/${follower.follower.id}`)}

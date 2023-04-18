@@ -4,6 +4,7 @@ import { Posts } from "../../../components/Posts/Posts";
 import { getAllPosts } from "../../../services/PostService";
 import Pisces from "../../../assets/images/SignsBack/pisces.png";
 import AuthContext from "../../../context/AuthContext";
+import { getCurrentUserLikes } from "../../../services/LikeService";
 
 export const SocialFeed = () => {
   const { currentUser } = useContext(AuthContext);
@@ -11,17 +12,24 @@ export const SocialFeed = () => {
   const [loading, setloading] = useState(true);
 
   const [posts, setPosts] = useState([]);
+  const [currentUserLikes, setCurrentUserLikes] = useState([]);
 
   useEffect(() => {
-    if (!posts) return;
-
     getAllPosts()
       .then((posts) => {
+        console.log(posts);
         setPosts(posts);
         setloading(false);
       })
       .catch((err) => console.error(err));
-  }, [posts]);
+
+    getCurrentUserLikes()
+      .then((likes) => {
+        console.log(likes);
+        setCurrentUserLikes(likes);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <div className="min-vh-100">
@@ -34,7 +42,7 @@ export const SocialFeed = () => {
                 ? posts.map((post) => (
                     <Posts
                       key={post.id}
-                      img={Pisces}
+                      img={post.user.image}
                       firstName={post.user.firstName}
                       lastName={post.user.lastName}
                       sunSign={post.user.sunSign.name}
@@ -46,6 +54,9 @@ export const SocialFeed = () => {
                       postId={post.id}
                       userId={post.user.id}
                       currentUser={currentUser.id}
+                      isLiked={currentUserLikes.map(
+                        (likedPost) => likedPost.post.id === post.id
+                      )}
                     />
                   ))
                 : "Loading Post"}
