@@ -7,15 +7,16 @@ import { SocialFeed } from "./views/Feeds/SocialFeed/SocialFeed";
 import AstroFeed from "./views/Feeds/AstroFeed/AstrologicalFeed";
 import ProtectedRoute from "./components/Misc/ProtectedRoute/ProtectedRoute";
 import { Profile } from "./views/Users/Profile/Profile";
-import { FormBg } from "./components/BackgroudForms/BackgroundForm";
+import { FormBg } from "./components/Backgrounds/BackgroudForms/BackgroundForm";
 import { FollowersList } from "./views/Users/FollowersList/FollowersList";
 import { OthersProfile } from "./views/Users/OthersProfile/OthersProfile";
 import { Notifications } from "./views/Users/Notifications/Notifications";
 import { NewPost } from "./views/Post/NewPost";
 import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
 
+
 function App() {
-  const routesWithoutNav = ["/", "signup", "/login"];
+  const routesWithoutNav = ["/", "/signup", "/login"];
   const location = useLocation();
 
   return (
@@ -34,7 +35,12 @@ function App() {
             </>
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={
+          <>
+
+            <Login />
+          </>
+        } />
 
         {/* PROFILES */}
 

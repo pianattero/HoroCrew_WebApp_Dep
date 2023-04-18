@@ -1,18 +1,4 @@
-/*.allContainer-Home {
-    background-image: url("../../../assets/images/Backgrounds/color.jpeg");
-    background-size: cover;
-    min-width: 100vw;
-    min-height: 100vh;
-    margin: 0;
-}*/
-
 * {
     margin: 0;
     padding: 0;
-}
-
-.section-3 {
-    background-color: aqua;
-    color: blue;
-    height: 100%;
 }

@@ -6,6 +6,8 @@ import Input from "../../components/Input/Input";
 import { newPost } from "../../services/PostService";
 import { newPostSchema } from "../../utils/schemas/post.schema";
 
+
+
 const initialValues = {
   body: "",
   image: "",
@@ -46,6 +48,7 @@ export const NewPost = () => {
   });
   return (
     <div>
+
       <form
         onSubmit={handleSubmit}
         className="mx-3"
