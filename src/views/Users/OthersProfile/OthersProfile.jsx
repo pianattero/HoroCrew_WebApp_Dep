@@ -20,7 +20,10 @@ import {
   createFollow,
 } from "../../../services/FollowService";
 import { getUserByIdPosts } from "../../../services/PostService";
-import { getUserByIdLikes } from "../../../services/LikeService";
+import {
+  getCurrentUserLikes,
+  getUserByIdLikes,
+} from "../../../services/LikeService";
 import { horoscopeAstroCompatibility as horoscopeAstroCompatibilityService } from "../../../services/Apis/HoroscopeAstro";
 import { Posts } from "../../../components/Posts/Posts";
 
@@ -40,6 +43,8 @@ export const OthersProfile = () => {
 
   const [userPosts, setUserPosts] = useState([]);
   const [showUserPosts, setShowUserPosts] = useState(false);
+
+  const [currentUserLikes, setCurrentUserLikes] = useState([]);
 
   const [horoscopeAstroCompatibility, setHoroscopeAstroCompatibility] =
     useState(null);
@@ -90,6 +95,12 @@ export const OthersProfile = () => {
     getUserFolloweds(id)
       .then((followeds) => {
         setUserFolloweds(followeds);
+      })
+      .catch((err) => console.error(err));
+
+    getCurrentUserLikes()
+      .then((likes) => {
+        setCurrentUserLikes(likes);
       })
       .catch((err) => console.error(err));
 
@@ -267,6 +278,9 @@ export const OthersProfile = () => {
                             postImgs={post.images}
                             userId={post.user.id}
                             currentUser={currentUser.id}
+                            isLiked={currentUserLikes.some(
+                              (likedPost) => likedPost.post.id === post.id
+                            )}
                           />
                         ))}
                       </div>
@@ -291,8 +305,11 @@ export const OthersProfile = () => {
                             ascendantSign={like.post.user.ascendantSign.name}
                             body={like.post.body}
                             postImgs={like.post.images}
-                            userId={like.post.user}
+                            userId={like.post.user.id}
                             currentUser={currentUser.id}
+                            isLiked={currentUserLikes.some(
+                              (likedPost) => likedPost.post.id === like.post.id
+                            )}
                           />
                         ))}
                       </div>

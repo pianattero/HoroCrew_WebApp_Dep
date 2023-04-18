@@ -42,7 +42,6 @@ const AstroFeed = () => {
 
     horoscopeAstroTarotService()
       .then((response) => {
-        console.log(response.data.res);
         setHoroscopeAstroTarot(response.data.res);
       })
       .catch((err) => console.error(err));
@@ -92,6 +91,8 @@ const AstroFeed = () => {
                 target="_blank"
                 onPress={() => {
                   setShowHoroscopeAstroDaily(!showHoroscopeAstroDaily);
+                  setShowHoroscopeAstroTarot(false);
+                  setShowHoroscopeAstroInfo(false);
                 }}
               >
                 <a className="text-dark" href="#daily">
@@ -144,6 +145,8 @@ const AstroFeed = () => {
                 target="_blank"
                 onPress={() => {
                   setShowHoroscopeAstroInfo(!showHoroscopeAstroInfo);
+                  setShowHoroscopeAstroDaily(false);
+                  setShowHoroscopeAstroTarot(false);
                 }}
               >
                 <a className="text-dark" href="#sunInfo">
@@ -198,9 +201,11 @@ const AstroFeed = () => {
                 icon
                 color="dark"
                 target="_blank"
-                onPress={() =>
-                  setShowHoroscopeAstroTarot(!showHoroscopeAstroTarot)
-                }
+                onPress={() => {
+                  setShowHoroscopeAstroTarot(!showHoroscopeAstroTarot);
+                  setShowHoroscopeAstroDaily(false);
+                  setShowHoroscopeAstroInfo(false);
+                }}
               >
                 <a className="text-dark" href="#tarot">
                   Get some Tarot Luck

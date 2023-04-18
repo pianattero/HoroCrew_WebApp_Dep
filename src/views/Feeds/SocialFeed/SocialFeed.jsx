@@ -2,7 +2,6 @@ import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import React, { useContext, useEffect, useState } from "react";
 import { Posts } from "../../../components/Posts/Posts";
 import { getAllPosts } from "../../../services/PostService";
-import Pisces from "../../../assets/images/SignsBack/pisces.png";
 import AuthContext from "../../../context/AuthContext";
 import { getCurrentUserLikes } from "../../../services/LikeService";
 
@@ -17,7 +16,6 @@ export const SocialFeed = () => {
   useEffect(() => {
     getAllPosts()
       .then((posts) => {
-        console.log(posts);
         setPosts(posts);
         setloading(false);
       })
@@ -25,7 +23,6 @@ export const SocialFeed = () => {
 
     getCurrentUserLikes()
       .then((likes) => {
-        console.log(likes);
         setCurrentUserLikes(likes);
       })
       .catch((err) => console.error(err));
@@ -54,7 +51,7 @@ export const SocialFeed = () => {
                       postId={post.id}
                       userId={post.user.id}
                       currentUser={currentUser.id}
-                      isLiked={currentUserLikes.map(
+                      isLiked={currentUserLikes.some(
                         (likedPost) => likedPost.post.id === post.id
                       )}
                     />

@@ -220,6 +220,9 @@ export const Profile = () => {
                         createdAt={post.createdAt}
                         userId={post.user}
                         currentUser={currentUser.id}
+                        isLiked={currentUserLikes.some(
+                          (likedPost) => likedPost.post.id === post.id
+                        )}
                       />
                     ))}
                   </div>
@@ -247,6 +250,9 @@ export const Profile = () => {
                         createdAt={like.post.createdAt}
                         userId={like.post.user.id}
                         currentUser={currentUser.id}
+                        isLiked={currentUserLikes.some(
+                          (likedPost) => likedPost.post.id === like.post.id
+                        )}
                       />
                     ))}
                   </div>
