@@ -62,8 +62,8 @@ export const Home = () => {
                         <Grid.Container gap={5}>
                             <Grid>
                                 <Link href="/signup">
-                                    <Button size="lg" shadow color="secondary" auto>
-                                        Join Us!
+                                    <Button size="lg" color="success" auto ghost>
+                                        Do´nt have an account? Join Us!
                                     </Button>
                                 </Link>
                             </Grid>
