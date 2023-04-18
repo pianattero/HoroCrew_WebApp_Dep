@@ -8,6 +8,7 @@ import { getCurrentUserLikes } from "../../../services/LikeService";
 import { newPost } from "../../../services/PostService";
 import { NewPost } from "../../Post/NewPost";
 import { newPostSchema } from "../../../utils/schemas/post.schema";
+import { ProfileBack } from "../../../components/Backgrounds/BackgroundProfile/BackgroundProfile";
 
 
 export const SocialFeed = () => {
@@ -36,7 +37,10 @@ export const SocialFeed = () => {
   }, []);
 
   return (
-    <div className="min-vh-100">
+    <div className="min-vh-100 social-feed-wrapper">
+      <div className="profile-back-wrapper">
+        <ProfileBack />
+      </div>
       <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
         <h1>See what's happening!</h1>
         <MDBRow>
