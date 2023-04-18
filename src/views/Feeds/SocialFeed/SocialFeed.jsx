@@ -5,6 +5,10 @@ import { getAllPosts } from "../../../services/PostService";
 import Pisces from "../../../assets/images/SignsBack/pisces.png";
 import AuthContext from "../../../context/AuthContext";
 import { getCurrentUserLikes } from "../../../services/LikeService";
+import { newPost } from "../../../services/PostService";
+import { NewPost } from "../../Post/NewPost";
+import { newPostSchema } from "../../../utils/schemas/post.schema";
+
 
 export const SocialFeed = () => {
   const { currentUser } = useContext(AuthContext);
@@ -36,29 +40,30 @@ export const SocialFeed = () => {
       <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
         <h1>See what's happening!</h1>
         <MDBRow>
+          <NewPost />
           <MDBCol>
             <div>
               {!loading
                 ? posts.map((post) => (
-                    <Posts
-                      key={post.id}
-                      img={post.user.image}
-                      firstName={post.user.firstName}
-                      lastName={post.user.lastName}
-                      sunSign={post.user.sunSign.name}
-                      moonSign={post.user.moonSign.name}
-                      ascendantSign={post.user.ascendantSign.name}
-                      body={post.body}
-                      postImg={post.image}
-                      createdAt={post.createdAt}
-                      postId={post.id}
-                      userId={post.user.id}
-                      currentUser={currentUser.id}
-                      isLiked={currentUserLikes.map(
-                        (likedPost) => likedPost.post.id === post.id
-                      )}
-                    />
-                  ))
+                  <Posts
+                    key={post.id}
+                    img={post.user.image}
+                    firstName={post.user.firstName}
+                    lastName={post.user.lastName}
+                    sunSign={post.user.sunSign.name}
+                    moonSign={post.user.moonSign.name}
+                    ascendantSign={post.user.ascendantSign.name}
+                    body={post.body}
+                    postImg={post.image}
+                    createdAt={post.createdAt}
+                    postId={post.id}
+                    userId={post.user.id}
+                    currentUser={currentUser.id}
+                    isLiked={currentUserLikes.map(
+                      (likedPost) => likedPost.post.id === post.id
+                    )}
+                  />
+                ))
                 : "Loading Post"}
             </div>
           </MDBCol>
