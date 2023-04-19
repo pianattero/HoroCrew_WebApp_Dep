@@ -1,9 +1,10 @@
 import { MDBCard, MDBCardBody } from "mdb-react-ui-kit";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, useModal, Button, Text } from "@nextui-org/react";
 import Carousel from "react-bootstrap/Carousel";
-import { likePost, deletePost, getAllPosts } from "../../services/PostService";
+import { useNavigate } from "react-router-dom";
+import { getPostComments, getPostLikes } from "../../services/PostService";
 
 export const Posts = ({
   img,
@@ -18,10 +19,30 @@ export const Posts = ({
   deleteFn,
   likeFn,
   isLiked,
+  postId,
   userId,
   currentUser,
 }) => {
   const { setVisible, bindings } = useModal();
+
+  const navigate = useNavigate();
+
+  const [postLikes, setpostLikes] = useState([]);
+  const [postComments, setpostComments] = useState([]);
+
+  useEffect(() => {
+    getPostLikes(postId)
+      .then((likes) => {
+        setpostLikes(likes.length);
+      })
+      .catch((err) => console.error(err));
+
+    getPostComments(postId)
+      .then((comments) => {
+        setpostComments(comments.length);
+      })
+      .catch((err) => console.error(err));
+  });
 
   return (
     <div className="my-3" style={{ width: "70vw" }}>
@@ -128,20 +149,37 @@ export const Posts = ({
               </Modal>
             </div>
           </div>
-          <div className="d-flex justify-content-between mt-1">
+          <div className="d-flex justify-content-between align-items-center mt-1">
             <div>
               <button style={{ border: "none" }} onClick={likeFn}>
                 {isLiked ? (
                   <i
-                    className="bi bi-heart-fill me-3"
+                    className="bi bi-heart-fill me-3 d-flex align-items-center"
                     style={{ color: "#8FEBE0" }}
-                  ></i>
+                  >
+                    {" "}
+                    <small>{postLikes}</small>
+                  </i>
                 ) : (
                   <i
-                    className="bi bi-heart me-3"
+                    className="bi bi-heart me-3 d-flex"
                     style={{ color: "#8FEBE0" }}
-                  ></i>
+                  >
+                    {" "}
+                    <small>{postLikes}</small>
+                  </i>
                 )}
+              </button>
+
+              <button style={{ border: "none" }}>
+                <i
+                  onClick={() => {
+                    navigate(`/post/${postId}`);
+                  }}
+                  className="bi bi-chat"
+                >
+                  <small>{postComments}</small>
+                </i>
               </button>
 
               {userId === currentUser ? (
@@ -164,67 +202,3 @@ export const Posts = ({
     </div>
   );
 };
-
-{
-  /* PREUBA MODAL */
-}
-//  <div>
-//  <Button auto color="transparent" onPress={() => setVisible(true)}>
-//    <img
-//      style={{ height: "50px" }}
-//      src="https://img.wattpad.com/873b90039dd8d88fb8f248062fe6f1ebe523bd7b/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f5036743344354b50676e545259773d3d2d313136383134333934302e313663323465353239313435653336393932363636373437323939362e6a7067"
-//    />
-//  </Button>
-
-//  <Modal
-//    width="80vw"
-//    scroll
-//    aria-labelledby="modal-title"
-//    aria-describedby="modal-description"
-//    {...bindings}
-//  >
-//    <Modal.Body>
-//      <Carousel variant="dark" className="text-center">
-//        <Carousel.Item>
-//          <img
-//            style={{
-//              maxHeight: "calc(100vh - 290px",
-//              maxWidth: "300px",
-//              width: "auto",
-//              height: "auto",
-//            }}
-//            className="d-block center"
-//            src="https://img.wattpad.com/873b90039dd8d88fb8f248062fe6f1ebe523bd7b/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f5036743344354b50676e545259773d3d2d313136383134333934302e313663323465353239313435653336393932363636373437323939362e6a7067"
-//            alt="First slide"
-//          />
-//        </Carousel.Item>
-//        <Carousel.Item>
-//          <img
-//            style={{
-//              maxHeight: "calc(100vh - 290px",
-//              maxWidth: "300px",
-//              width: "auto",
-//              height: "auto",
-//            }}
-//            className="d-block center"
-//            src="https://img.wattpad.com/873b90039dd8d88fb8f248062fe6f1ebe523bd7b/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f5036743344354b50676e545259773d3d2d313136383134333934302e313663323465353239313435653336393932363636373437323939362e6a7067"
-//            alt="Second slide"
-//          />
-//        </Carousel.Item>
-//      </Carousel>
-//    </Modal.Body>
-//    <Modal.Footer className="pt-0">
-//      <Button
-//        auto
-//        flat
-//        color="gradient"
-//        onPress={() => setVisible(false)}
-//      >
-//        X
-//      </Button>
-//    </Modal.Footer>
-//  </Modal>
-// </div>
-{
-  /* PREUBA MODAL */
-}

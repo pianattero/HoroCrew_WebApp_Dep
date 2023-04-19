@@ -1,5 +1,5 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Posts } from "../../../components/Posts/Posts";
 import {
   deletePost,
@@ -8,9 +8,7 @@ import {
 } from "../../../services/PostService";
 import AuthContext from "../../../context/AuthContext";
 import { getCurrentUserLikes } from "../../../services/LikeService";
-import { newPost } from "../../../services/PostService";
 import { NewPost } from "../../Post/NewPost";
-import { newPostSchema } from "../../../utils/schemas/post.schema";
 
 export const SocialFeed = () => {
   const { currentUser } = useContext(AuthContext);
@@ -23,10 +21,7 @@ export const SocialFeed = () => {
   const handleDelete = (postId) => {
     deletePost(postId)
       .then((res) => {
-        console.info(res);
-        return getAllPosts().then((posts) => {
-          setPosts(posts);
-        });
+        return handleAllPosts();
       })
       .catch((err) => console.error(err));
   };
@@ -34,13 +29,21 @@ export const SocialFeed = () => {
   const handleLike = (postId) => {
     likePost(postId)
       .then((res) => {
-        console.info(res);
         return getCurrentUserLikes().then((likes) => {
           setCurrentUserLikes(likes);
         });
       })
       .catch((err) => console.error(err));
   };
+
+  const handleAllPosts = useCallback(() => {
+    getAllPosts()
+      .then((posts) => {
+        setPosts(posts);
+        setloading(false);
+      })
+      .catch((err) => console.error(err));
+  });
 
   useEffect(() => {
     getAllPosts()
@@ -52,7 +55,6 @@ export const SocialFeed = () => {
 
     getCurrentUserLikes()
       .then((likes) => {
-        console.log(likes);
         setCurrentUserLikes(likes);
       })
       .catch((err) => console.error(err));
@@ -63,7 +65,7 @@ export const SocialFeed = () => {
       <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
         <h1>See what's happening!</h1>
         <MDBRow>
-          <NewPost />
+          <NewPost refreshPosts={handleAllPosts} />
           <MDBCol>
             <div>
               {!loading
