@@ -4,6 +4,10 @@ import { Posts } from "../../../components/Posts/Posts";
 import { getAllPosts } from "../../../services/PostService";
 import AuthContext from "../../../context/AuthContext";
 import { getCurrentUserLikes } from "../../../services/LikeService";
+import { newPost } from "../../../services/PostService";
+import { NewPost } from "../../Post/NewPost";
+import { newPostSchema } from "../../../utils/schemas/post.schema";
+
 
 export const SocialFeed = () => {
   const { currentUser } = useContext(AuthContext);
@@ -33,10 +37,12 @@ export const SocialFeed = () => {
       <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
         <h1>See what's happening!</h1>
         <MDBRow>
+          <NewPost />
           <MDBCol>
             <div>
               {!loading
                 ? posts.map((post) => (
+
                     <Posts
                       key={post.id}
                       img={post.user.image}
@@ -56,6 +62,7 @@ export const SocialFeed = () => {
                       )}
                     />
                   ))
+
                 : "Loading Post"}
             </div>
           </MDBCol>

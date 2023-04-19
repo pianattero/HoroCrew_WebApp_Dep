@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
+
 import { Animator, Fade, FadeIn, MoveIn, MoveOut, ScrollContainer, ScrollPage, Sticky, StickyIn, Zoom, ZoomIn, batch } from "react-scroll-motion"
 import "./Home.css";
-import imgLogo from "../../../assets/images/Backgrounds/logo2-removebg.png"
+import imgLogo from "../../../assets/images/Backgrounds/bgLogo.png"
+import { Button, Grid, Link, Spacer } from "@nextui-org/react";
+
+import Galaxy from "../../../components/Backgrounds/backgrounGalaxy/BackgroundGalaxy";
 
 const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn());
 const FadeUp = batch(Fade(), MoveIn(), MoveOut(), Sticky());
@@ -9,26 +12,34 @@ export const Home = () => {
     return (
 
         <>
+
             <ScrollContainer>
+
                 <ScrollPage page={0}>
+                    <Galaxy />
+
                     <Animator animation={batch(Sticky(), Fade(), MoveOut(0, -200))}>
-                        <img src={imgLogo} />
+                        <img src={imgLogo} style={{ width: "70vh", height: "100%" }} />
                     </Animator>
                 </ScrollPage>
 
                 <ScrollPage page={1}>
+                    <Galaxy />
+
                     <Animator animation={ZoomInScrollOut}>
-                        <span style={{ fontSize: "35px" }}>✨Welcome✨</span>
+                        <span style={{ fontSize: "35px", color: "white" }}>✨Welcome✨</span>
                     </Animator>
                 </ScrollPage>
 
                 <ScrollPage>
+                    <Galaxy />
                     <Animator animation={FadeUp}>
-                        <span style={{ fontSize: "20px" }}> 💑🏼🧘🏾‍♂️👨🏾‍❤️‍💋‍👨🏼 Find Your True Self 👩🏼‍❤️‍👩🏾🧘🏼‍♀️👩🏾‍❤️‍💋‍👩🏿</span>
+                        <span style={{ fontSize: "20px", color: "white" }}> Find Your True Self </span>
                     </Animator>
                 </ScrollPage>
                 <ScrollPage>
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }} >
+                    <Galaxy />
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", color: "white" }} >
                         <span style={{ fontSize: "30px" }}>
                             <Animator animation={MoveIn(-1000, 0)}>🐐Capricorn♑</Animator>
                             <Animator animation={MoveIn(1000, 0)}>🐮Taurus♉</Animator>
@@ -46,17 +57,29 @@ export const Home = () => {
                     </div>
                 </ScrollPage>
                 <ScrollPage>
+                    <Galaxy />
                     <Animator animation={batch(Fade(), Sticky())}>
-                        <span style={{ fontSize: "80px" }}>
-                            <Link type="button" className="btn join-btn primary" aria-current="page" to="/login"> 🚨 Already have an account?🤘🏽 </Link>
-                        </span>
-                        <br />
-                        <span style={{ fontSize: "80px" }}>
-                            <Link type="button" className="btn join-btn primary" aria-current="page" to="/signup">Join Us ❤️‍🔥 </Link>
-                        </span>
+                        <Grid.Container gap={5}>
+                            <Grid>
+                                <Link href="/signup">
+                                    <Button size="lg" color="success" auto ghost>
+                                        Do´nt have an account? Join Us!
+                                    </Button>
+                                </Link>
+                            </Grid>
+
+                            <Grid>
+                                <Link href="/login">
+                                    <Button size="lg" shadow color="primary" auto>
+                                        Already have an account? Sign In!
+                                    </Button>
+                                </Link>
+                            </Grid>
+                        </Grid.Container>
                     </Animator>
                 </ScrollPage>
             </ScrollContainer>
+
 
         </>
 
@@ -64,17 +87,4 @@ export const Home = () => {
 }
 
 
-/*export const Home = () => {
-
-    return (
-        <div className="allContainer-Home">
-            <div id="titleContainer">
-                <h1 className="title"> Welcome to HoroCrew</h1>
-                <Link type="button" className="btn join-btn" aria-current="page" to="/signup">Join Us</Link>
-                <Link type="button" className="btn join-btn" aria-current="page" to="/login"> Already have an account?</Link>
-            </div>
-        </div>
-    )
-
-}*/
 
