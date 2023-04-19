@@ -24,6 +24,8 @@
     background-color: #3c9de7;
     animation: bg-color 10s infinite;
     position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 @keyframes bg-color {

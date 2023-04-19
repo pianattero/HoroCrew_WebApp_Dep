@@ -10,7 +10,7 @@ import { newPostSchema } from "../../../utils/schemas/post.schema";
 import "./SocialFeed.css"
 import { SearchBar } from "../../SearchBar/SearchBar";
 
-//import { ProfileBack } from "../../../components/Backgrounds/BackgroundProfile/BackgroundProfile";
+
 
 
 export const SocialFeed = () => {
@@ -40,12 +40,11 @@ export const SocialFeed = () => {
 
   return (
     <div className="bodyBackground min-vh-100">
-      {/*<div className="profile-back-wrapper">
-        <ProfileBack />
-      </div> */}
+
       <MDBContainer className=" d-flex flex-column justify-content-start align-items-center">
         <div className="content-wrapper">
           <h1>See what's happening!</h1>
+          <SearchBar />
           <MDBRow>
             <NewPost />
             <MDBCol>
@@ -76,7 +75,7 @@ export const SocialFeed = () => {
             </MDBCol>
           </MDBRow>
         </div>
-      </MDBContainer>
-    </div>
+      </MDBContainer >
+    </div >
   );
 };
