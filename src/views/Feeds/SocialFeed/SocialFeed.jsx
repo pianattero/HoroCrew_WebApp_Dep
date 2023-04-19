@@ -1,13 +1,16 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import React, { useContext, useEffect, useState } from "react";
 import { Posts } from "../../../components/Posts/Posts";
-import { getAllPosts } from "../../../services/PostService";
+import {
+  deletePost,
+  getAllPosts,
+  likePost,
+} from "../../../services/PostService";
 import AuthContext from "../../../context/AuthContext";
 import { getCurrentUserLikes } from "../../../services/LikeService";
 import { newPost } from "../../../services/PostService";
 import { NewPost } from "../../Post/NewPost";
 import { newPostSchema } from "../../../utils/schemas/post.schema";
-
 
 export const SocialFeed = () => {
   const { currentUser } = useContext(AuthContext);
@@ -16,6 +19,28 @@ export const SocialFeed = () => {
 
   const [posts, setPosts] = useState([]);
   const [currentUserLikes, setCurrentUserLikes] = useState([]);
+
+  const handleDelete = (postId) => {
+    deletePost(postId)
+      .then((res) => {
+        console.info(res);
+        return getAllPosts().then((posts) => {
+          setPosts(posts);
+        });
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleLike = (postId) => {
+    likePost(postId)
+      .then((res) => {
+        console.info(res);
+        return getCurrentUserLikes().then((likes) => {
+          setCurrentUserLikes(likes);
+        });
+      })
+      .catch((err) => console.error(err));
+  };
 
   useEffect(() => {
     getAllPosts()
@@ -27,6 +52,7 @@ export const SocialFeed = () => {
 
     getCurrentUserLikes()
       .then((likes) => {
+        console.log(likes);
         setCurrentUserLikes(likes);
       })
       .catch((err) => console.error(err));
@@ -42,7 +68,6 @@ export const SocialFeed = () => {
             <div>
               {!loading
                 ? posts.map((post) => (
-
                     <Posts
                       key={post.id}
                       img={post.user.image}
@@ -54,6 +79,12 @@ export const SocialFeed = () => {
                       body={post.body}
                       postImgs={post.images}
                       createdAt={post.createdAt}
+                      deleteFn={() => {
+                        handleDelete(post.id);
+                      }}
+                      likeFn={() => {
+                        handleLike(post.id);
+                      }}
                       postId={post.id}
                       userId={post.user.id}
                       currentUser={currentUser.id}
@@ -62,7 +93,6 @@ export const SocialFeed = () => {
                       )}
                     />
                   ))
-
                 : "Loading Post"}
             </div>
           </MDBCol>

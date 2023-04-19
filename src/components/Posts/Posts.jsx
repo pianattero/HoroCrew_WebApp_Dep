@@ -15,36 +15,13 @@ export const Posts = ({
   body,
   postImgs,
   createdAt,
+  deleteFn,
+  likeFn,
   isLiked,
-  postId,
   userId,
   currentUser,
 }) => {
   const { setVisible, bindings } = useModal();
-
-  const [posts, setPosts] = useState();
-
-  const handleAllPosts = () => {
-    getAllPosts()
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
-  };
-
-  const handleDelete = () => {
-    deletePost(postId)
-      .then((res) => {
-        console.info(`Post ${postId} deleted`);
-      })
-      .catch((err) => console.error(err));
-  };
-
-  const handleLike = () => {
-    likePost(postId)
-      .then((res) => {
-        console.info(res);
-      })
-      .catch((err) => console.error(err));
-  };
 
   return (
     <div className="my-3" style={{ width: "70vw" }}>
@@ -91,7 +68,7 @@ export const Posts = ({
           <div>
             <p className="p-0 m-0 mt-3">{body}</p>
           </div>
-          <div className="d-flex align-items-start mb-3 overflow-scroll">
+          <div className="d-flex  align-items-start mb-3 overflow-scroll">
             <div className="d-flex mt-2 ">
               {postImgs.map((img) => (
                 <button
@@ -101,7 +78,10 @@ export const Posts = ({
                 >
                   <img
                     className="rounded"
-                    style={{ height: "100px" }}
+                    style={{
+                      height: "100px",
+                      width: "auto",
+                    }}
                     src={img}
                   />
                 </button>
@@ -150,10 +130,7 @@ export const Posts = ({
           </div>
           <div className="d-flex justify-content-between mt-1">
             <div>
-              <button
-                style={{ border: "none" }}
-                onClick={() => handleLike({ postId })}
-              >
+              <button style={{ border: "none" }} onClick={likeFn}>
                 {isLiked ? (
                   <i
                     className="bi bi-heart-fill me-3"
@@ -168,10 +145,7 @@ export const Posts = ({
               </button>
 
               {userId === currentUser ? (
-                <button
-                  style={{ border: "none" }}
-                  onClick={() => handleDelete({ postId })}
-                >
+                <button style={{ border: "none" }} onClick={deleteFn}>
                   <i
                     className="bi bi-trash3-fill ms-3"
                     style={{ color: "#2D5C6D" }}

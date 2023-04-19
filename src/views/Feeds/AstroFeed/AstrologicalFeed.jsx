@@ -1,10 +1,4 @@
-
-import {
-  NextUIProvider,
-  Card,
-  Text,
-  Button,
-} from "@nextui-org/react";
+import { NextUIProvider, Card, Text, Button } from "@nextui-org/react";
 import { AppBack } from "../../../components/Backgrounds/BackgroundSigns/Background";
 import "./AstroFeed.css";
 
@@ -14,10 +8,10 @@ import {
   horoscopeAstroInfo as horoscopeAstroInfoService,
   horoscopeAstroTarot as horoscopeAstroTarotService,
   horoscopeAstroDaily as horoscopeAstroDailyService,
-} from "../../../services/Apis/HoroscopeAstro"
+} from "../../../services/Apis/HoroscopeAstro";
 import { AboutSunSign } from "../../../components/AboutSunSign/AboutSunSign";
 import { ScrollContainer, ScrollPage } from "react-scroll-motion";
-import { TarotInfo } from "../../../components/TarotInfo/TarotInfo"
+import { TarotInfo } from "../../../components/TarotInfo/TarotInfo";
 
 const AstroFeed = () => {
   const { currentUser } = useContext(AuthContext);
@@ -50,7 +44,6 @@ const AstroFeed = () => {
         setHoroscopeAstroTarot(response.data.res);
       })
       .catch((err) => console.error(err));
-
   }, [currentUser]);
 
   return (
@@ -59,9 +52,10 @@ const AstroFeed = () => {
         <AppBack />
       </div>
       <ScrollContainer>
-
-
-        <div className="background-wrapper" style={{ backgroundColor: "transparent" }}>
+        <div
+          className="background-wrapper"
+          style={{ backgroundColor: "transparent" }}
+        >
           <AppBack />
         </div>
         <div
@@ -77,11 +71,9 @@ const AstroFeed = () => {
                 backgroundColor: "transparent",
               }}
             >
-
               <Card.Body css={{ p: 0 }}>
                 <Card.Image
                   src="https://www.iberoshow.com.es/u/fotografias/m/2022/2/27/f720x404-42996_84568_5050.jpg"
-
                   width="100%"
                   height="100%"
                   objectFit="cover"
@@ -97,17 +89,17 @@ const AstroFeed = () => {
                     "$borderWeights$light solid rgba(255, 255, 255, 0.2)",
                   bottom: 0,
                   zIndex: 1,
-
                 }}
-              
+              >
                 <Button
-                icon
-                color="dark"
-                target="_blank"
-                onPress={() => {
-                  setShowHoroscopeAstroDaily(!showHoroscopeAstroDaily);
-                  setShowHoroscopeAstroTarot(false);
-                  setShowHoroscopeAstroInfo(false);
+                  icon
+                  color="dark"
+                  target="_blank"
+                  onPress={() => {
+                    setShowHoroscopeAstroInfo(!showHoroscopeAstroInfo);
+                    setShowHoroscopeAstroTarot(false);
+                    setShowHoroscopeAstroDaily(false);
+                  }}
                 >
                   <a className="text-dark" href="#sunInfo">
                     Want to know more about you Sun Sign?
@@ -137,7 +129,6 @@ const AstroFeed = () => {
                 backgroundColor: "transparent",
               }}
             >
-
               <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                 <Text h3 color="white">
                   Daily Horoscope
@@ -161,26 +152,23 @@ const AstroFeed = () => {
                     "$borderWeights$light solid rgba(255, 255, 255, 0.2)",
                   bottom: 0,
                   zIndex: 1,
-
                 }}
-              
-                {/* FALTA MODIFICAR BUTTON & AGREGAR END DE API */}
-
+              >
                 <Button
-                icon
-                color="dark"
-                target="_blank"
-                onPress={() => {
-                  setShowHoroscopeAstroInfo(!showHoroscopeAstroInfo);
-                  setShowHoroscopeAstroDaily(false);
-                  setShowHoroscopeAstroTarot(false);
+                  icon
+                  color="dark"
+                  target="_blank"
+                  onPress={() => {
+                    setShowHoroscopeAstroDaily(!ShowHoroscopeAstroDaily);
+                    setShowHoroscopeAstroInfo(false);
+                    setShowHoroscopeAstroTarot(false);
+                  }}
                 >
                   Get your horoscope today
                 </Button>
               </Card.Footer>
             </Card>
           </div>
-
 
           <div>
             <Card
@@ -191,7 +179,6 @@ const AstroFeed = () => {
                 backgroundColor: "transparent",
               }}
             >
-
               <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                 <Text h3 color="white">
                   Daily Tarot
@@ -216,15 +203,16 @@ const AstroFeed = () => {
                   bottom: 0,
                   zIndex: 1,
                 }}
-              
+              >
                 <Button
-                icon
-                color="dark"
-                target="_blank"
-                onPress={() => {
-                  setShowHoroscopeAstroTarot(!showHoroscopeAstroTarot);
-                  setShowHoroscopeAstroDaily(false);
-                  setShowHoroscopeAstroInfo(false);
+                  icon
+                  color="dark"
+                  target="_blank"
+                  onPress={() => {
+                    setShowHoroscopeAstroTarot(!showHoroscopeAstroTarot);
+                    setShowHoroscopeAstroDaily(false);
+                    setShowHoroscopeAstroInfo(false);
+                  }}
                 >
                   <a className="text-dark" href="#tarot">
                     Get some Tarot Luck
@@ -242,17 +230,13 @@ const AstroFeed = () => {
           <div id="tarot">
             {showHoroscopeAstroTarot
               ? horoscopeAstroTarot.map((tarotCard) => (
-                <TarotInfo tarot={tarotCard} key={tarotCard.sequence} />
-              ))
+                  <TarotInfo tarot={tarotCard} key={tarotCard.sequence} />
+                ))
               : null}
           </div>
         </div>
-
-
       </ScrollContainer>
     </NextUIProvider>
   );
 };
 export default AstroFeed;
-
-
