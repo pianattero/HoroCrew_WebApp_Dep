@@ -13,6 +13,7 @@ import { OthersProfile } from "./views/Users/OthersProfile/OthersProfile";
 import { Notifications } from "./views/Users/Notifications/Notifications";
 import { NewPost } from "./views/Post/NewPost";
 import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
+import { MessageSection } from "./components/MessageSection/MessageSection";
 
 
 function App() {
@@ -113,6 +114,16 @@ function App() {
           element={
             <ProtectedRoute>
               <NewPost />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* MESSAGES */}
+        <Route
+          path="/chat/:id"
+          element={
+            <ProtectedRoute>
+              <MessageSection />
             </ProtectedRoute>
           }
         />

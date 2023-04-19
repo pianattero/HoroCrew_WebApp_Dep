@@ -77,6 +77,7 @@ const AstroFeed = () => {
                 backgroundColor: "transparent",
               }}
             >
+
               <Card.Body css={{ p: 0 }}>
                 <Card.Image
                   src="https://www.iberoshow.com.es/u/fotografias/m/2022/2/27/f720x404-42996_84568_5050.jpg"
@@ -96,15 +97,17 @@ const AstroFeed = () => {
                     "$borderWeights$light solid rgba(255, 255, 255, 0.2)",
                   bottom: 0,
                   zIndex: 1,
+
                 }}
-              >
+              
                 <Button
-                  icon
-                  color="dark"
-                  target="_blank"
-                  onPress={() => {
-                    setShowHoroscopeAstroInfo(!showHoroscopeAstroInfo);
-                  }}
+                icon
+                color="dark"
+                target="_blank"
+                onPress={() => {
+                  setShowHoroscopeAstroDaily(!showHoroscopeAstroDaily);
+                  setShowHoroscopeAstroTarot(false);
+                  setShowHoroscopeAstroInfo(false);
                 >
                   <a className="text-dark" href="#sunInfo">
                     Want to know more about you Sun Sign?
@@ -134,6 +137,7 @@ const AstroFeed = () => {
                 backgroundColor: "transparent",
               }}
             >
+
               <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                 <Text h3 color="white">
                   Daily Horoscope
@@ -157,25 +161,25 @@ const AstroFeed = () => {
                     "$borderWeights$light solid rgba(255, 255, 255, 0.2)",
                   bottom: 0,
                   zIndex: 1,
+
                 }}
-              >
+              
                 {/* FALTA MODIFICAR BUTTON & AGREGAR END DE API */}
 
                 <Button
-                  icon
-                  color="dark"
-                  target="_blank"
-                  onPress={() => {
-                    setShowHoroscopeAstroInfo(true);
-                  }}
+                icon
+                color="dark"
+                target="_blank"
+                onPress={() => {
+                  setShowHoroscopeAstroInfo(!showHoroscopeAstroInfo);
+                  setShowHoroscopeAstroDaily(false);
+                  setShowHoroscopeAstroTarot(false);
                 >
                   Get your horoscope today
                 </Button>
               </Card.Footer>
             </Card>
           </div>
-
-          {/* FALTA MODIFICAR BUTTON & AGREGAR END DE API */}
 
 
           <div>
@@ -187,6 +191,7 @@ const AstroFeed = () => {
                 backgroundColor: "transparent",
               }}
             >
+
               <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                 <Text h3 color="white">
                   Daily Tarot
@@ -211,14 +216,15 @@ const AstroFeed = () => {
                   bottom: 0,
                   zIndex: 1,
                 }}
-              >
+              
                 <Button
-                  icon
-                  color="dark"
-                  target="_blank"
-                  onPress={() =>
-                    setShowHoroscopeAstroTarot(!showHoroscopeAstroTarot)
-                  }
+                icon
+                color="dark"
+                target="_blank"
+                onPress={() => {
+                  setShowHoroscopeAstroTarot(!showHoroscopeAstroTarot);
+                  setShowHoroscopeAstroDaily(false);
+                  setShowHoroscopeAstroInfo(false);
                 >
                   <a className="text-dark" href="#tarot">
                     Get some Tarot Luck

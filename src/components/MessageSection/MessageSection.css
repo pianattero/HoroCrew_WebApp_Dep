@@ -1,0 +1,26 @@
+.currentUserMsg {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: end;
+    margin-bottom: 5px;
+}
+
+.currentUserMsg p {
+    background-color: aqua;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.othersMsg {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+
+}
+
+.othersMsg p {
+    background-color: brown;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
