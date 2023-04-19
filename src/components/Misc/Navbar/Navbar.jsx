@@ -34,17 +34,17 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink to="/astroFeed" onClick={handleClick}>
-                Astro Feed
+                Astro Feed <i className="bi bi-brightness-low"></i>
               </NavLink>
             </li>
             <li>
               <NavLink to="/profile" onClick={handleClick}>
-                Profile
+                <i className="bi bi-person-circle"></i>
               </NavLink>
             </li>
             <li>
               <NavLink to="/notifications" onClick={handleClick}>
-                Notifications
+                <i className="bi bi-bell-fill"></i>
               </NavLink>
             </li>
             <li>
@@ -54,7 +54,7 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink to="/" onClick={logoutToken}>
-                Logout
+                Logout<i className="bi bi-box-arrow-right"></i>
               </NavLink>
             </li>
           </ul>
