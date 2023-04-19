@@ -8,6 +8,8 @@ import { newPost } from "../../../services/PostService";
 import { NewPost } from "../../Post/NewPost";
 import { newPostSchema } from "../../../utils/schemas/post.schema";
 import "./SocialFeed.css"
+import { SearchBar } from "../../SearchBar/SearchBar";
+
 //import { ProfileBack } from "../../../components/Backgrounds/BackgroundProfile/BackgroundProfile";
 
 
