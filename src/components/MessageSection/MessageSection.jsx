@@ -1,0 +1,123 @@
+import { Input } from "@nextui-org/react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
+import { getMessages, createMessage } from "../../services/MessageService";
+import { Buttons } from "../../components/Button/Button";
+import { getUserById } from "../../services/UserService";
+import "./MessageSection.css";
+import moment from "moment";
+import { useFormik } from "formik";
+import { msgSchema } from "../../utils/schemas/message.schema";
+
+const initialValues = {
+  msg: "",
+};
+
+export const MessageSection = () => {
+  const { currentUser } = useContext(AuthContext);
+  const { id } = useParams();
+
+  const [messages, setMessages] = useState();
+
+  const [user, setUser] = useState();
+
+  const { values, handleChange, handleSubmit } = useFormik({
+    initialValues: initialValues,
+    validateOnChange: false,
+    validationSchema: msgSchema,
+    onSubmit: (values) => {
+      createMessage({ msg: values.msg, id: user.id })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.error(err));
+    },
+  });
+
+  const handleMessages = useCallback(() => {
+    getMessages(id)
+      .then((msgs) => {
+        setMessages(msgs);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
+      getUserById(id)
+        .then((userId) => {
+          setUser(userId);
+        })
+        .catch((err) => console.error(err));
+    }
+
+    if (!currentUser || !user) return;
+
+    handleMessages();
+
+    setInterval(() => {
+      handleMessages();
+    }, 5000);
+  }, [currentUser, user]);
+
+  return (
+    <div>
+      {user ? (
+        <div>
+          <div className="d-flex align-items-center border rounded m-1 w-100">
+            <img style={{ width: "70px" }} src={user.image} />
+            <h3 className="mb-0 ms-2">
+              {user.firstName} {user.lastName}
+            </h3>
+          </div>
+          <div
+            className=" overflow-scroll border rounded m-1 py-3 px-1"
+            style={{ minHeight: "70vh", maxHeight: "70vh" }}
+          >
+            {messages
+              ? messages.map((message) => (
+                  <div
+                    key={message._id}
+                    className={
+                      message.sender.id === currentUser.id
+                        ? "currentUserMsg"
+                        : "othersMsg"
+                    }
+                  >
+                    <img
+                      style={{ width: "40px" }}
+                      className="rounded-circle"
+                      src={message.sender.image}
+                    />
+                    <p className="mb-0 mx-2">{message.msg}</p>
+                    <small className="p-0 m-0 text-muted">
+                      <em>
+                        {moment(message.createdAt).format("DD/MM/YY - hh:mm")}
+                      </em>
+                    </small>
+                  </div>
+                ))
+              : "No messages yet"}
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="d-flex justify-content-end m-1">
+              <Input
+                aria-label="msg"
+                width="300px"
+                name="msg"
+                id="msg"
+                onChange={handleChange}
+                value={values.msg}
+                placeholder="Type your message..."
+              />
+              <Buttons text="Send" type="submit" />
+            </div>
+          </form>
+        </div>
+      ) : (
+        "loading"
+      )}
+    </div>
+  );
+};

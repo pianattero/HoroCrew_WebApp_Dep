@@ -25,19 +25,26 @@ export const NewPost = () => {
     handleBlur,
     handleChange,
     setSubmitting,
+    setFieldValue,
   } = useFormik({
     initialValues: initialValues,
     validateOnBlur: true,
     validateOnChange: false,
     validationSchema: newPostSchema,
     onSubmit: (values) => {
-      newPost({
-        body: values.body,
-        image: values.image,
-      })
+      const formData = new FormData();
+      Object.keys(values).forEach((key) => {
+        if (key === "image") {
+          [...values["image"]].forEach((img, i) => {
+            formData.append(`img-${i}`, img);
+          });
+        } else {
+          formData.append(key, values[key]);
+        }
+      });
+      newPost(formData)
         .then((response) => {
           console.info(response);
-          console.log(values.image);
           navigate("/socialFeed");
         })
         .catch((err) => {
@@ -71,12 +78,14 @@ export const NewPost = () => {
         </FormControl>
 
         <FormControl text="Upload image" htmlFor="image">
-          <Input
+          <input
             id="image"
             name="image"
             type="file"
-            onChange={handleChange}
-            value={values.image}
+            multiple
+            onChange={(event) => {
+              setFieldValue("image", event.currentTarget.files);
+            }}
           />
         </FormControl>
 

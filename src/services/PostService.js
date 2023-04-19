@@ -10,8 +10,7 @@ export const getUserByIdPosts = (id) =>
 
 export const getAllPosts = () => authenticatedHttp.get("/posts");
 
-export const newPost = ({ body }) =>
-  authenticatedHttp.post("/posts/create", { body });
+export const newPost = (body) => authenticatedHttp.post("/posts/create", body);
 
 export const likePost = (postId) =>
   authenticatedHttp.post(`/posts/${postId}/like`, postId);

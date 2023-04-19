@@ -1,7 +1,12 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import React, { useContext, useEffect, useState } from "react";
 import { Posts } from "../../../components/Posts/Posts";
-import { getAllPosts } from "../../../services/PostService";
+
+import {
+  deletePost,
+  getAllPosts,
+  likePost,
+} from "../../../services/PostService";
 import AuthContext from "../../../context/AuthContext";
 import { getCurrentUserLikes } from "../../../services/LikeService";
 import { newPost } from "../../../services/PostService";
@@ -9,7 +14,6 @@ import { NewPost } from "../../Post/NewPost";
 import { newPostSchema } from "../../../utils/schemas/post.schema";
 import "./SocialFeed.css"
 import { SearchBar } from "../../SearchBar/SearchBar";
-
 
 
 
@@ -21,10 +25,31 @@ export const SocialFeed = () => {
   const [posts, setPosts] = useState([]);
   const [currentUserLikes, setCurrentUserLikes] = useState([]);
 
+  const handleDelete = (postId) => {
+    deletePost(postId)
+      .then((res) => {
+        console.info(res);
+        return getAllPosts().then((posts) => {
+          setPosts(posts);
+        });
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleLike = (postId) => {
+    likePost(postId)
+      .then((res) => {
+        console.info(res);
+        return getCurrentUserLikes().then((likes) => {
+          setCurrentUserLikes(likes);
+        });
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     getAllPosts()
       .then((posts) => {
-        console.log(posts);
         setPosts(posts);
         setloading(false);
       })
@@ -39,6 +64,7 @@ export const SocialFeed = () => {
   }, []);
 
   return (
+
     <div className="bodyBackground min-vh-100">
 
       <MDBContainer className=" d-flex flex-column justify-content-start align-items-center">
@@ -51,6 +77,7 @@ export const SocialFeed = () => {
               <div>
                 {!loading
                   ? posts.map((post) => (
+
                     <Posts
                       key={post.id}
                       img={post.user.image}
@@ -59,23 +86,33 @@ export const SocialFeed = () => {
                       sunSign={post.user.sunSign.name}
                       moonSign={post.user.moonSign.name}
                       ascendantSign={post.user.ascendantSign.name}
-                      body={post.body}
-                      postImg={post.image}
+
+                   
+
+                      postImgs={post.images}
                       createdAt={post.createdAt}
+                      deleteFn={() => {
+                        handleDelete(post.id);
+                      }}
+                      likeFn={() => {
+                        handleLike(post.id);
+                      }}
                       postId={post.id}
                       userId={post.user.id}
                       currentUser={currentUser.id}
-                      isLiked={currentUserLikes.map(
+                      isLiked={currentUserLikes.some(
+
                         (likedPost) => likedPost.post.id === post.id
                       )}
                     />
                   ))
-                  : "Loading Post"}
-              </div>
-            </MDBCol>
-          </MDBRow>
-        </div>
-      </MDBContainer >
-    </div >
+
+                : "Loading Post"}
+            </div>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+    </div>
+
   );
 };
