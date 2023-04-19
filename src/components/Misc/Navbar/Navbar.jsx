@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { logout as logoutToken } from "../../../stores/AccessTokenStore"
-import logo from "../../../assets/images/Backgrounds/bgLogo.png";
+import logo from "../../../assets/images/Backgrounds/logoIcon.png";
 import React, { useState } from "react";
 import "./Navbar.css";
 import hamburguer from "../../../assets/hamburger.svg";
+
 
 
 export const Navbar = () => {
@@ -18,6 +19,8 @@ export const Navbar = () => {
         <div className="nav-logo">
           <img src={logo} alt="Logo" className="logo" width="32" height="32" />
         </div>
+
+
         <button className="nav-toggle-btn" onClick={handleClick}>
           <img src={hamburguer} alt="" role="button" draggable="false" />
         </button>
@@ -31,17 +34,17 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink to="/astroFeed" onClick={handleClick}>
-                Astro Feed
+                Astro Feed <i className="bi bi-brightness-low"></i>
               </NavLink>
             </li>
             <li>
               <NavLink to="/profile" onClick={handleClick}>
-                Profile
+                <i className="bi bi-person-circle"></i>
               </NavLink>
             </li>
             <li>
               <NavLink to="/notifications" onClick={handleClick}>
-                Notifications
+                <i className="bi bi-bell-fill"></i>
               </NavLink>
             </li>
             <li>
@@ -51,7 +54,7 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink to="/" onClick={logoutToken}>
-                Logout
+                Logout<i className="bi bi-box-arrow-right"></i>
               </NavLink>
             </li>
           </ul>
