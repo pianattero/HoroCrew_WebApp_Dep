@@ -29,7 +29,7 @@ export const Navbar = () => {
           <ul>
             <li>
               <NavLink to="/socialFeed" onClick={handleClick}>
-                Social Feed
+                Social Feed <i className="bi bi-person-video2"></i> {/* Added */}
               </NavLink>
             </li>
             <li>
@@ -54,7 +54,7 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink to="/" onClick={logoutToken}>
-                Logout<i className="bi bi-box-arrow-right"></i>
+                Logout  <i className="bi bi-box-arrow-right"></i>
               </NavLink>
             </li>
           </ul>

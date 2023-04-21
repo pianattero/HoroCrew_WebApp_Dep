@@ -9,6 +9,7 @@ import { setAccessToken } from "../../../stores/AccessTokenStore";
 import { loginSchema } from "../../../utils/schemas/login.schema";
 import { Link } from "react-router-dom";
 import "./Login.css"
+import { GlowingDiv } from "../../../components/Backgrounds/BackgroundLogin/BackgroundLogin";
 
 
 const initialValues = {
@@ -53,7 +54,10 @@ const Login = () => {
     });
 
     return (
-        <div>
+        <div className="signup-bg">
+            <div className="glowingDiv">
+                <GlowingDiv />
+            </div>
             <h1>Login</h1>
 
             <form onSubmit={handleSubmit}>
