@@ -48,7 +48,7 @@ export const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink href="#" onClick={handleClick}>
+              <NavLink to="/profile/edit-profile" onClick={handleClick}>
                 <i className="bi bi-gear-fill"></i>
               </NavLink>
             </li>

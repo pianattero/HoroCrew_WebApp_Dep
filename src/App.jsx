@@ -13,6 +13,7 @@ import { OthersProfile } from "./views/Users/OthersProfile/OthersProfile";
 import { Notifications } from "./views/Users/Notifications/Notifications";
 import { NewPost } from "./views/Post/NewPost";
 import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
+import { EditProfile } from "./components/Edit/EditProfile/EditProfile";
 
 
 
@@ -50,6 +51,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/edit-profile"
+          element={
+            <ProtectedRoute>
+              <EditProfile />
             </ProtectedRoute>
           }
         />

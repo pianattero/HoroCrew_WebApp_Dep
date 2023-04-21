@@ -65,6 +65,7 @@ const Login = () => {
                     text="Email"
                     error={touched.email && errors.email}
                     htmlFor="email"
+                    style={{ color: "white" }}
                 >
                     <Input
                         id="email"
@@ -74,7 +75,7 @@ const Login = () => {
                         value={values.email}
                         error={touched.email && errors.email}
                         placeholder="Enter your email..."
-                        style={{ color: "white" }}
+
 
                     />
                 </FormControl>
@@ -83,7 +84,9 @@ const Login = () => {
                     text="Password"
                     error={touched.password && errors.password}
                     htmlFor="password"
+                    style={{ color: "white" }}
                 >
+
                     <Input
                         id="password"
                         name="password"
@@ -93,7 +96,7 @@ const Login = () => {
                         error={touched.password && errors.password}
                         placeholder="Enter your password..."
                         type="password"
-                        style={{ color: "white" }}
+
 
                     />
                 </FormControl>
