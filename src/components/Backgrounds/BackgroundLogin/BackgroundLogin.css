@@ -3,13 +3,13 @@
     padding: 0;
 }
 
-body {
+.body-bg {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     min-height: 100vh;
-    background: whitesmoke;
+    background: black;
     overflow: hidden;
 }
 

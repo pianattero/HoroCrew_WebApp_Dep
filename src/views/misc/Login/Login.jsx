@@ -60,7 +60,7 @@ const Login = () => {
             </div>
             <h1>Login</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
                 <FormControl
                     text="Email"
                     error={touched.email && errors.email}
@@ -74,6 +74,8 @@ const Login = () => {
                         value={values.email}
                         error={touched.email && errors.email}
                         placeholder="Enter your email..."
+                        style={{ color: "white" }}
+
                     />
                 </FormControl>
 
@@ -91,6 +93,8 @@ const Login = () => {
                         error={touched.password && errors.password}
                         placeholder="Enter your password..."
                         type="password"
+                        style={{ color: "white" }}
+
                     />
                 </FormControl>
 
