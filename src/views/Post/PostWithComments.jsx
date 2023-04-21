@@ -2,10 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Posts } from "../../components/Posts/Posts";
 import AuthContext from "../../context/AuthContext";
-import { postWithComments as postWithCommentsService } from "../../services/PostService";
+import {
+  commentPost,
+  deleteComment,
+  getPostComments,
+  postWithComments as postWithCommentsService,
+} from "../../services/PostService";
 import { Comment } from "../../components/Comment/Comment";
 import { Buttons } from "../../components/Button/Button";
 import { Input } from "@nextui-org/react";
+import { commentSchema } from "../../utils/schemas/comment.schema";
+import { useFormik } from "formik";
+
+const initialValues = {
+  body: "",
+};
 
 export const PostWithComments = () => {
   const { currentUser } = useContext(AuthContext);
@@ -13,11 +24,33 @@ export const PostWithComments = () => {
 
   const [postWithComments, setpostWithComments] = useState(null);
 
+  const { values, handleChange, handleSubmit } = useFormik({
+    initialValues: initialValues,
+    validateOnChange: false,
+    validationSchema: commentSchema,
+    onSubmit: (values) => {
+      commentPost({ body: values.body, postId: postWithComments.post.id })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.error(err));
+    },
+  });
+
+  const handleDelete = (commentId) => {
+    deleteComment(commentId)
+      .then((res) => {
+        getPostComments(postWithComments.post.id).then((res) => {
+          console.log(res);
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     if (!postWithComments) {
       postWithCommentsService(id)
         .then((post) => {
-          console.log(post);
           setpostWithComments(post);
         })
         .catch((err) => console.error(err));
@@ -44,17 +77,21 @@ export const PostWithComments = () => {
             currentUser={currentUser.id}
           />
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <Input
-                aria-labelledby="comment"
+                aria-labelledby="body"
+                name="body"
+                id="body"
                 width="200px"
                 type="text"
                 placeholder="Leave your comment!"
+                onChange={handleChange}
+                value={values.body}
               />
-              <Buttons text="Comment" />
+              <Buttons text="Comment" type="submit" />
             </form>
           </div>
-          <div>
+          <div className="mt-2">
             {postWithComments.comments.map((comment) => (
               <Comment
                 key={comment._id}
@@ -63,6 +100,11 @@ export const PostWithComments = () => {
                 lastName={comment.user.lastName}
                 comment={comment.body}
                 date={comment.date}
+                userId={postWithComments.post.user.id}
+                currentUser={currentUser.id}
+                deleteFn={() => {
+                  handleDelete(comment._id);
+                }}
               />
             ))}
           </div>

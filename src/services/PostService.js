@@ -24,3 +24,9 @@ export const likePost = (postId) =>
 
 export const deletePost = (postId) =>
   authenticatedHttp.post(`/posts/${postId}/delete`, postId);
+
+export const commentPost = ({ postId, body }) =>
+  authenticatedHttp.post(`/posts/${postId}/comment`, { body });
+
+export const deleteComment = (commentId) =>
+  authenticatedHttp.post(`/posts/comment/${commentId}/delete`);
