@@ -15,7 +15,11 @@ import { aztroAPI as aztroAPIService } from "../../../services/Apis/AztroAPI";
 import { horoscopeAI as horoscopeAIService } from "../../../services/Apis/HoroscopesAI";
 import { horoscopeAstroInfo as horoscopeAstroInfoService } from "../../../services/Apis/HoroscopeAstro";
 
-import { getCurrentUserPosts } from "../../../services/PostService";
+import {
+  deletePost,
+  getCurrentUserPosts,
+  likePost,
+} from "../../../services/PostService";
 import { getCurrentUserLikes } from "../../../services/LikeService";
 import {
   getCurrentUserFollowers,
@@ -42,6 +46,35 @@ export const Profile = () => {
   const [currentUserLikes, setCurrentUserLikes] = useState([]);
   const [showCurrentUserLikes, setShowCurrentUserLikes] = useState(false);
 
+  const handleDelete = (postId) => {
+    deletePost(postId).then((res) => {
+      handleCurrentUserPosts();
+      handleCurrentUserLikes();
+    });
+  };
+
+  const handleLike = (postId) => {
+    likePost(postId).then((res) => {
+      return handleCurrentUserLikes();
+    });
+  };
+
+  const handleCurrentUserPosts = () => {
+    getCurrentUserPosts()
+      .then((posts) => {
+        setCurrentUserPosts(posts);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleCurrentUserLikes = () => {
+    getCurrentUserLikes()
+      .then((likes) => {
+        setCurrentUserLikes(likes);
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     if (!currentUser) return;
 
@@ -57,17 +90,9 @@ export const Profile = () => {
       })
       .catch((err) => console.error(err));
 
-    getCurrentUserPosts()
-      .then((posts) => {
-        setCurrentUserPosts(posts);
-      })
-      .catch((err) => console.error(err));
+    handleCurrentUserPosts();
 
-    getCurrentUserLikes()
-      .then((likes) => {
-        setCurrentUserLikes(likes);
-      })
-      .catch((err) => console.error(err));
+    handleCurrentUserLikes();
   }, [currentUser]);
 
   return (
@@ -216,8 +241,15 @@ export const Profile = () => {
                         moonSign={currentUser.moonSign.name}
                         ascendantSign={currentUser.ascendantSign.name}
                         body={post.body}
+                        postId={post.id}
                         postImgs={post.images}
                         createdAt={post.createdAt}
+                        deleteFn={() => {
+                          handleDelete(post.id);
+                        }}
+                        likeFn={() => {
+                          handleLike(post.id);
+                        }}
                         userId={post.user}
                         currentUser={currentUser.id}
                         isLiked={currentUserLikes.some(
@@ -246,8 +278,15 @@ export const Profile = () => {
                         moonSign={like.post.user.moonSign.name}
                         ascendantSign={like.post.user.ascendantSign.name}
                         body={like.post.body}
+                        postId={like.post.id}
                         postImgs={like.post.images}
                         createdAt={like.post.createdAt}
+                        deleteFn={() => {
+                          handleDelete(like.post.id);
+                        }}
+                        likeFn={() => {
+                          handleLike(like.post.id);
+                        }}
                         userId={like.post.user.id}
                         currentUser={currentUser.id}
                         isLiked={currentUserLikes.some(

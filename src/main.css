@@ -11,9 +11,3 @@
     background: linear-gradient(90deg, rgba(45,92,109,1) 0%, rgba(143,235,224,1) 50%, rgba(255,255,255,1) 100%)
 }
 
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-  }

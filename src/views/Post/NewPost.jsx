@@ -6,16 +6,12 @@ import Input from "../../components/Input/Input";
 import { newPost } from "../../services/PostService";
 import { newPostSchema } from "../../utils/schemas/post.schema";
 
-
-
 const initialValues = {
   body: "",
   image: "",
 };
 
-export const NewPost = () => {
-  const navigate = useNavigate();
-
+export const NewPost = ({ refreshPosts }) => {
   const {
     values,
     errors,
@@ -42,10 +38,11 @@ export const NewPost = () => {
           formData.append(key, values[key]);
         }
       });
+      refreshPosts && refreshPosts();
       newPost(formData)
         .then((response) => {
           console.info(response);
-          navigate("/socialFeed");
+          setSubmitting(true);
         })
         .catch((err) => {
           console.err(err);
@@ -55,7 +52,6 @@ export const NewPost = () => {
   });
   return (
     <div>
-
       <form
         onSubmit={handleSubmit}
         className="mx-3"

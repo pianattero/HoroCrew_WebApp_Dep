@@ -14,7 +14,7 @@ import { Notifications } from "./views/Users/Notifications/Notifications";
 import { NewPost } from "./views/Post/NewPost";
 import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
 import { MessageSection } from "./components/MessageSection/MessageSection";
-
+import { PostWithComments } from "./views/Post/PostWithComments";
 
 
 
@@ -38,11 +38,15 @@ function App() {
             </>
           }
         />
-        <Route path="/login" element={
-          <>
-            <Login />
-          </>
-        } />
+        <Route
+          path="/login"
+          element={
+            <>
+              <Login />
+            </>
+          }
+        />
+
 
         {/* PROFILES */}
 
@@ -91,7 +95,7 @@ function App() {
           }
         />
 
-        {/* FEEDS */}
+        {/* FEEDS AND POSTS */}
         <Route
           path="/socialfeed"
           element={
@@ -115,6 +119,15 @@ function App() {
           element={
             <ProtectedRoute>
               <NewPost />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="post/:id"
+          element={
+            <ProtectedRoute>
+              <PostWithComments />
             </ProtectedRoute>
           }
         />

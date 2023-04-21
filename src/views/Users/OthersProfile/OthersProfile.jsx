@@ -275,6 +275,7 @@ export const OthersProfile = () => {
                             moonSign={user.moonSign.name}
                             ascendantSign={user.ascendantSign.name}
                             body={post.body}
+                            postId={post.id}
                             postImgs={post.images}
                             userId={post.user.id}
                             currentUser={currentUser.id}
@@ -304,6 +305,7 @@ export const OthersProfile = () => {
                             moonSign={like.post.user.moonSign.name}
                             ascendantSign={like.post.user.ascendantSign.name}
                             body={like.post.body}
+                            postId={like.post.id}
                             postImgs={like.post.images}
                             userId={like.post.user.id}
                             currentUser={currentUser.id}
