@@ -1,0 +1,55 @@
+/*.social-feed-wrapper {
+    position: relative;
+
+}
+
+.profile-back-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-size: cover;
+}
+    /* Setting a negative z-index to move it behind the content --- doesnt work*/
+
+/*
+.content-wrapper {
+    position: relative;
+    z-index: 1;}
+    /* Set the z-index to 1 to ensure it appears on top */
+
+.bodyBackground {
+    background-color: #3c9de7;
+    animation: bg-color 10s infinite;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+@keyframes bg-color {
+    0% {
+        background-color: #3cc8e7;
+    }
+
+    20% {
+        background-color: #3596ac;
+    }
+
+    40% {
+        background-color: #3d7b96;
+    }
+
+    60% {
+        background-color: #41c0c0;
+    }
+
+    80% {
+        background-color: #1f869d;
+    }
+
+    100% {
+        background-color: #addde3;
+    }
+}

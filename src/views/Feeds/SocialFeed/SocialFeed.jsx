@@ -1,6 +1,7 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Posts } from "../../../components/Posts/Posts";
+
 import {
   deletePost,
   getAllPosts,
@@ -9,6 +10,12 @@ import {
 import AuthContext from "../../../context/AuthContext";
 import { getCurrentUserLikes } from "../../../services/LikeService";
 import { NewPost } from "../../Post/NewPost";
+
+import { newPostSchema } from "../../../utils/schemas/post.schema";
+import "./SocialFeed.css"
+import { SearchBar } from "../../SearchBar/SearchBar";
+
+
 
 export const SocialFeed = () => {
   const { currentUser } = useContext(AuthContext);
@@ -61,15 +68,21 @@ export const SocialFeed = () => {
   }, []);
 
   return (
-    <div className="min-vh-100">
-      <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
-        <h1>See what's happening!</h1>
-        <MDBRow>
-          <NewPost refreshPosts={handleAllPosts} />
-          <MDBCol>
-            <div>
-              {!loading
-                ? posts.map((post) => (
+
+
+    <div className="bodyBackground min-vh-100">
+
+      <MDBContainer className=" d-flex flex-column justify-content-start align-items-center">
+        <div className="content-wrapper">
+          <h1>See what's happening!</h1>
+          <SearchBar />
+          <MDBRow>
+            <NewPost />
+            <MDBCol>
+              <div>
+                {!loading
+                  ? posts.map((post) => (
+
                     <Posts
                       key={post.id}
                       img={post.user.image}
@@ -78,7 +91,9 @@ export const SocialFeed = () => {
                       sunSign={post.user.sunSign.name}
                       moonSign={post.user.moonSign.name}
                       ascendantSign={post.user.ascendantSign.name}
-                      body={post.body}
+
+                   
+
                       postImgs={post.images}
                       createdAt={post.createdAt}
                       deleteFn={() => {
@@ -91,15 +106,18 @@ export const SocialFeed = () => {
                       userId={post.user.id}
                       currentUser={currentUser.id}
                       isLiked={currentUserLikes.some(
+
                         (likedPost) => likedPost.post.id === post.id
                       )}
                     />
                   ))
+
                 : "Loading Post"}
             </div>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
     </div>
+
   );
 };

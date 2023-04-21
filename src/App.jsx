@@ -16,6 +16,8 @@ import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
 import { MessageSection } from "./components/MessageSection/MessageSection";
 import { PostWithComments } from "./views/Post/PostWithComments";
 
+
+
 function App() {
   const routesWithoutNav = ["/", "/signup", "/login"];
   const location = useLocation();
@@ -44,6 +46,7 @@ function App() {
             </>
           }
         />
+
 
         {/* PROFILES */}
 
