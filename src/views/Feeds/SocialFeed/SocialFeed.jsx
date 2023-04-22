@@ -1,7 +1,7 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Posts } from "../../../components/Posts/Posts";
-
+import "./SocialFeed.css"
 import {
   deletePost,
   getAllPosts,
@@ -60,14 +60,14 @@ export const SocialFeed = () => {
 
   return (
 
-    <div className="scroll-bg min-vh-100">
+    <div className="scroll-bg min-vh-100 container-social">
 
 
       <MDBContainer className=" d-flex flex-column justify-content-start align-items-center">
         <div className="content-wrapper">
           <h1>See what's happening!</h1>
           <SearchBar />
-          <MDBRow>
+          <MDBRow >
             <NewPost
               refreshPosts={() => {
                 handleAllPosts();
@@ -77,32 +77,32 @@ export const SocialFeed = () => {
               <div>
                 {!loading
                   ? posts.map((post) => (
-                      <Posts
-                        key={post.id}
-                        img={post.user.image}
-                        firstName={post.user.firstName}
-                        lastName={post.user.lastName}
-                        sunSign={post.user.sunSign.name}
-                        moonSign={post.user.moonSign.name}
-                        ascendantSign={post.user.ascendantSign.name}
-                        body={post.body}
-                        postImgs={post.images}
-                        createdAt={post.createdAt}
-                        showTrash={true}
-                        deleteFn={() => {
-                          handleDelete(post.id);
-                        }}
-                        likeFn={() => {
-                          handleLike(post.id);
-                        }}
-                        postId={post.id}
-                        userId={post.user.id}
-                        currentUser={currentUser.id}
-                        isLiked={currentUserLikes.some(
-                          (likedPost) => likedPost.post.id === post.id
-                        )}
-                      />
-                    ))
+                    <Posts
+                      key={post.id}
+                      img={post.user.image}
+                      firstName={post.user.firstName}
+                      lastName={post.user.lastName}
+                      sunSign={post.user.sunSign.name}
+                      moonSign={post.user.moonSign.name}
+                      ascendantSign={post.user.ascendantSign.name}
+                      body={post.body}
+                      postImgs={post.images}
+                      createdAt={post.createdAt}
+                      showTrash={true}
+                      deleteFn={() => {
+                        handleDelete(post.id);
+                      }}
+                      likeFn={() => {
+                        handleLike(post.id);
+                      }}
+                      postId={post.id}
+                      userId={post.user.id}
+                      currentUser={currentUser.id}
+                      isLiked={currentUserLikes.some(
+                        (likedPost) => likedPost.post.id === post.id
+                      )}
+                    />
+                  ))
                   : "Loading Post"}
               </div>
             </MDBCol>
