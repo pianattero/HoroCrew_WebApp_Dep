@@ -148,7 +148,7 @@ export const OthersProfile = () => {
                           </MDBCardText>
                         </div>
                       </div>
-                      <div className="mt-2 ms-5 d-flex flex-column align-items-center">
+                      <div className="mt-2 ms-5 d-flex flex-row-reverse align-items-center">
                         <Buttons
                           text={
                             userFollowers.some(
@@ -168,14 +168,22 @@ export const OthersProfile = () => {
                           }
                           onClick={handleFollow}
                         />
-                        <div>
-                          <i
-                            onClick={() => {
-                              navigate(`/chat/${user.id}`);
-                            }}
-                            className="bi bi-chat"
-                          ></i>
-                        </div>
+
+                        {userFollowers.some(
+                          (follower) => follower.follower.id === currentUser.id
+                        ) &&
+                        userFolloweds.some(
+                          (followed) => followed.followed.id === currentUser.id
+                        ) ? (
+                          <div className="me-2">
+                            <i
+                              onClick={() => {
+                                navigate(`/chat/${user.id}`);
+                              }}
+                              className="bi bi-chat-right-text-fill"
+                            ></i>
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                   </div>
@@ -307,6 +315,7 @@ export const OthersProfile = () => {
                             body={like.post.body}
                             postId={like.post.id}
                             postImgs={like.post.images}
+                            showTrash={true}
                             userId={like.post.user.id}
                             currentUser={currentUser.id}
                             isLiked={currentUserLikes.some(

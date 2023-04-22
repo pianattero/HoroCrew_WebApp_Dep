@@ -9,11 +9,16 @@ import {
 } from "mdb-react-ui-kit";
 import moment from "moment";
 import AuthContext from "../../../context/AuthContext";
-import { getNotifications } from "../../../services/NotificationService";
-import { Link } from "react-router-dom";
+import {
+  getNotifications,
+  getReadNotifications,
+} from "../../../services/NotificationService";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Notifications = () => {
   const { currentUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const [notifications, setNotifications] = useState();
 
@@ -21,13 +26,27 @@ export const Notifications = () => {
     notifications.map((notification) => (notification.read = true));
   };
 
+  const readNoti = () => {
+    getReadNotifications()
+      .then((readNotifications) => {
+        console.log(readNotifications);
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
-    if (!currentUser) return;
+    if (!currentUser && !notifications) return;
 
     getNotifications()
       .then((notifications) => {
         setNotifications(notifications);
-        //handleRead(notifications);
+        console.log(notifications);
+      })
+      .catch((err) => console.error(err));
+
+    getReadNotifications()
+      .then((readNotifications) => {
+        console.log(readNotifications);
       })
       .catch((err) => console.error(err));
   }, [currentUser]);
@@ -54,9 +73,30 @@ export const Notifications = () => {
                         </Link>
                       </div>
                       <div className="d-flex align-items-center justify-content-between flex-grow-1 ms-3">
-                        <p className="me-4 p-0">
-                          <strong>{notification.message}</strong>
-                        </p>
+                        <div className="d-flex flex-column">
+                          {notification.read ? (
+                            <p className="me-4 mb-0 p-0">
+                              {notification.message}
+                            </p>
+                          ) : (
+                            <p className="me-4 mb-0 p-0">
+                              <strong>{notification.message}</strong>
+                            </p>
+                          )}
+
+                          {notification.type === "Like" ||
+                          notification.type === "Comment" ? (
+                            <p
+                              className="text-muted"
+                              onClick={() => {
+                                navigate(`/post/${notification.post}`);
+                              }}
+                            >
+                              <small>View post</small>
+                            </p>
+                          ) : null}
+                        </div>
+
                         <p className="p-0">
                           <small>
                             <em>

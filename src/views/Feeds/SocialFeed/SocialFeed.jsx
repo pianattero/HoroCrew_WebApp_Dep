@@ -49,12 +49,7 @@ export const SocialFeed = () => {
   }, []);
 
   useEffect(() => {
-    getAllPosts()
-      .then((posts) => {
-        setPosts(posts);
-        setloading(false);
-      })
-      .catch((err) => console.error(err));
+    handleAllPosts();
 
     getCurrentUserLikes()
       .then((likes) => {
@@ -90,6 +85,7 @@ export const SocialFeed = () => {
                         body={post.body}
                         postImgs={post.images}
                         createdAt={post.createdAt}
+                        showTrash={true}
                         deleteFn={() => {
                           handleDelete(post.id);
                         }}

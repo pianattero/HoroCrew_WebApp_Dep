@@ -33,8 +33,6 @@ import { Link } from "react-router-dom";
 export const Profile = () => {
   const { currentUser } = useContext(AuthContext);
 
-  const [loading, setloading] = useState(true);
-
   const [currentUserFollowers, setCurrentUserFollowers] = useState([]);
   const [currentUserFolloweds, setCurrentUserFolloweds] = useState([]);
 
@@ -244,6 +242,7 @@ export const Profile = () => {
                         postId={post.id}
                         postImgs={post.images}
                         createdAt={post.createdAt}
+                        showTrash={true}
                         deleteFn={() => {
                           handleDelete(post.id);
                         }}
@@ -281,6 +280,7 @@ export const Profile = () => {
                         postId={like.post.id}
                         postImgs={like.post.images}
                         createdAt={like.post.createdAt}
+                        showTrash={true}
                         deleteFn={() => {
                           handleDelete(like.post.id);
                         }}
