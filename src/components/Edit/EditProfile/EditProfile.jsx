@@ -33,7 +33,7 @@ export const EditProfile = () => {
             editService({ firstName: values.firstName, lastName: values.lastName, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth, timeOfBirth: values.timeOfBirth })
                 .then((response) => {
                     edit(response)
-                    navigate("/profile/edit-profile")
+                    navigate("/profile")
                 })
                 .catch((error) => {
 
@@ -158,9 +158,9 @@ export const EditProfile = () => {
                     type="submit"
                     disabled={isSubmitting}
                 >
-                    {isSubmitting ? "Submitting..." : "Submit"}
+                    {isSubmitting ? "Submitting..." : "Save Changes"}
+
                 </button>
-                <Link className="btn btn-light m-3" to="/profile"> Save Changes </Link>
 
             </form>
         </div>
