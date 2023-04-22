@@ -35,7 +35,6 @@ export const EditProfile = () => {
         onSubmit: (values) => {
             editService({ firstName: values.firstName, lastName: values.lastName, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth, timeOfBirth: values.timeOfBirth })
                 .then((response) => {
-                    edit(response)
                     navigate("/profile")
                 })
                 .catch((error) => {
