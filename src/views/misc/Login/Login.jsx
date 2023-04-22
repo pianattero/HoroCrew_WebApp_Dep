@@ -58,7 +58,10 @@ const Login = () => {
             <div className="glowingDiv">
                 <GlowingDiv />
             </div>
-            <h1 className="h1-login">Login</h1>
+            <div>
+                <h1 className="h1-login">Login</h1>
+            </div>
+
 
             <form onSubmit={handleSubmit} >
                 <FormControl
