@@ -22,7 +22,7 @@ export const MessageSection = () => {
 
   const [user, setUser] = useState();
 
-  const { values, handleChange, handleSubmit } = useFormik({
+  const { values, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: initialValues,
     validateOnChange: false,
     validationSchema: msgSchema,
@@ -32,6 +32,7 @@ export const MessageSection = () => {
           console.log(res);
         })
         .catch((err) => console.error(err));
+      resetForm({ values: "" });
     },
   });
 

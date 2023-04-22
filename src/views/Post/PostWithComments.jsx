@@ -5,7 +5,6 @@ import AuthContext from "../../context/AuthContext";
 import {
   commentPost,
   deleteComment,
-  getPostComments,
   postWithComments as postWithCommentsService,
 } from "../../services/PostService";
 import { Comment } from "../../components/Comment/Comment";
@@ -24,36 +23,39 @@ export const PostWithComments = () => {
 
   const [postWithComments, setpostWithComments] = useState(null);
 
-  const { values, handleChange, handleSubmit } = useFormik({
+  const { values, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: initialValues,
     validateOnChange: false,
     validationSchema: commentSchema,
     onSubmit: (values) => {
       commentPost({ body: values.body, postId: postWithComments.post.id })
         .then((res) => {
-          console.log(res);
+          handlePostWithComments();
         })
         .catch((err) => console.error(err));
+      resetForm({ values: "" });
     },
   });
 
   const handleDelete = (commentId) => {
     deleteComment(commentId)
       .then((res) => {
-        getPostComments(postWithComments.post.id).then((res) => {
-          console.log(res);
-        });
+        handlePostWithComments();
       })
       .catch((err) => console.log(err));
   };
 
+  const handlePostWithComments = () => {
+    postWithCommentsService(id)
+      .then((post) => {
+        setpostWithComments(post);
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     if (!postWithComments) {
-      postWithCommentsService(id)
-        .then((post) => {
-          setpostWithComments(post);
-        })
-        .catch((err) => console.error(err));
+      handlePostWithComments();
     }
   }, [postWithComments]);
 

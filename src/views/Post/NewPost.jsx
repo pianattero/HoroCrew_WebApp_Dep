@@ -22,6 +22,7 @@ export const NewPost = ({ refreshPosts }) => {
     handleChange,
     setSubmitting,
     setFieldValue,
+    resetForm,
   } = useFormik({
     initialValues: initialValues,
     validateOnBlur: true,
@@ -38,16 +39,16 @@ export const NewPost = ({ refreshPosts }) => {
           formData.append(key, values[key]);
         }
       });
-      refreshPosts && refreshPosts();
       newPost(formData)
         .then((response) => {
-          console.info(response);
+          refreshPosts && refreshPosts();
           setSubmitting(true);
         })
         .catch((err) => {
           console.err(err);
           setSubmitting(false);
         });
+      resetForm({ values: "" });
     },
   });
   return (
@@ -89,14 +90,13 @@ export const NewPost = ({ refreshPosts }) => {
           <button
             type="submit"
             className="btn rounded-pill"
-            disabled={isSubmitting}
             style={{
               backgroundColor: "#3EC4FC",
               color: "white",
               width: "80vw",
             }}
           >
-            {isSubmitting ? "ADDING NEW POST" : "ADD NEW"}
+            ADD NEW
           </button>
         </div>
       </form>
