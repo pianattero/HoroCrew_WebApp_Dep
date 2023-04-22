@@ -54,11 +54,14 @@ const Login = () => {
     });
 
     return (
-        <div className="signup-bg">
+        <div className="login-bg">
             <div className="glowingDiv">
                 <GlowingDiv />
             </div>
-            <h1 className="h1-login">Login</h1>
+            <div>
+                <h1 className="h1-login">Login</h1>
+            </div>
+
 
             <form onSubmit={handleSubmit} >
                 <FormControl
@@ -106,10 +109,10 @@ const Login = () => {
                     type="submit"
                     disabled={isSubmitting}
                 >
-                    {isSubmitting ? "Submitting..." : "Submit"}
+                    {isSubmitting ? "Submitting..." : "Login"}
                 </button>
                 <Link className="btn btn-light m-3" to="/"> Atras </Link>
-                <Link className="btn btn-light m-3" to="/loginFacial"> Facial Login </Link>
+
 
             </form>
         </div>

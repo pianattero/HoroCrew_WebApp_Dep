@@ -6,6 +6,19 @@
     width: 100%;
 }
 
+.edit-container {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: 40px;
+}
+
 @keyframes bg-color {
     0% {
         background-color: #3cc8e7;

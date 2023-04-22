@@ -27,32 +27,32 @@ export const Home = () => {
                     <Galaxy />
 
                     <Animator animation={ZoomInScrollOut}>
-                        <span style={{ fontSize: "35px", color: "white" }}>✨Welcome✨</span>
+                        <span style={{ fontFamily: "fantasy", fontSize: "40px", color: "white" }}>✨Welcome✨</span>
                     </Animator>
                 </ScrollPage>
 
                 <ScrollPage>
                     <Galaxy />
                     <Animator animation={FadeUp}>
-                        <span style={{ fontSize: "20px", color: "white" }}> Find Your True Self </span>
+                        <span style={{ fontFamily: "fantasy", fontSize: "40px", color: "white" }}> Find Your True Self </span>
                     </Animator>
                 </ScrollPage>
                 <ScrollPage>
                     <Galaxy />
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", color: "white" }} >
                         <span style={{ fontSize: "30px" }}>
-                            <Animator animation={MoveIn(-1000, 0)}>🐐Capricorn♑</Animator>
-                            <Animator animation={MoveIn(1000, 0)}>🐮Taurus♉</Animator>
-                            <Animator animation={MoveIn(1000, 0)}>🐟Pisces♓</Animator>
-                            <Animator animation={MoveOut(1000, 0)}>👯Gemini♊</Animator>
-                            <Animator animation={MoveOut(-1000, 0)}> 🏹Sagitarius♐ </Animator>
-                            <Animator animation={MoveOut(-1000, 0)}> ⚖️Libra♎ </Animator>
-                            <Animator animation={MoveIn(-1000, 0)}>🌊Aquarius♒</Animator>
-                            <Animator animation={MoveIn(1000, 0)}>🐏Aries♈</Animator>
-                            <Animator animation={MoveIn(1000, 0)}>💸Virgo♍</Animator>
-                            <Animator animation={MoveOut(-1000, 0)}> 🦂Scorpio♏ </Animator>
-                            <Animator animation={MoveOut(-1000, 0)}> 🦀Cancer♋</Animator>
-                            <Animator animation={MoveOut(-1000, 0)}> 🦁Leo♌</Animator>
+                            <Animator animation={MoveIn(-1000, 0)} style={{ fontFamily: "fantasy" }}>🐐Capricorn♑</Animator>
+                            <Animator animation={MoveIn(1000, 0)} style={{ fontFamily: "fantasy" }}>🐮Taurus♉</Animator>
+                            <Animator animation={MoveIn(1000, 0)} style={{ fontFamily: "fantasy" }}>🐟Pisces♓</Animator>
+                            <Animator animation={MoveOut(1000, 0)} style={{ fontFamily: "fantasy" }}>👯Gemini♊</Animator>
+                            <Animator animation={MoveOut(-1000, 0)} style={{ fontFamily: "fantasy" }}> 🏹Sagitarius♐ </Animator>
+                            <Animator animation={MoveOut(-1000, 0)} style={{ fontFamily: "fantasy" }}> ⚖️Libra♎ </Animator>
+                            <Animator animation={MoveIn(-1000, 0)} style={{ fontFamily: "fantasy" }}>🌊Aquarius♒</Animator>
+                            <Animator animation={MoveIn(1000, 0)} style={{ fontFamily: "fantasy" }}>🐏Aries♈</Animator>
+                            <Animator animation={MoveIn(1000, 0)} style={{ fontFamily: "fantasy" }}>💸Virgo♍</Animator>
+                            <Animator animation={MoveOut(-1000, 0)} style={{ fontFamily: "fantasy" }}> 🦂Scorpio♏ </Animator>
+                            <Animator animation={MoveOut(-1000, 0)} style={{ fontFamily: "fantasy" }}> 🦀Cancer♋</Animator>
+                            <Animator animation={MoveOut(-1000, 0)} style={{ fontFamily: "fantasy" }}> 🦁Leo♌</Animator>
                         </span>
                     </div>
                 </ScrollPage>

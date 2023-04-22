@@ -46,7 +46,7 @@ export const Posts = ({
   });
 
   return (
-    <div className="my-3" style={{ width: "70vw" }}>
+    <div className="my-3">
       <MDBCard>
         <MDBCardBody>
           <div className="d-flex align-items-center justify-content-between flex-wrap">
