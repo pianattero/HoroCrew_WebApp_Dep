@@ -23,6 +23,7 @@ export const EditProfile = () => {
         timeOfBirth: currentUser.timeOfBirth,
     };
 
+
     const navigate = useNavigate()
 
     const {
