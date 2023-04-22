@@ -1,17 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { logout as logoutToken } from "../../../stores/AccessTokenStore"
+import { logout as logoutToken } from "../../../stores/AccessTokenStore";
 import logo from "../../../assets/images/Backgrounds/logoIcon.png";
 import React, { useState } from "react";
 import "./Navbar.css";
 import hamburguer from "../../../assets/hamburger.svg";
 
-
-
 export const Navbar = () => {
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
-
 
   return (
     <>
@@ -22,7 +19,6 @@ export const Navbar = () => {
           </NavLink>
 
         </div>
-
 
         <button className="nav-toggle-btn" onClick={handleClick}>
           <img src={hamburguer} alt="" role="button" draggable="false" />
@@ -57,7 +53,9 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink to="/" onClick={logoutToken}>
-                Logout  <i className="bi bi-box-arrow-right"></i>
+
+                Logout <i className="bi bi-box-arrow-right"></i>
+
               </NavLink>
             </li>
           </ul>

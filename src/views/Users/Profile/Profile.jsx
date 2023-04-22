@@ -15,7 +15,11 @@ import { aztroAPI as aztroAPIService } from "../../../services/Apis/AztroAPI";
 import { horoscopeAI as horoscopeAIService } from "../../../services/Apis/HoroscopesAI";
 import { horoscopeAstroInfo as horoscopeAstroInfoService } from "../../../services/Apis/HoroscopeAstro";
 
-import { getCurrentUserPosts } from "../../../services/PostService";
+import {
+  deletePost,
+  getCurrentUserPosts,
+  likePost,
+} from "../../../services/PostService";
 import { getCurrentUserLikes } from "../../../services/LikeService";
 import {
   getCurrentUserFollowers,
@@ -29,8 +33,6 @@ import { Link } from "react-router-dom";
 export const Profile = () => {
   const { currentUser } = useContext(AuthContext);
 
-  const [loading, setloading] = useState(true);
-
   const [currentUserFollowers, setCurrentUserFollowers] = useState([]);
   const [currentUserFolloweds, setCurrentUserFolloweds] = useState([]);
 
@@ -41,6 +43,35 @@ export const Profile = () => {
 
   const [currentUserLikes, setCurrentUserLikes] = useState([]);
   const [showCurrentUserLikes, setShowCurrentUserLikes] = useState(false);
+
+  const handleDelete = (postId) => {
+    deletePost(postId).then((res) => {
+      handleCurrentUserPosts();
+      handleCurrentUserLikes();
+    });
+  };
+
+  const handleLike = (postId) => {
+    likePost(postId).then((res) => {
+      return handleCurrentUserLikes();
+    });
+  };
+
+  const handleCurrentUserPosts = () => {
+    getCurrentUserPosts()
+      .then((posts) => {
+        setCurrentUserPosts(posts);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleCurrentUserLikes = () => {
+    getCurrentUserLikes()
+      .then((likes) => {
+        setCurrentUserLikes(likes);
+      })
+      .catch((err) => console.error(err));
+  };
 
   useEffect(() => {
     if (!currentUser) return;
@@ -57,17 +88,9 @@ export const Profile = () => {
       })
       .catch((err) => console.error(err));
 
-    getCurrentUserPosts()
-      .then((posts) => {
-        setCurrentUserPosts(posts);
-      })
-      .catch((err) => console.error(err));
+    handleCurrentUserPosts();
 
-    getCurrentUserLikes()
-      .then((likes) => {
-        setCurrentUserLikes(likes);
-      })
-      .catch((err) => console.error(err));
+    handleCurrentUserLikes();
   }, [currentUser]);
 
   return (
@@ -209,14 +232,26 @@ export const Profile = () => {
                         key={post.id}
                         img={currentUser.image}
                         firstName={currentUser.firstName}
+                        lastName={currentUser.lastName}
                         sunSign={currentUser.sunSign.name}
                         moonSign={currentUser.moonSign.name}
                         ascendantSign={currentUser.ascendantSign.name}
                         body={post.body}
-                        postImg={post.image}
+                        postId={post.id}
+                        postImgs={post.images}
                         createdAt={post.createdAt}
+                        showTrash={true}
+                        deleteFn={() => {
+                          handleDelete(post.id);
+                        }}
+                        likeFn={() => {
+                          handleLike(post.id);
+                        }}
                         userId={post.user}
                         currentUser={currentUser.id}
+                        isLiked={currentUserLikes.some(
+                          (likedPost) => likedPost.post.id === post.id
+                        )}
                       />
                     ))}
                   </div>
@@ -235,14 +270,26 @@ export const Profile = () => {
                         key={like._id}
                         img={like.post.user.image}
                         firstName={like.post.user.firstName}
+                        lastName={like.post.user.lastName}
                         sunSign={like.post.user.sunSign.name}
                         moonSign={like.post.user.moonSign.name}
                         ascendantSign={like.post.user.ascendantSign.name}
                         body={like.post.body}
-                        postImg={like.post.image}
+                        postId={like.post.id}
+                        postImgs={like.post.images}
                         createdAt={like.post.createdAt}
+                        showTrash={true}
+                        deleteFn={() => {
+                          handleDelete(like.post.id);
+                        }}
+                        likeFn={() => {
+                          handleLike(like.post.id);
+                        }}
                         userId={like.post.user.id}
                         currentUser={currentUser.id}
+                        isLiked={currentUserLikes.some(
+                          (likedPost) => likedPost.post.id === like.post.id
+                        )}
                       />
                     ))}
                   </div>

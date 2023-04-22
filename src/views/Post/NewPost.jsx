@@ -1,21 +1,17 @@
+import { Button, Loading } from "@nextui-org/react";
 import { useFormik } from "formik";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import FormControl from "../../components/FormControl/FormControl";
 import Input from "../../components/Input/Input";
 import { newPost } from "../../services/PostService";
 import { newPostSchema } from "../../utils/schemas/post.schema";
-
-
 
 const initialValues = {
   body: "",
   image: "",
 };
 
-export const NewPost = () => {
-  const navigate = useNavigate();
-
+export const NewPost = ({ refreshPosts }) => {
   const {
     values,
     errors,
@@ -25,20 +21,29 @@ export const NewPost = () => {
     handleBlur,
     handleChange,
     setSubmitting,
+    setFieldValue,
+    resetForm,
   } = useFormik({
     initialValues: initialValues,
     validateOnBlur: true,
     validateOnChange: false,
     validationSchema: newPostSchema,
     onSubmit: (values) => {
-      newPost({
-        body: values.body,
-        image: values.image,
-      })
+      const formData = new FormData();
+      Object.keys(values).forEach((key) => {
+        if (key === "image") {
+          [...values["image"]].forEach((img, i) => {
+            formData.append(`img-${i}`, img);
+          });
+        } else {
+          formData.append(key, values[key]);
+        }
+      });
+      newPost(formData)
         .then((response) => {
-          console.info(response);
-          console.log(values.image);
-          navigate("/socialFeed");
+          refreshPosts && refreshPosts();
+          setSubmitting(false);
+          resetForm({ values: "" });
         })
         .catch((err) => {
           console.err(err);
@@ -48,7 +53,6 @@ export const NewPost = () => {
   });
   return (
     <div>
-
       <form
         onSubmit={handleSubmit}
         className="mx-3"
@@ -70,17 +74,22 @@ export const NewPost = () => {
           />
         </FormControl>
 
-        <FormControl text="Upload image" htmlFor="image">
-          <Input
+        <div
+          style={{ textAlign: "center", verticalAlign: "middle" }}
+          className="d-flex align-items-center justify-content-between"
+        >
+          <input
+            aria-describedby="image"
+            className="custom-file-input"
             id="image"
             name="image"
             type="file"
-            onChange={handleChange}
-            value={values.image}
+            multiple
+            onChange={(event) => {
+              setFieldValue("image", event.currentTarget.files);
+            }}
           />
-        </FormControl>
 
-        <div style={{ textAlign: "center" }}>
           <button
             type="submit"
             className="btn rounded-pill"
@@ -88,10 +97,14 @@ export const NewPost = () => {
             style={{
               backgroundColor: "#3EC4FC",
               color: "white",
-              width: "80vw",
+              width: "fit-content",
             }}
           >
-            {isSubmitting ? "ADDING NEW POST" : "ADD NEW"}
+            {isSubmitting ? (
+              <Loading type="spinner" color="currentColor" size="lg" />
+            ) : (
+              "ADD NEW POST"
+            )}
           </button>
         </div>
       </form>

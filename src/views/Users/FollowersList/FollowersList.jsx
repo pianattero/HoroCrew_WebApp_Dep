@@ -20,7 +20,6 @@ export const FollowersList = () => {
 
     getCurrentUserFollowers()
       .then((followers) => {
-        console.log(followers);
         setCurrentUserFollowers(followers);
         setloading(false);
       })
@@ -32,9 +31,9 @@ export const FollowersList = () => {
         currentUserFollowers.length > 0 ? (
           <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
             <h1>Followers</h1>
-            {currentUserFollowers.map((follower) => (
-              <MDBRow>
-                <MDBCol>
+            <MDBRow>
+              <MDBCol>
+                {currentUserFollowers.map((follower) => (
                   <UserBrief
                     key={follower._id}
                     img={follower.follower.image}
@@ -42,9 +41,9 @@ export const FollowersList = () => {
                     text="View Profile"
                     onClick={() => navigate(`/profile/${follower.follower.id}`)}
                   />
-                </MDBCol>
-              </MDBRow>
-            ))}
+                ))}
+              </MDBCol>
+            </MDBRow>
           </MDBContainer>
         ) : (
           "No followers yet"
