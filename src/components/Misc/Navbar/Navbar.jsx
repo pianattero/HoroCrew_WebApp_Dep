@@ -17,7 +17,10 @@ export const Navbar = () => {
     <>
       <nav className="navbar">
         <div className="nav-logo">
-          <img src={logo} alt="Logo" className="logo" width="32" height="32" />
+          <NavLink to="/profile" onClick={handleClick}>
+            <img src={logo} alt="Logo" className="logo" width="32" height="32" />
+          </NavLink>
+
         </div>
 
 

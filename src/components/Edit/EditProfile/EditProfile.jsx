@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import Input from "../../Input/Input";
-
+import "./EditProfile.css"
 export const EditProfile = () => {
     const formik = useFormik({
         initialValues: {
@@ -36,54 +36,57 @@ export const EditProfile = () => {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="email">Email</label>
-            <Input
-                type="email"
-                id="email"
-                name="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-            />
+        <div className="bodyBackground min-vh-100">
+            <h1> Edit Your Profile! </h1>
+            <form onSubmit={formik.handleSubmit}>
+                <label htmlFor="email">Email</label>
+                <Input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                />
 
-            <label htmlFor="timeOfBirth">Time of Birth</label>
-            <Input
-                type="text"
-                id="timeOfBirth"
-                name="timeOfBirth"
-                value={formik.values.timeOfBirth}
-                onChange={formik.handleChange}
-            />
+                <label htmlFor="timeOfBirth">Time of Birth</label>
+                <Input
+                    type="text"
+                    id="timeOfBirth"
+                    name="timeOfBirth"
+                    value={formik.values.timeOfBirth}
+                    onChange={formik.handleChange}
+                />
 
-            <label htmlFor="dayOfBirth">Day of Birth</label>
-            <Input
-                type="text"
-                id="dayOfBirth"
-                name="dayOfBirth"
-                value={formik.values.dayOfBirth}
-                onChange={formik.handleChange}
-            />
+                <label htmlFor="dayOfBirth">Day of Birth</label>
+                <Input
+                    type="text"
+                    id="dayOfBirth"
+                    name="dayOfBirth"
+                    value={formik.values.dayOfBirth}
+                    onChange={formik.handleChange}
+                />
 
-            <label htmlFor="monthOfBirth">Month of Birth</label>
-            <Input
-                type="text"
-                id="monthOfBirth"
-                name="monthOfBirth"
-                value={formik.values.monthOfBirth}
-                onChange={formik.handleChange}
-            />
+                <label htmlFor="monthOfBirth">Month of Birth</label>
+                <Input
+                    type="text"
+                    id="monthOfBirth"
+                    name="monthOfBirth"
+                    value={formik.values.monthOfBirth}
+                    onChange={formik.handleChange}
+                />
 
-            <label htmlFor="yearOfBirth">Year of Birth</label>
-            <Input
-                type="text"
-                id="yearOfBirth"
-                name="yearOfBirth"
-                value={formik.values.yearOfBirth}
-                onChange={formik.handleChange}
-            />
+                <label htmlFor="yearOfBirth">Year of Birth</label>
+                <Input
+                    type="text"
+                    id="yearOfBirth"
+                    name="yearOfBirth"
+                    value={formik.values.yearOfBirth}
+                    onChange={formik.handleChange}
+                />
 
 
-            <button type="submit">Save Changes</button>
-        </form>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
     );
 };

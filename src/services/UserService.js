@@ -5,5 +5,5 @@ const authenticatedHttp = createHttp(true);
 export const getCurrentUser = () => authenticatedHttp.get("/users/me");
 export const getUserById = (id) => authenticatedHttp.get(`/users/${id}`);
 export const getAllUsers = () => authenticatedHttp.get("/users");
-//export const getEditCurrentUser = () => authenticatedHttp.get("/users/me/edit");
+//export const getEditCurrentUser = () => authenticatedHttp.post("/users/me/edit");
 

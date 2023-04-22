@@ -197,9 +197,6 @@ const FormSignUp = () => {
                     Register
                 </button>
 
-                <button className="btn btn-primary m-3" type="reset">
-                    Reset
-                </button>
                 <Link className="btn btn-light m-3" to="/"> Atras </Link>
 
 

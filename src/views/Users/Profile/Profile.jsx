@@ -102,9 +102,7 @@ export const Profile = () => {
                       </MDBCardText>
                     </div>
                   </div>
-                  <div className="mt-2 ms-5">
-                    <Buttons text="Edit Profile" />
-                  </div>
+
                 </div>
               </div>
             </MDBCard>
