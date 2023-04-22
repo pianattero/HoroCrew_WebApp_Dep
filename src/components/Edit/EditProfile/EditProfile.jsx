@@ -1,98 +1,168 @@
-import React from "react";
+import React, { useContext } from "react";
 import Input from "../../Input/Input";
 import FormControl from "../../FormControl/FormControl";
 import { getEditCurrentUser as editService } from "../../../services/UserService"
 import { useNavigate, Link } from "react-router-dom";
-
-
-import { useFormik } from "formik";
-import axios from "axios";
-
 import "./EditProfile.css"
-export const EditProfile = () => {
-    const formik = useFormik({
-        initialValues: {
-            firstName: "",
-            lastName: "",
-            timeOfBirth: "",
-            dayOfBirth: "",
-            monthOfBirth: "",
-            yearOfBirth: "",
-        },
-        onSubmit: (values) => {
-            const formData = new FormData();
-            formData.append("email", values.email);
-            formData.append("timeOfBirth", values.timeOfBirth);
-            formData.append("dayOfBirth", values.dayOfBirth);
-            formData.append("monthOfBirth", values.monthOfBirth);
-            formData.append("yearOfBirth", values.yearOfBirth);
-            if (values.file) {
-                formData.append("file", values.file);
-            }
+import { useFormik } from "formik";
+import AuthContext from "../../../context/AuthContext";
 
-            axios
-                .put("/profile/edit-profile", formData)
+
+export const EditProfile = () => {
+    const { currentUser } = useContext(AuthContext);
+
+    const initialValues = {
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        timeOfBirth: currentUser.timeOfBirth,
+        dayOfBirth: currentUser.dayOfBirth,
+        monthOfBirth: currentUser.monthOfBirth,
+        yearOfBirth: currentUser.yearOfBirth,
+    };
+
+    const navigate = useNavigate()
+
+    const {
+        values, errors, touched, handleChange, handleBlur,
+        isSubmitting, handleSubmit, setSubmitting, setFieldError
+    } = useFormik({
+        initialValues: initialValues,
+        validateOnBlur: true,
+        validateOnChange: false,
+        onSubmit: (values) => {
+            editService({ firstName: values.firstName, lastName: values.lastName, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth, timeOfBirth: values.timeOfBirth })
                 .then((response) => {
-                    console.log(response.data);
+                    edit(response)
+                    navigate("/profile/edit-profile")
                 })
                 .catch((error) => {
-                    console.log(error.response.data);
-                });
+
+                    console.log(error.response);
+                    setSubmitting(false)
+                })
         },
-    });
+
+    })
 
     return (
         <div className="bodyBackground min-vh-100">
+
             <h1> Edit Your Profile! </h1>
-            <form onSubmit={formik.handleSubmit}>
-                <label htmlFor="email">Email</label>
-                <Input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                />
 
-                <label htmlFor="timeOfBirth">Time of Birth</label>
-                <Input
-                    type="text"
-                    id="timeOfBirth"
-                    name="timeOfBirth"
-                    value={formik.values.timeOfBirth}
-                    onChange={formik.handleChange}
-                />
+            <form onSubmit={handleSubmit} >
+                <FormControl
+                    text="First Name"
+                    error={touched.firtsName && errors.firstName}
+                    htmlFor="firstName"
+                >
+                    <Input
+                        id="firstName"
+                        name="firstName"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.firstName}
+                        error={touched.firstName && errors.firstName}
+                        placeholder={initialValues.firstName}
 
-                <label htmlFor="dayOfBirth">Day of Birth</label>
-                <Input
-                    type="text"
-                    id="dayOfBirth"
-                    name="dayOfBirth"
-                    value={formik.values.dayOfBirth}
-                    onChange={formik.handleChange}
-                />
+                    />
+                </FormControl>
 
-                <label htmlFor="monthOfBirth">Month of Birth</label>
-                <Input
-                    type="text"
-                    id="monthOfBirth"
-                    name="monthOfBirth"
-                    value={formik.values.monthOfBirth}
-                    onChange={formik.handleChange}
-                />
+                <FormControl
+                    text="Last Name"
+                    error={touched.lastName && errors.lastName}
+                    htmlFor="lastName"
+                >
+                    <Input
+                        id="lastName"
+                        name="lastName"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.lastName}
+                        error={touched.lastName && errors.lastName}
+                        placeholder={initialValues.lastName}
 
-                <label htmlFor="yearOfBirth">Year of Birth</label>
-                <Input
-                    type="text"
-                    id="yearOfBirth"
-                    name="yearOfBirth"
-                    value={formik.values.yearOfBirth}
-                    onChange={formik.handleChange}
-                />
+                    />
 
+                </FormControl>
+                <FormControl
+                    text="Time of Birth"
+                    error={touched.timeOfBirth && errors.timeOfBirth}
+                    htmlFor="timeOfBirth"
+                >
+                    <Input
+                        id="timeOfBirth"
+                        name="timeOfBirth"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.timeOfBirth}
+                        error={touched.timeOfBirth && errors.timeOfBirth}
+                        placeholder={initialValues.timeOfBirth}
 
-                <button type="submit">Save Changes</button>
+                    />
+
+                </FormControl>
+
+                <FormControl
+                    text="Day of Birth"
+                    error={touched.dayOfBirth && errors.dayOfBirth}
+                    htmlFor="dayOfBirth"
+                >
+                    <Input
+                        id="dayOfBirth"
+                        name="dayOfBirth"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.dayOfBirth}
+                        error={touched.dayOfBirth && errors.dayOfBirth}
+                        placeholder={initialValues.dayOfBirth}
+
+                    />
+
+                </FormControl>
+                <FormControl
+                    text="Month of Birth"
+                    error={touched.monthOfBirth && errors.monthOfBirth}
+                    htmlFor="monthOfBirth"
+                >
+                    <Input
+                        id="monthOfBirth"
+                        name="monthOfBirth"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.monthOfBirth}
+                        error={touched.monthOfBirth && errors.monthOfBirth}
+                        placeholder={initialValues.monthOfBirth}
+
+                    />
+
+                </FormControl>
+                <FormControl
+                    text="Year of Birth"
+                    error={touched.yearOfBirth && errors.yearOfBirth}
+                    htmlFor="yearOfBirth"
+                >
+                    <Input
+                        id="yearOfBirth"
+                        name="yearOfBirth"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.yearOfBirth}
+                        error={touched.yearOfBirth && errors.yearOfBirth}
+                        placeholder={initialValues.yearOfBirth}
+
+                    />
+
+                </FormControl>
+                <button
+                    className="btn btn-primary"
+                    type="submit"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? "Submitting..." : "Submit"}
+                </button>
+                <Link className="btn btn-light m-3" to="/profile"> Save Changes </Link>
+
             </form>
         </div>
-    );
-};
+    )
+}

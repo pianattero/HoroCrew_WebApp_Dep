@@ -31,7 +31,7 @@ const FormSignUp = () => {
         validateOnBlur: true,
         validateOnChange: false,
         validationSchema: signUpSchema,
-        onSubmit: (values) => signUpService({ firstName: values.firstName, lastName: values.lastName, email: values.email, password: values.password, repeatPassword: values.repeatPassword, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth, timeOfBirth: values.monthOfBirth })
+        onSubmit: (values) => signUpService({ firstName: values.firstName, lastName: values.lastName, email: values.email, password: values.password, repeatPassword: values.repeatPassword, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth, timeOfBirth: values.timeOfBirth })
 
             .then((response) => {
                 console.log(response)
