@@ -6,9 +6,9 @@ export const getCurrentUser = () => authenticatedHttp.get("/users/me");
 export const getUserById = (id) => authenticatedHttp.get(`/users/${id}`);
 export const getAllUsers = () => authenticatedHttp.get("/users");
 
-export const getEditCurrentUser = ({ firstName, lastName, dayOfBirth, monthOfBirth, yearOfBirth, timeOfBirth }) =>
-    authenticatedHttp.post(
+export const getEditCurrentUser = ({ firstName, lastName, dayOfBirth, monthOfBirth, yearOfBirth, timeOfBirth, facialId }) =>
+    authenticatedHttp.patch(
         "/users/me/edit", {
-        firstName, lastName, dayOfBirth, monthOfBirth, yearOfBirth, timeOfBirth
+        firstName, lastName, dayOfBirth, monthOfBirth, yearOfBirth, timeOfBirth, facialId
     });
 

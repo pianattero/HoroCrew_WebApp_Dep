@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./EditProfile.css"
 import { useFormik } from "formik";
 import AuthContext from "../../../context/AuthContext";
+import { editSchema } from "../../../utils/schemas/edit.schema";
 
 
 export const EditProfile = () => {
@@ -14,10 +15,10 @@ export const EditProfile = () => {
     const initialValues = {
         firstName: currentUser.firstName,
         lastName: currentUser.lastName,
-        timeOfBirth: currentUser.timeOfBirth,
         dayOfBirth: currentUser.dayOfBirth,
         monthOfBirth: currentUser.monthOfBirth,
         yearOfBirth: currentUser.yearOfBirth,
+        timeOfBirth: currentUser.timeOfBirth,
     };
 
     const navigate = useNavigate()
@@ -29,8 +30,9 @@ export const EditProfile = () => {
         initialValues: initialValues,
         validateOnBlur: true,
         validateOnChange: false,
+        validationSchema: editSchema,
         onSubmit: (values) => {
-            editService({ firstName: values.firstName, lastName: values.lastName, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth, timeOfBirth: values.timeOfBirth })
+            editService({ firstName: values.firstName, lastName: values.lastName, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth })
                 .then((response) => {
                     edit(response)
                     navigate("/profile")
@@ -84,23 +86,7 @@ export const EditProfile = () => {
                     />
 
                 </FormControl>
-                <FormControl
-                    text="Time of Birth"
-                    error={touched.timeOfBirth && errors.timeOfBirth}
-                    htmlFor="timeOfBirth"
-                >
-                    <Input
-                        id="timeOfBirth"
-                        name="timeOfBirth"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.timeOfBirth}
-                        error={touched.timeOfBirth && errors.timeOfBirth}
-                        placeholder={initialValues.timeOfBirth}
 
-                    />
-
-                </FormControl>
 
                 <FormControl
                     text="Day of Birth"
@@ -115,6 +101,7 @@ export const EditProfile = () => {
                         value={values.dayOfBirth}
                         error={touched.dayOfBirth && errors.dayOfBirth}
                         placeholder={initialValues.dayOfBirth}
+                        type="number"
 
                     />
 
@@ -132,6 +119,7 @@ export const EditProfile = () => {
                         value={values.monthOfBirth}
                         error={touched.monthOfBirth && errors.monthOfBirth}
                         placeholder={initialValues.monthOfBirth}
+                        type="number"
 
                     />
 
@@ -149,9 +137,28 @@ export const EditProfile = () => {
                         value={values.yearOfBirth}
                         error={touched.yearOfBirth && errors.yearOfBirth}
                         placeholder={initialValues.yearOfBirth}
+                        type="number"
 
                     />
 
+                </FormControl>
+
+                <FormControl
+                    text="Time of Birth"
+                    error={touched.dayOfBirth && errors.dayOfBirth}
+                    htmlFor="timeOfBirth"
+                >
+                    <Input
+                        id="timeOfBirth"
+                        name="timeOfBirth"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.timeOfBirth}
+                        // error={touched.timeOfBirth && errors.timeOfBirth}
+                        placeholder={initialValues.timeOfBirth}
+                        type="time"
+
+                    />
                 </FormControl>
                 <button
                     className="btn btn-primary"

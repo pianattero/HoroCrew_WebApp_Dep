@@ -14,6 +14,8 @@ import { Notifications } from "./views/Users/Notifications/Notifications";
 import { NewPost } from "./views/Post/NewPost";
 import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
 import { EditProfile } from "./components/Edit/EditProfile/EditProfile";
+//import { FacialIO } from "./views/Facial/Facial";
+
 
 
 
@@ -41,8 +43,10 @@ function App() {
         <Route path="/login" element={
           <>
             <Login />
+
           </>
         } />
+
 
         {/* PROFILES */}
 

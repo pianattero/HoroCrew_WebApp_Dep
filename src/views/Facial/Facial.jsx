@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { getEditCurrentUser as getEditCurrentUserFacial } from "../../services/UserService";
+
 
 import { useEffect } from "react";
 
@@ -23,9 +25,7 @@ export const FacialIO = () => {
             });
 
             console.log(` Unique Facial ID: ${response.facialId}
-      Enrollment Date: ${response.timestamp}
-      Gender: ${response.details.gender}
-      Age Approximation: ${response.details.age}`);
+      Enrollment Date: ${response.timestamp}`);
         } catch (errCode) {
             handleError(errCode);
         }
