@@ -1,17 +1,23 @@
 import React from "react";
+import Input from "../../Input/Input";
+import FormControl from "../../FormControl/FormControl";
+import { getEditCurrentUser as editService } from "../../../services/UserService"
+import { useNavigate, Link } from "react-router-dom";
+
+
 import { useFormik } from "formik";
 import axios from "axios";
-import Input from "../../Input/Input";
+
 import "./EditProfile.css"
 export const EditProfile = () => {
     const formik = useFormik({
         initialValues: {
-            email: "",
+            firstName: "",
+            lastName: "",
             timeOfBirth: "",
             dayOfBirth: "",
             monthOfBirth: "",
             yearOfBirth: "",
-            file: null,
         },
         onSubmit: (values) => {
             const formData = new FormData();
