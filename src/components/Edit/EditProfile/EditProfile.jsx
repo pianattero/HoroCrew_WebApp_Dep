@@ -10,7 +10,7 @@ import { editSchema } from "../../../utils/schemas/edit.schema";
 
 
 export const EditProfile = () => {
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, getCurrentUser } = useContext(AuthContext);
 
 
     const initialValues = {
@@ -35,6 +35,7 @@ export const EditProfile = () => {
         onSubmit: (values) => {
             editService({ firstName: values.firstName, lastName: values.lastName, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth, timeOfBirth: values.timeOfBirth })
                 .then((response) => {
+                    getCurrentUser()
                     navigate("/profile")
                 })
                 .catch((error) => {

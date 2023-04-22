@@ -50,6 +50,7 @@ export const AuthProvider = ({ children }) => {
       currentUser,
       isAuthLoaded,
       login,
+      getCurrentUser
     };
   }, [currentUser, isAuthLoaded, login]);
 
