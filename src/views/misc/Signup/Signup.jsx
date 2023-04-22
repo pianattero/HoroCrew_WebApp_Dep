@@ -5,6 +5,7 @@ import { signUp as signUpService } from "../../../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import { signUpSchema } from "../../../utils/schemas/signUp.schema";
 import { Link } from "react-router-dom";
+import "./Signup.css"
 
 
 
@@ -46,7 +47,7 @@ const FormSignUp = () => {
     });
 
     return (
-        <div>
+        <div className="container-signup">
             <h1> Sign Up</h1>
 
             <form onSubmit={handleSubmit}>
