@@ -53,128 +53,132 @@ export const EditProfile = () => {
 
     return (
         <div className="bodyBackground min-vh-100">
+            <div className="edit-container">
 
-            <h1> Edit Your Profile! </h1>
 
-            <form onSubmit={handleSubmit} >
-                <FormControl
-                    text="First Name"
-                    error={touched.firtsName && errors.firstName}
-                    htmlFor="firstName"
-                >
-                    <Input
-                        id="firstName"
-                        name="firstName"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.firstName}
-                        error={touched.firstName && errors.firstName}
-                        placeholder={initialValues.firstName}
+                <h1> Edit Your Profile! </h1>
 
-                    />
-                </FormControl>
+                <form onSubmit={handleSubmit} >
+                    <FormControl
+                        text="First Name"
+                        error={touched.firtsName && errors.firstName}
+                        htmlFor="firstName"
+                    >
+                        <Input
+                            id="firstName"
+                            name="firstName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.firstName}
+                            error={touched.firstName && errors.firstName}
+                            placeholder={initialValues.firstName}
 
-                <FormControl
-                    text="Last Name"
-                    error={touched.lastName && errors.lastName}
-                    htmlFor="lastName"
-                >
-                    <Input
-                        id="lastName"
-                        name="lastName"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.lastName}
+                        />
+                    </FormControl>
+
+                    <FormControl
+                        text="Last Name"
                         error={touched.lastName && errors.lastName}
-                        placeholder={initialValues.lastName}
+                        htmlFor="lastName"
+                    >
+                        <Input
+                            id="lastName"
+                            name="lastName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.lastName}
+                            error={touched.lastName && errors.lastName}
+                            placeholder={initialValues.lastName}
 
-                    />
+                        />
 
-                </FormControl>
+                    </FormControl>
 
 
-                <FormControl
-                    text="Day of Birth"
-                    error={touched.dayOfBirth && errors.dayOfBirth}
-                    htmlFor="dayOfBirth"
-                >
-                    <Input
-                        id="dayOfBirth"
-                        name="dayOfBirth"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.dayOfBirth}
+                    <FormControl
+                        text="Day of Birth"
                         error={touched.dayOfBirth && errors.dayOfBirth}
-                        placeholder={initialValues.dayOfBirth}
-                        type="number"
+                        htmlFor="dayOfBirth"
+                    >
+                        <Input
+                            id="dayOfBirth"
+                            name="dayOfBirth"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.dayOfBirth}
+                            error={touched.dayOfBirth && errors.dayOfBirth}
+                            placeholder={initialValues.dayOfBirth}
+                            type="number"
 
-                    />
+                        />
 
-                </FormControl>
-                <FormControl
-                    text="Month of Birth"
-                    error={touched.monthOfBirth && errors.monthOfBirth}
-                    htmlFor="monthOfBirth"
-                >
-                    <Input
-                        id="monthOfBirth"
-                        name="monthOfBirth"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.monthOfBirth}
+                    </FormControl>
+                    <FormControl
+                        text="Month of Birth"
                         error={touched.monthOfBirth && errors.monthOfBirth}
-                        placeholder={initialValues.monthOfBirth}
-                        type="number"
+                        htmlFor="monthOfBirth"
+                    >
+                        <Input
+                            id="monthOfBirth"
+                            name="monthOfBirth"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.monthOfBirth}
+                            error={touched.monthOfBirth && errors.monthOfBirth}
+                            placeholder={initialValues.monthOfBirth}
+                            type="number"
 
-                    />
+                        />
 
-                </FormControl>
-                <FormControl
-                    text="Year of Birth"
-                    error={touched.yearOfBirth && errors.yearOfBirth}
-                    htmlFor="yearOfBirth"
-                >
-                    <Input
-                        id="yearOfBirth"
-                        name="yearOfBirth"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.yearOfBirth}
+                    </FormControl>
+                    <FormControl
+                        text="Year of Birth"
                         error={touched.yearOfBirth && errors.yearOfBirth}
-                        placeholder={initialValues.yearOfBirth}
-                        type="number"
+                        htmlFor="yearOfBirth"
+                    >
+                        <Input
+                            id="yearOfBirth"
+                            name="yearOfBirth"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.yearOfBirth}
+                            error={touched.yearOfBirth && errors.yearOfBirth}
+                            placeholder={initialValues.yearOfBirth}
+                            type="number"
 
-                    />
+                        />
 
-                </FormControl>
+                    </FormControl>
 
-                <FormControl
-                    text="Time of Birth"
-                    error={touched.dayOfBirth && errors.dayOfBirth}
-                    htmlFor="timeOfBirth"
-                >
-                    <Input
-                        id="timeOfBirth"
-                        name="timeOfBirth"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.timeOfBirth}
-                        error={touched.timeOfBirth && errors.timeOfBirth}
-                        placeholder={initialValues.timeOfBirth}
-                        type="time"
+                    <FormControl
+                        text="Time of Birth"
+                        error={touched.dayOfBirth && errors.dayOfBirth}
+                        htmlFor="timeOfBirth"
+                    >
+                        <Input
+                            id="timeOfBirth"
+                            name="timeOfBirth"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.timeOfBirth}
+                            error={touched.timeOfBirth && errors.timeOfBirth}
+                            placeholder={initialValues.timeOfBirth}
+                            type="time"
 
-                    />
-                </FormControl>
-                <button
-                    className="btn btn-primary"
-                    type="submit"
-                    disabled={isSubmitting}
-                >
-                    {isSubmitting ? "Submitting..." : "Save Changes"}
+                        />
+                    </FormControl>
+                    <button
+                        className="btn btn-primary"
+                        type="submit"
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? "Submitting..." : "Save Changes"}
 
-                </button>
+                    </button>
 
-            </form>
+                </form>
+            </div>
+
         </div>
     )
 }

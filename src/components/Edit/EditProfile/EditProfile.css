@@ -1,9 +1,17 @@
 .bodyBackground {
     background-color: #3c9de7;
     animation: bg-color 10s infinite;
-    position: absolute;
+    position: fixed;
     height: 400%;
     width: 100%;
+}
+
+.edit-container {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
 }
 
 @keyframes bg-color {
