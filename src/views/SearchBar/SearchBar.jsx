@@ -27,6 +27,7 @@ export const SearchBar = () => {
 
     return (
         <div id="searchbar">
+            <p> Look For Your Friends Here 👀</p>
             <div className="input-group mb-3">
                 <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" value={search} onChange={handleSearchChange} />
                 <button type="button" className="btn btn-outline-dark" onClick={() => setSearch("")}>
