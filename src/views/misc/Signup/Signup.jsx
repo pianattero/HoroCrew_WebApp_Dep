@@ -5,6 +5,7 @@ import { signUp as signUpService } from "../../../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import { signUpSchema } from "../../../utils/schemas/signUp.schema";
 import { Link } from "react-router-dom";
+import "./Signup.css"
 
 
 
@@ -46,12 +47,12 @@ const FormSignUp = () => {
     });
 
     return (
-        <div>
+        <div className="container-signup">
             <h1> Sign Up</h1>
 
             <form onSubmit={handleSubmit}>
                 <FormControl
-                    text="firstName"
+                    text="First Name"
                     error={touched.firstName && errors.firstName}
                     htmlFor="firstName"
                 >
@@ -66,7 +67,7 @@ const FormSignUp = () => {
                 </FormControl>
 
                 <FormControl
-                    text="lastName"
+                    text="Last Name"
                     error={touched.lastName && errors.lastName}
                     htmlFor="lastName"
                 >
@@ -81,7 +82,7 @@ const FormSignUp = () => {
                 </FormControl>
 
                 <FormControl
-                    text="email"
+                    text="Email"
                     error={touched.lastName && errors.lastName}
                     htmlFor="email"
                 >
@@ -96,7 +97,7 @@ const FormSignUp = () => {
                 </FormControl>
 
                 <FormControl
-                    text="password"
+                    text="Password"
                     error={touched.password && errors.password}
                     htmlFor="password"
                 >
@@ -113,7 +114,7 @@ const FormSignUp = () => {
                 </FormControl>
 
                 <FormControl
-                    text="repeatPassword"
+                    text="Repeat Password"
                     error={touched.repeatPassword && errors.repeatPassword}
                     htmlFor="repeatPassword"
                 >
@@ -130,7 +131,7 @@ const FormSignUp = () => {
                 </FormControl>
 
                 <FormControl
-                    text="dayOfBirth"
+                    text="Day Of Birth"
                     error={touched.dayOfBirth && errors.dayOfBirth}
                     htmlFor="dayOfBirth"
                 >
@@ -146,7 +147,7 @@ const FormSignUp = () => {
                 </FormControl>
 
                 <FormControl
-                    text="monthOfBirth"
+                    text="Month Of Birth"
                     error={touched.monthOfBirth && errors.monthOfBirth}
                     htmlFor="monthOfBirth"
                 >
@@ -162,7 +163,7 @@ const FormSignUp = () => {
                 </FormControl>
 
                 <FormControl
-                    text="yearOfBirth"
+                    text="Year Of Birth"
                     error={touched.yearOfBirth && errors.yearOfBirth}
                     htmlFor="yearOfBirth"
                 >
@@ -178,7 +179,7 @@ const FormSignUp = () => {
                 </FormControl>
 
                 <FormControl
-                    text="timeOfBirth"
+                    text="Time Of Birth"
                     error={touched.timeOfBirth && errors.timeOfBirth}
                     htmlFor="timeOfBirth"
                 >

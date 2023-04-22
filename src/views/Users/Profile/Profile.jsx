@@ -95,7 +95,7 @@ export const Profile = () => {
 
   return (
     <div
-      className="gradient-custom-2"
+      className="background-profile gradient-custom-2"
       style={{
         minHeight: "100vh",
       }}

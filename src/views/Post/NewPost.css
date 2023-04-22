@@ -1,43 +1,44 @@
+.btn-3 {
+  background-color: #ee6d9e;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+}
 
-    
-    
-    &.btn-3 {
-      background-color: #ee6d9e;
-      border-radius: 0;
-      overflow: hidden;
-      
-      span {
-        display: inline-block;
-        height: 100%;
-        transition: all 0.3s;
-        width: 100%;
-      }
-      
-      &::before {
-        color: #fff;
-        content: "\f382";
-        font-family: "Font Awesome 5 Pro";
-        font-size: 130%;
-        height: 100%;
-        left: 0;
-        line-height: 2.6;
-        position: absolute;
-        top: -180%;
-        transition: all 0.3s;
-        width: 100%;
-      }
-  
-      span:hover {
-        background-color: darken(#ee6d9e, 30%);
-        
-        
-          transform: translateY(300%);
-        
-        }
-          
-        span::before {
-          top: 0;
-        
-      
-    }
-  
+.btn-3 span {
+  display: inline-block;
+  height: 100%;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn-3::before {
+  color: #fff;
+  content: "\f382";
+  font-family: "Font Awesome 5 Pro";
+  font-size: 130%;
+  height: 100%;
+  left: 0;
+  line-height: 2.6;
+  position: absolute;
+  top: -180%;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn-3:hover span {
+  background-color: #c14b71;
+  transform: translateY(300%);
+}
+
+.btn-3 span::before {
+  top: 0;
+}
+
+.custom-file-input {
+  width: 300px;
+}
+
+.card {
+  width: 290px;
+}

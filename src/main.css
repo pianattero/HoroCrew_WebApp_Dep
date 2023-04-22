@@ -1,6 +1,8 @@
 * {
     background-color: transparent;
+
     /* cursor: url(), auto; */
+
 }
 
 body {
@@ -8,8 +10,8 @@ body {
 } 
 
 .profilBg {
-    background: rgb(45,92,109);
-    background: linear-gradient(90deg, rgba(45,92,109,1) 0%, rgba(143,235,224,1) 50%, rgba(255,255,255,1) 100%)
+    background: rgb(45, 92, 109);
+    background: linear-gradient(90deg, rgba(45, 92, 109, 1) 0%, rgba(143, 235, 224, 1) 50%, rgba(255, 255, 255, 1) 100%)
 }
 
 .custom-file-input {
@@ -46,20 +48,6 @@ body {
 }
 
 .custom-file-input:active::before {
+
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
-}
-
-.post {
-    width: 70vw
-}
-
-
-
-@media screen and (max-width: 500px) {
-    .post {
-        width: 90vw;
-    }
-
-
-
 }

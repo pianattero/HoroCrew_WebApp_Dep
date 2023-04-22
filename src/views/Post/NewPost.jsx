@@ -56,7 +56,7 @@ export const NewPost = ({ refreshPosts }) => {
     <div>
       <form
         onSubmit={handleSubmit}
-        className="mx-3"
+        className="box"
         encType="multipart/form-data"
       >
         <FormControl
@@ -77,7 +77,7 @@ export const NewPost = ({ refreshPosts }) => {
 
         <div
           style={{ textAlign: "center", verticalAlign: "middle" }}
-          className="d-flex align-items-center justify-content-between"
+          className="d-flex align-items-center justify-content-center"
         >
           <input
             aria-describedby="image"
