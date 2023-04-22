@@ -12,6 +12,7 @@ import { editSchema } from "../../../utils/schemas/edit.schema";
 export const EditProfile = () => {
     const { currentUser } = useContext(AuthContext);
 
+
     const initialValues = {
         firstName: currentUser.firstName,
         lastName: currentUser.lastName,
@@ -32,7 +33,7 @@ export const EditProfile = () => {
         validateOnChange: false,
         validationSchema: editSchema,
         onSubmit: (values) => {
-            editService({ firstName: values.firstName, lastName: values.lastName, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth })
+            editService({ firstName: values.firstName, lastName: values.lastName, dayOfBirth: values.dayOfBirth, monthOfBirth: values.monthOfBirth, yearOfBirth: values.yearOfBirth, timeOfBirth: values.timeOfBirth })
                 .then((response) => {
                     edit(response)
                     navigate("/profile")
@@ -45,6 +46,8 @@ export const EditProfile = () => {
         },
 
     })
+
+    console.log(values)
 
     return (
         <div className="bodyBackground min-vh-100">
@@ -154,7 +157,7 @@ export const EditProfile = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.timeOfBirth}
-                        // error={touched.timeOfBirth && errors.timeOfBirth}
+                        error={touched.timeOfBirth && errors.timeOfBirth}
                         placeholder={initialValues.timeOfBirth}
                         type="time"
 
