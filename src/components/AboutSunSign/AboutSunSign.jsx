@@ -1,8 +1,9 @@
 import React from "react";
+import "./AboutSunSign.css"
 
 export const AboutSunSign = ({ signData }) => {
   return (
-    <div>
+    <div >
       <h2>{signData.name}</h2>
       <div>
         <h5>Basics:</h5>

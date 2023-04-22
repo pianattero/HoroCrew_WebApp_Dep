@@ -59,7 +59,10 @@ export const SocialFeed = () => {
   }, []);
 
   return (
-    <div className="bodyBackground min-vh-100">
+
+    <div className="scroll-bg min-vh-100">
+
+
       <MDBContainer className=" d-flex flex-column justify-content-start align-items-center">
         <div className="content-wrapper">
           <h1>See what's happening!</h1>

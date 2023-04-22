@@ -14,7 +14,10 @@ export const Navbar = () => {
     <>
       <nav className="navbar">
         <div className="nav-logo">
-          <img src={logo} alt="Logo" className="logo" width="32" height="32" />
+          <NavLink to="/profile" onClick={handleClick}>
+            <img src={logo} alt="Logo" className="logo" width="32" height="32" />
+          </NavLink>
+
         </div>
 
         <button className="nav-toggle-btn" onClick={handleClick}>
@@ -25,7 +28,7 @@ export const Navbar = () => {
           <ul>
             <li>
               <NavLink to="/socialFeed" onClick={handleClick}>
-                Social Feed
+                Social Feed <i className="bi bi-person-video2"></i> {/* Added */}
               </NavLink>
             </li>
             <li>
@@ -44,13 +47,15 @@ export const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink href="#" onClick={handleClick}>
+              <NavLink to="/profile/edit-profile" onClick={handleClick}>
                 <i className="bi bi-gear-fill"></i>
               </NavLink>
             </li>
             <li>
               <NavLink to="/" onClick={logoutToken}>
+
                 Logout <i className="bi bi-box-arrow-right"></i>
+
               </NavLink>
             </li>
           </ul>

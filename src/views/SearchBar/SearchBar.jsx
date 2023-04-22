@@ -1,3 +1,5 @@
+
+//updated - commit done - missing pull//
 import { useEffect, useState } from "react";
 import { getAllUsers as getAllUsersService } from "../../services/UserService"
 import { Link } from "react-router-dom";
@@ -6,22 +8,23 @@ export const SearchBar = () => {
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState("");
 
-    const filter = users.filter(user => user.firstName.toLowerCase().includes(search.toLowerCase()))
-
-    const handleSearchChange = event => {
-        const { value } = event.target;
-        setSearch(value);
-
-        // useEffect(() => {
+    useEffect(() => {
         getAllUsersService()
             .then(users => {
                 setUsers(users);
             })
             .catch(err => console.error(err))
+    }, []);
 
-        // }, []);
+    const filteredUsers = search
+        ? users.filter(user => user.firstName.toLowerCase().includes(search.toLowerCase()))
+        : [];
 
+    const handleSearchChange = event => {
+        const { value } = event.target;
+        setSearch(value);
     }
+
     return (
         <div id="searchbar">
             <div className="input-group mb-3">
@@ -30,19 +33,13 @@ export const SearchBar = () => {
                     Clear
                 </button>
             </div>
-            <ul>
-                {users
-                    ?
-                    users.map(user => (
+            {filteredUsers.length > 0 && (
+                <ul>
+                    {filteredUsers.map(user => (
                         <li key={user.id}><Link to={`/profile/${user.id}`}>{user.firstName}</Link></li>
-                    ))
-                    : filter.map(user => (
-                        <li key={user.id}>{user.firstName}</li>
-
-                    ))
-                }
-            </ul>
-        </div >
+                    ))}
+                </ul>
+            )}
+        </div>
     );
 }
-

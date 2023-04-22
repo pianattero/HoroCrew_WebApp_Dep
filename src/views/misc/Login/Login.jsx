@@ -9,6 +9,7 @@ import { setAccessToken } from "../../../stores/AccessTokenStore";
 import { loginSchema } from "../../../utils/schemas/login.schema";
 import { Link } from "react-router-dom";
 import "./Login.css"
+import { GlowingDiv } from "../../../components/Backgrounds/BackgroundLogin/BackgroundLogin";
 
 
 const initialValues = {
@@ -53,14 +54,18 @@ const Login = () => {
     });
 
     return (
-        <div>
-            <h1>Login</h1>
+        <div className="signup-bg">
+            <div className="glowingDiv">
+                <GlowingDiv />
+            </div>
+            <h1 className="h1-login">Login</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
                 <FormControl
                     text="Email"
                     error={touched.email && errors.email}
                     htmlFor="email"
+                    style={{ color: "white" }}
                 >
                     <Input
                         id="email"
@@ -70,6 +75,8 @@ const Login = () => {
                         value={values.email}
                         error={touched.email && errors.email}
                         placeholder="Enter your email..."
+
+
                     />
                 </FormControl>
 
@@ -77,7 +84,9 @@ const Login = () => {
                     text="Password"
                     error={touched.password && errors.password}
                     htmlFor="password"
+                    style={{ color: "white" }}
                 >
+
                     <Input
                         id="password"
                         name="password"
@@ -87,6 +96,8 @@ const Login = () => {
                         error={touched.password && errors.password}
                         placeholder="Enter your password..."
                         type="password"
+
+
                     />
                 </FormControl>
 

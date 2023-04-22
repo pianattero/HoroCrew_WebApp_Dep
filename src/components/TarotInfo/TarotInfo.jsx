@@ -1,4 +1,5 @@
 import React from "react";
+import "./TarotInfo.css"
 
 export const TarotInfo = ({ tarot }) => {
   return (
