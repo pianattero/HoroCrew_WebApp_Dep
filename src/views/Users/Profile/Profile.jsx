@@ -125,7 +125,6 @@ export const Profile = () => {
                       </MDBCardText>
                     </div>
                   </div>
-
                 </div>
               </div>
             </MDBCard>

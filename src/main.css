@@ -1,10 +1,11 @@
 * {
     background-color: transparent;
+    /* cursor: url(), auto; */
 }
 
-/* body {
+body {
     background-color: whitesmoke;
-} */
+} 
 
 .profilBg {
     background: rgb(45,92,109);
@@ -46,4 +47,19 @@
 
 .custom-file-input:active::before {
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+}
+
+.post {
+    width: 70vw
+}
+
+
+
+@media screen and (max-width: 500px) {
+    .post {
+        width: 90vw;
+    }
+
+
+
 }

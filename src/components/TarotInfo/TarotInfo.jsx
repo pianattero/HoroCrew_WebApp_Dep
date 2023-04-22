@@ -1,14 +1,30 @@
 import React from "react";
-import "./TarotInfo.css"
+import "./TarotInfo.css";
+
+import tarot1 from "../../../public/images/tarot/tarot1.png";
+import tarot2 from "../../../public/images/tarot/tarot2.png";
+import tarot3 from "../../../public/images/tarot/tarot3.png";
+import tarot4 from "../../../public/images/tarot/tarot4.png";
+import tarot5 from "../../../public/images/tarot/tarot5.png";
+import tarot6 from "../../../public/images/tarot/tarot6.png";
 
 export const TarotInfo = ({ tarot }) => {
+  const tarotCards = [tarot1, tarot2, tarot3, tarot4, tarot5, tarot6];
+  const randomCard = tarotCards[Math.floor(Math.random() * tarotCards.length)];
+
   return (
-    <div className="m-3">
-      <h3>
+    <div className="m-3" style={{ width: "80vw" }}>
+      <img style={{ height: "300px" }} src={randomCard} />
+      <h3 className="mt-3">
         {tarot.name} || {tarot.sequence}
       </h3>
-      <p>{tarot.desc}</p>
-      <p>{tarot.rdesc}</p>
+      <div className="px-5">
+        <h6 className="mb-0">Description:</h6>
+        <p>{tarot.desc}</p>
+        <i className="bi bi-arrow-repeat"></i>
+        <h6 className="mb-0">Reverse description:</h6>
+        <p>{tarot.rdesc}</p>
+      </div>
     </div>
   );
 };

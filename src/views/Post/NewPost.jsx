@@ -1,6 +1,7 @@
 import { Button, Loading } from "@nextui-org/react";
 import { useFormik } from "formik";
 import React from "react";
+import { Buttons } from "../../components/Button/Button";
 import FormControl from "../../components/FormControl/FormControl";
 import Input from "../../components/Input/Input";
 import { newPost } from "../../services/PostService";
@@ -90,22 +91,17 @@ export const NewPost = ({ refreshPosts }) => {
             }}
           />
 
-          <button
+          <Buttons
             type="submit"
-            className="btn rounded-pill"
             disabled={isSubmitting}
-            style={{
-              backgroundColor: "#3EC4FC",
-              color: "white",
-              width: "fit-content",
-            }}
-          >
-            {isSubmitting ? (
-              <Loading type="spinner" color="currentColor" size="lg" />
-            ) : (
-              "ADD NEW POST"
-            )}
-          </button>
+            text={
+              isSubmitting ? (
+                <Loading type="spinner" color="currentColor" size="md" />
+              ) : (
+                <strong>Add New Post</strong>
+              )
+            }
+          />
         </div>
       </form>
     </div>

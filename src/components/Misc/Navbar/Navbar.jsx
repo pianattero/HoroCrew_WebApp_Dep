@@ -15,9 +15,14 @@ export const Navbar = () => {
       <nav className="navbar">
         <div className="nav-logo">
           <NavLink to="/profile" onClick={handleClick}>
-            <img src={logo} alt="Logo" className="logo" width="32" height="32" />
+            <img
+              src={logo}
+              alt="Logo"
+              className="logo"
+              width="32"
+              height="32"
+            />
           </NavLink>
-
         </div>
 
         <button className="nav-toggle-btn" onClick={handleClick}>
@@ -28,7 +33,7 @@ export const Navbar = () => {
           <ul>
             <li>
               <NavLink to="/socialFeed" onClick={handleClick}>
-                Social Feed <i className="bi bi-person-video2"></i> {/* Added */}
+                Social Feed <i className="bi bi-person-video2"></i>
               </NavLink>
             </li>
             <li>
@@ -53,9 +58,7 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink to="/" onClick={logoutToken}>
-
                 Logout <i className="bi bi-box-arrow-right"></i>
-
               </NavLink>
             </li>
           </ul>

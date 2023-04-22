@@ -22,10 +22,6 @@ export const Notifications = () => {
 
   const [notifications, setNotifications] = useState();
 
-  const handleRead = (notifications) => {
-    notifications.map((notification) => (notification.read = true));
-  };
-
   const readNoti = () => {
     getReadNotifications()
       .then((readNotifications) => {
@@ -40,13 +36,8 @@ export const Notifications = () => {
     getNotifications()
       .then((notifications) => {
         setNotifications(notifications);
+        readNoti();
         console.log(notifications);
-      })
-      .catch((err) => console.error(err));
-
-    getReadNotifications()
-      .then((readNotifications) => {
-        console.log(readNotifications);
       })
       .catch((err) => console.error(err));
   }, [currentUser]);
@@ -61,7 +52,7 @@ export const Notifications = () => {
               <MDBCol className="mt-2">
                 <MDBCard style={{ borderRadius: "15px", width: "400px" }}>
                   <MDBCardBody className="p-3">
-                    <div className="d-flex align-items-center text-black mt-2">
+                    <div className="d-flex align-items-center text-black">
                       <div className="flex-shrink-0 d-flex align-items-center">
                         <Link to={`/profile/${notification.notificator.id}`}>
                           <MDBCardImage
@@ -87,7 +78,7 @@ export const Notifications = () => {
                           {notification.type === "Like" ||
                           notification.type === "Comment" ? (
                             <p
-                              className="text-muted"
+                              className="text-muted mb-0"
                               onClick={() => {
                                 navigate(`/post/${notification.post}`);
                               }}

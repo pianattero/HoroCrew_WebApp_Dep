@@ -19,13 +19,14 @@ import {
   getUserFolloweds,
   createFollow,
 } from "../../../services/FollowService";
-import { getUserByIdPosts } from "../../../services/PostService";
+import { getUserByIdPosts, likePost } from "../../../services/PostService";
 import {
   getCurrentUserLikes,
   getUserByIdLikes,
 } from "../../../services/LikeService";
 import { horoscopeAstroCompatibility as horoscopeAstroCompatibilityService } from "../../../services/Apis/HoroscopeAstro";
 import { Posts } from "../../../components/Posts/Posts";
+import { Collapse, Text } from "@nextui-org/react";
 
 export const OthersProfile = () => {
   const { currentUser } = useContext(AuthContext);
@@ -57,6 +58,20 @@ export const OthersProfile = () => {
         return handleUserFollowers();
       })
       .catch((err) => console.error(err));
+  };
+
+  const handleCurrentUserLikes = () => {
+    getCurrentUserLikes()
+      .then((likes) => {
+        setCurrentUserLikes(likes);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleLike = (postId) => {
+    likePost(postId).then((res) => {
+      return handleCurrentUserLikes();
+    });
   };
 
   const handleUserFollowers = () => {
@@ -226,7 +241,22 @@ export const OthersProfile = () => {
 
                 <div className="d-flex justify-content-around text-center mb-3 py-2 border-top border-bottom">
                   <Buttons
-                    text="Compatibility"
+                    text={
+                      userFollowers.some(
+                        (follower) => follower.follower.id === currentUser.id
+                      ) &&
+                      userFolloweds.some(
+                        (followed) => followed.followed.id === currentUser.id
+                      ) ? (
+                        <p className="mb-0">
+                          Compatibility <i className="bi bi-unlock-fill"></i>
+                        </p>
+                      ) : (
+                        <p className="mb-0">
+                          Compatibility <i className="bi bi-lock-fill"></i>
+                        </p>
+                      )
+                    }
                     onClick={() => {
                       setShowHoroscopeAstroCompatibility(true);
                       showUserPosts && setShowUserPosts(false);
@@ -255,17 +285,25 @@ export const OthersProfile = () => {
                   />
                 </div>
 
-                <div style={{ width: "90vw" }}>
+                <div>
                   {showHoroscopeAstroCompatibility &&
                   horoscopeAstroCompatibility ? (
-                    <div>
-                      {horoscopeAstroCompatibility.map((sections) => (
-                        <div key={sections.header}>
-                          <p>{sections.header}</p>
-                          <p>{sections.text}</p>
-                        </div>
-                      ))}
-                    </div>
+                    userFollowers.some(
+                      (follower) => follower.follower.id === currentUser.id
+                    ) &&
+                    userFolloweds.some(
+                      (followed) => followed.followed.id === currentUser.id
+                    ) ? (
+                      <Collapse.Group>
+                        {horoscopeAstroCompatibility.map((sections) => (
+                          <Collapse title={sections.header}>
+                            <Text className="text-center">{sections.text}</Text>
+                          </Collapse>
+                        ))}
+                      </Collapse.Group>
+                    ) : (
+                      "Follow each other to know your compatibility!"
+                    )
                   ) : null}
                 </div>
 
@@ -283,6 +321,9 @@ export const OthersProfile = () => {
                             moonSign={user.moonSign.name}
                             ascendantSign={user.ascendantSign.name}
                             body={post.body}
+                            likeFn={() => {
+                              handleLike(post.id);
+                            }}
                             postId={post.id}
                             postImgs={post.images}
                             userId={post.user.id}
@@ -313,6 +354,9 @@ export const OthersProfile = () => {
                             moonSign={like.post.user.moonSign.name}
                             ascendantSign={like.post.user.ascendantSign.name}
                             body={like.post.body}
+                            likeFn={() => {
+                              handleLike(like.post.id);
+                            }}
                             postId={like.post.id}
                             postImgs={like.post.images}
                             showTrash={true}
