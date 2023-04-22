@@ -5,3 +5,34 @@ h1 {
     justify-content: center;
     display: flex;
 }
+.container-social {
+    background-color: #F8F9FA;
+}
+.content-wrapper {
+    margin-top: 50px;
+}
+/* Small devices (landscape phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .content-wrapper {
+        margin-top: 20px;
+    }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .container-social {
+        padding: 0;
+    }
+}
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .container-social {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container-social {
+        max-width: 1140px;
+    }
+}
