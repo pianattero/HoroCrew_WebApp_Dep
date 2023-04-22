@@ -1,7 +1,7 @@
 import { MDBCard, MDBCardBody } from "mdb-react-ui-kit";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Modal, useModal, Button, Text } from "@nextui-org/react";
+import { Modal, useModal, Button, Tooltip } from "@nextui-org/react";
 import Carousel from "react-bootstrap/Carousel";
 import { useNavigate } from "react-router-dom";
 import { getPostComments, getPostLikes } from "../../services/PostService";
@@ -46,6 +46,7 @@ export const Posts = ({
   });
 
   return (
+
     <div className="my-3">
       <MDBCard>
         <MDBCardBody>
@@ -65,12 +66,10 @@ export const Posts = ({
                 src={img}
                 style={{ height: "30px" }}
               />
-              <p className="mx-3 p-0 my-0 mt-1">
-                <small>
-                  <strong>
-                    {firstName} {lastName}
-                  </strong>
-                </small>
+              <p className="mx-3 p-0 my-0">
+                <strong>
+                  {firstName} {lastName}
+                </strong>
               </p>
             </div>
             <div>
@@ -160,7 +159,7 @@ export const Posts = ({
             </div>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            <div>
+            <div className="mb-3">
               <button style={{ border: "none" }} onClick={likeFn}>
                 {isLiked ? (
                   <i
@@ -185,6 +184,7 @@ export const Posts = ({
                   }}
                   className="bi bi-chat"
                 >
+                  {" "}
                   <small>{postComments}</small>
                 </i>
               </button>
@@ -198,12 +198,15 @@ export const Posts = ({
                 </button>
               ) : null}
             </div>
-            <p className="p-0 m-0 text-muted">
-              <small>
-                <em>{moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}</em>
-              </small>
-            </p>
           </div>
+          <p
+            className="p-0 m-0 text-muted"
+            style={{ right: "10px", bottom: "10px", position: "absolute" }}
+          >
+            <small>
+              <em>{moment(createdAt).format("MMMM Do YYYY, h:mm a")}</em>
+            </small>
+          </p>
         </MDBCardBody>
       </MDBCard>
     </div>

@@ -79,9 +79,12 @@ export const PostWithComments = () => {
   }, [postWithComments]);
 
   return (
-    <div>
+    <div
+      className="d-flex flex-column justify-content-center"
+      style={{ width: "100%" }}
+    >
       {postWithComments ? (
-        <div>
+        <div className="ms-3">
           <Posts
             img={postWithComments.post.user.image}
             firstName={postWithComments.post.user.firstName}
@@ -102,37 +105,40 @@ export const PostWithComments = () => {
               (likedPost) => likedPost.post.id === postWithComments.post.id
             )}
           />
-          <div>
-            <form onSubmit={handleSubmit}>
-              <Input
-                aria-labelledby="body"
-                name="body"
-                id="body"
-                width="200px"
-                type="text"
-                placeholder="Leave your comment!"
-                onChange={handleChange}
-                value={values.body}
-              />
-              <Buttons text="Comment" type="submit" />
-            </form>
-          </div>
-          <div className="mt-2">
-            {postWithComments.comments.map((comment) => (
-              <Comment
-                key={comment._id}
-                img={comment.user.image}
-                firstName={comment.user.firstName}
-                lastName={comment.user.lastName}
-                comment={comment.body}
-                date={comment.date}
-                userId={comment.user.id}
-                currentUser={currentUser.id}
-                deleteFn={() => {
-                  handleDelete(comment._id);
-                }}
-              />
-            ))}
+          <div style={{ width: "80%" }}>
+            <div>
+              <form onSubmit={handleSubmit}>
+                <Input
+                  aria-labelledby="body"
+                  name="body"
+                  id="body"
+                  width="70%"
+                  type="text"
+                  placeholder="Leave your comment!"
+                  onChange={handleChange}
+                  value={values.body}
+                />
+                <Buttons text="Comment" type="submit" />
+              </form>
+            </div>
+
+            <div className="mt-3">
+              {postWithComments.comments.map((comment) => (
+                <Comment
+                  key={comment._id}
+                  img={comment.user.image}
+                  firstName={comment.user.firstName}
+                  lastName={comment.user.lastName}
+                  comment={comment.body}
+                  date={comment.date}
+                  userId={comment.user.id}
+                  currentUser={currentUser.id}
+                  deleteFn={() => {
+                    handleDelete(comment._id);
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       ) : (

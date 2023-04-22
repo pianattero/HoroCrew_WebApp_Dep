@@ -1,7 +1,19 @@
-
-import { Animator, Fade, FadeIn, MoveIn, MoveOut, ScrollContainer, ScrollPage, Sticky, StickyIn, Zoom, ZoomIn, batch } from "react-scroll-motion"
+import {
+  Animator,
+  Fade,
+  FadeIn,
+  MoveIn,
+  MoveOut,
+  ScrollContainer,
+  ScrollPage,
+  Sticky,
+  StickyIn,
+  Zoom,
+  ZoomIn,
+  batch,
+} from "react-scroll-motion";
 import "./Home.css";
-import imgLogo from "../../../assets/images/Backgrounds/bgLogo.png"
+import imgLogo from "../../../assets/images/Backgrounds/bgLogo.png";
 import { Button, Grid, Link, Spacer } from "@nextui-org/react";
 
 import Galaxy from "../../../components/Backgrounds/backgrounGalaxy/BackgroundGalaxy";
@@ -9,6 +21,7 @@ import Galaxy from "../../../components/Backgrounds/backgrounGalaxy/BackgroundGa
 const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn());
 const FadeUp = batch(Fade(), MoveIn(), MoveOut(), Sticky());
 export const Home = () => {
+
     return (
 
         <>
@@ -19,7 +32,7 @@ export const Home = () => {
                     <Galaxy />
 
                     <Animator animation={batch(Sticky(), Fade(), MoveOut(0, -200))}>
-                        <img src={imgLogo} style={{ width: "70vh", height: "100%" }} />
+                        <img src={imgLogo} style={{ width: "60vh", height: "100%" }} />
                     </Animator>
                 </ScrollPage>
 
@@ -85,6 +98,5 @@ export const Home = () => {
 
     )
 }
-
 
 

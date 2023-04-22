@@ -12,12 +12,14 @@ export const Comment = ({
   deleteFn,
 }) => {
   return (
-    <div className="d-flex flex-column px-3 border-bottom">
+    <div className="d-flex flex-column p-3 border-bottom position-relative">
       <div className="d-flex justify-content-between">
         <div className="d-flex align-items-center">
-          <img style={{ width: "50px" }} src={img} />
-          <p className="mb-0">
-            {firstName} {lastName}
+          <img style={{ width: "25px" }} src={img} />
+          <p className="ms-2 mb-0">
+            <strong>
+              {firstName} {lastName}
+            </strong>
           </p>
         </div>
         {userId === currentUser ? (
@@ -29,12 +31,19 @@ export const Comment = ({
           </button>
         ) : null}
       </div>
-      <div className="d-flex justify-content-between ">
-        <p>{comment}</p>
-        <p className="text-muted">
-          <small>{moment(date).format("MMMM Do YYYY, h:mm:ss a")}</small>
+      <div className="my-3">
+        <p className="ms-3">
+          <small>{comment}</small>
         </p>
       </div>
+      <p
+        className="text-muted ms-3"
+        style={{ right: "10px", bottom: "0", position: "absolute" }}
+      >
+        <em>
+          <small>{moment(date).format("MMM D YY, h:mm a")}</small>
+        </em>
+      </p>
     </div>
   );
 };
