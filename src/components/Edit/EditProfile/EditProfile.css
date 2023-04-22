@@ -1,7 +1,7 @@
 .bodyBackground {
     background-color: #3c9de7;
     animation: bg-color 10s infinite;
-    position: fixed;
+    position: absolute;
     height: 400%;
     width: 100%;
 }
