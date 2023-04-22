@@ -4,10 +4,11 @@
     align-items: center;
     justify-content: end;
     margin-bottom: 5px;
+    margin-left: 10px;
 }
 
 .currentUserMsg p {
-    background-color: aqua;
+    background-color: rgba(143, 235, 224, 0.299);
     border-radius: 4px;
     padding: 5px 10px;
 }
@@ -16,11 +17,12 @@
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+    margin-right: 10px;
 
 }
 
 .othersMsg p {
-    background-color: brown;
+    background-color: rgba(45, 92, 109, 0.349);
     border-radius: 4px;
     padding: 5px 10px;
 }

@@ -1,4 +1,4 @@
-import { Input } from "@nextui-org/react";
+import { Input, Tooltip } from "@nextui-org/react";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
@@ -91,12 +91,16 @@ export const MessageSection = () => {
                       className="rounded-circle"
                       src={message.sender.image}
                     />
-                    <p className="mb-0 mx-2">{message.msg}</p>
-                    <small className="p-0 m-0 text-muted">
-                      <em>
-                        {moment(message.createdAt).format("DD/MM/YY - hh:mm")}
-                      </em>
-                    </small>
+                    <Tooltip
+                      content={moment(message.createdAt).format(
+                        "DD/MM/YY - h:mm a"
+                      )}
+                      placement={
+                        message.sender.id === currentUser.id ? "left" : "right"
+                      }
+                    >
+                      <p className="mb-0 mx-2">{message.msg}</p>
+                    </Tooltip>
                   </div>
                 ))
               : "No messages yet"}
