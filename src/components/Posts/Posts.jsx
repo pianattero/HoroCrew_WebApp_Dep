@@ -16,6 +16,7 @@ export const Posts = ({
   body,
   postImgs,
   createdAt,
+  showTrash,
   deleteFn,
   likeFn,
   isLiked,
@@ -49,7 +50,16 @@ export const Posts = ({
       <MDBCard>
         <MDBCardBody>
           <div className="d-flex align-items-center justify-content-between flex-wrap">
-            <div className="d-flex">
+            <div
+              className="d-flex"
+              onClick={() => {
+                {
+                  currentUser === userId
+                    ? navigate("/profile")
+                    : navigate(`/profile/${userId}`);
+                }
+              }}
+            >
               <img
                 className="border rounded-circle"
                 src={img}
@@ -111,8 +121,8 @@ export const Posts = ({
 
             <div>
               <Modal
-                width="80vw"
                 scroll
+                fullScreen
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
                 {...bindings}
@@ -120,11 +130,11 @@ export const Posts = ({
                 <Modal.Body className="d-flex justify-content-center align-items-center">
                   <Carousel variant="dark" className="text-center">
                     {postImgs.map((img) => (
-                      <Carousel.Item>
+                      <Carousel.Item key={img}>
                         <img
                           style={{
-                            maxHeight: "calc(100vh - 290px",
-                            maxWidth: "300px",
+                            maxHeight: "calc(100vh - 100px)",
+                            maxWidth: "calc(100vw - 100px)",
                             width: "auto",
                             height: "auto",
                           }}
@@ -138,9 +148,9 @@ export const Posts = ({
                 </Modal.Body>
                 <Modal.Footer className="pt-0">
                   <Button
-                    auto
-                    flat
+                    bordered
                     color="gradient"
+                    auto
                     onPress={() => setVisible(false)}
                   >
                     X
@@ -149,22 +159,19 @@ export const Posts = ({
               </Modal>
             </div>
           </div>
-          <div className="d-flex justify-content-between align-items-center mt-1">
+          <div className="d-flex justify-content-between align-items-center">
             <div>
               <button style={{ border: "none" }} onClick={likeFn}>
                 {isLiked ? (
                   <i
-                    className="bi bi-heart-fill me-3 d-flex align-items-center"
+                    className="bi bi-heart-fill me-3"
                     style={{ color: "#8FEBE0" }}
                   >
                     {" "}
                     <small>{postLikes}</small>
                   </i>
                 ) : (
-                  <i
-                    className="bi bi-heart me-3 d-flex"
-                    style={{ color: "#8FEBE0" }}
-                  >
+                  <i className="bi bi-heart me-3" style={{ color: "#8FEBE0" }}>
                     {" "}
                     <small>{postLikes}</small>
                   </i>
@@ -182,7 +189,7 @@ export const Posts = ({
                 </i>
               </button>
 
-              {userId === currentUser ? (
+              {userId === currentUser && showTrash ? (
                 <button style={{ border: "none" }} onClick={deleteFn}>
                   <i
                     className="bi bi-trash3-fill ms-3"

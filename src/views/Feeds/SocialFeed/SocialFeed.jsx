@@ -10,8 +10,6 @@ import {
 import AuthContext from "../../../context/AuthContext";
 import { getCurrentUserLikes } from "../../../services/LikeService";
 import { NewPost } from "../../Post/NewPost";
-
-import { newPostSchema } from "../../../utils/schemas/post.schema";
 import "./SocialFeed.css";
 import { SearchBar } from "../../SearchBar/SearchBar";
 
@@ -48,15 +46,10 @@ export const SocialFeed = () => {
         setloading(false);
       })
       .catch((err) => console.error(err));
-  });
+  }, []);
 
   useEffect(() => {
-    getAllPosts()
-      .then((posts) => {
-        setPosts(posts);
-        setloading(false);
-      })
-      .catch((err) => console.error(err));
+    handleAllPosts();
 
     getCurrentUserLikes()
       .then((likes) => {
@@ -72,7 +65,11 @@ export const SocialFeed = () => {
           <h1>See what's happening!</h1>
           <SearchBar />
           <MDBRow>
-            <NewPost />
+            <NewPost
+              refreshPosts={() => {
+                handleAllPosts();
+              }}
+            />
             <MDBCol>
               <div>
                 {!loading
@@ -85,8 +82,10 @@ export const SocialFeed = () => {
                         sunSign={post.user.sunSign.name}
                         moonSign={post.user.moonSign.name}
                         ascendantSign={post.user.ascendantSign.name}
+                        body={post.body}
                         postImgs={post.images}
                         createdAt={post.createdAt}
+                        showTrash={true}
                         deleteFn={() => {
                           handleDelete(post.id);
                         }}

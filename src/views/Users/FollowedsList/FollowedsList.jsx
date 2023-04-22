@@ -31,9 +31,9 @@ export const FollowedsList = () => {
         currentUserFolloweds.length > 0 ? (
           <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
             <h1>Followers</h1>
-            {currentUserFolloweds.map((followed) => (
-              <MDBRow key={followed._id}>
-                <MDBCol>
+            <MDBRow>
+              <MDBCol>
+                {currentUserFolloweds.map((followed) => (
                   <UserBrief
                     user={followed.followed}
                     img={followed.followed.image}
@@ -41,9 +41,9 @@ export const FollowedsList = () => {
                     text="View Profile"
                     onClick={() => navigate(`/profile/${followed.followed.id}`)}
                   />
-                </MDBCol>
-              </MDBRow>
-            ))}
+                ))}
+              </MDBCol>
+            </MDBRow>
           </MDBContainer>
         ) : (
           "No followeds yet"

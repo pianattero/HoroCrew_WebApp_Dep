@@ -5,7 +5,7 @@ import AuthContext from "../../context/AuthContext";
 import {
   commentPost,
   deleteComment,
-  getPostComments,
+  likePost,
   postWithComments as postWithCommentsService,
 } from "../../services/PostService";
 import { Comment } from "../../components/Comment/Comment";
@@ -13,6 +13,7 @@ import { Buttons } from "../../components/Button/Button";
 import { Input } from "@nextui-org/react";
 import { commentSchema } from "../../utils/schemas/comment.schema";
 import { useFormik } from "formik";
+import { getCurrentUserLikes } from "../../services/LikeService";
 
 const initialValues = {
   body: "",
@@ -23,43 +24,62 @@ export const PostWithComments = () => {
   const { id } = useParams();
 
   const [postWithComments, setpostWithComments] = useState(null);
+  const [currentUserLikes, setCurrentUserLikes] = useState([]);
 
-  const { values, handleChange, handleSubmit } = useFormik({
+  const { values, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: initialValues,
     validateOnChange: false,
     validationSchema: commentSchema,
     onSubmit: (values) => {
       commentPost({ body: values.body, postId: postWithComments.post.id })
         .then((res) => {
-          console.log(res);
+          handlePostWithComments();
         })
         .catch((err) => console.error(err));
+      resetForm({ values: "" });
     },
   });
+
+  const handleCurrentUserLikes = () => {
+    getCurrentUserLikes()
+      .then((likes) => {
+        setCurrentUserLikes(likes);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleLike = (postId) => {
+    likePost(postId).then((res) => {
+      return handleCurrentUserLikes();
+    });
+  };
 
   const handleDelete = (commentId) => {
     deleteComment(commentId)
       .then((res) => {
-        getPostComments(postWithComments.post.id).then((res) => {
-          console.log(res);
-        });
+        handlePostWithComments();
       })
       .catch((err) => console.log(err));
   };
 
+  const handlePostWithComments = () => {
+    postWithCommentsService(id)
+      .then((post) => {
+        setpostWithComments(post);
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     if (!postWithComments) {
-      postWithCommentsService(id)
-        .then((post) => {
-          setpostWithComments(post);
-        })
-        .catch((err) => console.error(err));
+      handlePostWithComments();
     }
+
+    handleCurrentUserLikes();
   }, [postWithComments]);
 
   return (
     <div>
-      <h1>Post with comments</h1>
       {postWithComments ? (
         <div>
           <Posts
@@ -72,9 +92,15 @@ export const PostWithComments = () => {
             body={postWithComments.post.body}
             postImgs={postWithComments.post.images}
             createdAt={postWithComments.post.createdAt}
+            likeFn={() => {
+              handleLike(postWithComments.post.id);
+            }}
             postId={postWithComments.post.id}
             userId={postWithComments.post.user.id}
             currentUser={currentUser.id}
+            isLiked={currentUserLikes.some(
+              (likedPost) => likedPost.post.id === postWithComments.post.id
+            )}
           />
           <div>
             <form onSubmit={handleSubmit}>
@@ -100,7 +126,7 @@ export const PostWithComments = () => {
                 lastName={comment.user.lastName}
                 comment={comment.body}
                 date={comment.date}
-                userId={postWithComments.post.user.id}
+                userId={comment.user.id}
                 currentUser={currentUser.id}
                 deleteFn={() => {
                   handleDelete(comment._id);
