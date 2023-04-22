@@ -9,6 +9,7 @@ import AuthContext from "../../../context/AuthContext";
 import { editSchema } from "../../../utils/schemas/edit.schema";
 
 
+
 export const EditProfile = () => {
     const { currentUser, getCurrentUser } = useContext(AuthContext);
 
