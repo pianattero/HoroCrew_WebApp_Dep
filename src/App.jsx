@@ -44,6 +44,7 @@ function App() {
           path="/login"
           element={
             <>
+              <FormBg />
               <Login />
             </>
           }

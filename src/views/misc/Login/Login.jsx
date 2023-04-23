@@ -55,9 +55,7 @@ const Login = () => {
 
     return (
         <div className="login-bg">
-            <div className="glowingDiv">
-                <GlowingDiv />
-            </div>
+
             <div>
                 <h1 className="h1-login">Login</h1>
             </div>
