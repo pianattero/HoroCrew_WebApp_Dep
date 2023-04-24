@@ -14,7 +14,7 @@ import { Input } from "@nextui-org/react";
 import { commentSchema } from "../../utils/schemas/comment.schema";
 import { useFormik } from "formik";
 import { getCurrentUserLikes } from "../../services/LikeService";
-import { PostSk } from "../../components/Skeletons/PostSk";
+import { PostSk } from "../../components/Skeletons/PostSk/PostSk";
 
 const initialValues = {
   body: "",
