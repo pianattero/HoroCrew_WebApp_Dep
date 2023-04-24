@@ -30,7 +30,6 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.10.0",
     "react-scroll-motion": "^0.3.2",
-    "react-starfield-animation": "^1.0.1",
     "socket.io-client": "^4.6.1",
     "tailwind": "^4.0.0",
     "vue-skeleton-loading": "^1.0.2",
