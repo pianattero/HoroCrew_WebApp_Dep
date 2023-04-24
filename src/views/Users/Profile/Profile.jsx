@@ -216,8 +216,8 @@ export const Profile = () => {
                     <div className="text-center">
                       <p className="mb-2">We will miss you!</p>
                       <img
-                        style={{ width: "180px" }}
-                        src="https://lens-storage.storage.googleapis.com/png/397a7e3600ba49308fd6b49a6132fe58"
+                        style={{ width: "180px", filter: "grayscale(100%)" }}
+                        src="https://lens-storage.storage.googleapis.com/png/cc6a85c6a1564ba083819474584e3ed9"
                       />
                     </div>
                   </Modal.Body>
