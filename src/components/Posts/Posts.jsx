@@ -96,8 +96,8 @@ export const Posts = ({
           <div>
             <p className="p-0 m-0 mt-3">{body}</p>
           </div>
-          <div className="d-flex  align-items-start mb-3 overflow-scroll">
-            <div className="d-flex mt-2 ">
+          <div className="d-flex align-items-start mb-3 overflow-scroll">
+            <div className="d-flex mt-2">
               {postImgs.map((img) => (
                 <button
                   className="px-1 border-0"

@@ -5,11 +5,9 @@ import FormControl from "../../../components/FormControl/FormControl";
 import Input from "../../../components/Input/Input";
 import AuthContext from "../../../context/AuthContext";
 import { login as loginService } from "../../../services/AuthService";
-import { setAccessToken } from "../../../stores/AccessTokenStore";
 import { loginSchema } from "../../../utils/schemas/login.schema";
 import { Link } from "react-router-dom";
 import "./Login.css";
-import { GlowingDiv } from "../../../components/Backgrounds/BackgroundLogin/BackgroundLogin";
 
 const initialValues = {
   email: "",

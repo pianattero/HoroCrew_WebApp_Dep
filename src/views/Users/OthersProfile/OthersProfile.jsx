@@ -26,7 +26,7 @@ import {
 } from "../../../services/LikeService";
 import { horoscopeAstroCompatibility as horoscopeAstroCompatibilityService } from "../../../services/Apis/HoroscopeAstro";
 import { Posts } from "../../../components/Posts/Posts";
-import { Card, Collapse, Grid, Text } from "@nextui-org/react";
+import { Card, Collapse, Grid, Text, Tooltip } from "@nextui-org/react";
 import { ProfileSk } from "../../../components/Skeletons/ProfileSk/ProfileSk";
 
 export const OthersProfile = () => {
@@ -200,12 +200,17 @@ export const OthersProfile = () => {
                           (followed) => followed.followed.id === currentUser.id
                         ) ? (
                           <div className="me-2">
-                            <i
-                              onClick={() => {
-                                navigate(`/chat/${user.id}`);
-                              }}
-                              className="bi bi-chat-right-text-fill"
-                            ></i>
+                            <Tooltip
+                              content={`chat with ${user.firstName}`}
+                              placement="top"
+                            >
+                              <i
+                                onClick={() => {
+                                  navigate(`/chat/${user.id}`);
+                                }}
+                                className="bi bi-chat-right-text-fill"
+                              ></i>
+                            </Tooltip>
                           </div>
                         ) : null}
                       </div>
@@ -224,13 +229,17 @@ export const OthersProfile = () => {
                       </MDBCardText>
                     </div>
                     <div className="px-3">
-                      {userFollowers.length}
+                      <MDBCardText className="mb-0 h5">
+                        {userFollowers.length}{" "}
+                      </MDBCardText>
                       <MDBCardText className="small text-muted mb-0">
                         Followers
                       </MDBCardText>
                     </div>
                     <div>
-                      {userFolloweds.length}
+                      <MDBCardText className="mb-0 h5">
+                        {userFolloweds.length}
+                      </MDBCardText>
                       <MDBCardText className="small text-muted mb-0">
                         Following
                       </MDBCardText>

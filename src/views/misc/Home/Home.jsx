@@ -8,13 +8,12 @@ import {
   ScrollPage,
   Sticky,
   StickyIn,
-  Zoom,
   ZoomIn,
   batch,
 } from "react-scroll-motion";
 import "./Home.css";
 import imgLogo from "../../../assets/images/Backgrounds/bgLogo.png";
-import { Button, Grid, Link, Spacer } from "@nextui-org/react";
+import { Button, Grid, Link } from "@nextui-org/react";
 
 import Galaxy from "../../../components/Backgrounds/backgrounGalaxy/BackgroundGalaxy";
 
@@ -29,6 +28,7 @@ export const Home = () => {
 
           <Animator animation={batch(Sticky(), Fade(), MoveOut(0, -200))}>
             <img src={imgLogo} style={{ width: "60vh", height: "100%" }} />
+            <div class="scroll-down"></div>
           </Animator>
         </ScrollPage>
 
@@ -54,6 +54,7 @@ export const Home = () => {
             <span
               style={{
                 fontFamily: "fantasy",
+                textAlign: "center",
                 fontSize: "40px",
                 color: "white",
               }}
@@ -79,78 +80,48 @@ export const Home = () => {
                 animation={MoveIn(-1000, 0)}
                 style={{ fontFamily: "fantasy" }}
               >
-                🐐Capricorn♑
-              </Animator>
-              <Animator
-                animation={MoveIn(1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                🐮Taurus♉
-              </Animator>
-              <Animator
-                animation={MoveIn(1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                🐟Pisces♓
-              </Animator>
-              <Animator
-                animation={MoveOut(1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                👯Gemini♊
-              </Animator>
-              <Animator
-                animation={MoveOut(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                {" "}
-                🏹Sagitarius♐{" "}
-              </Animator>
-              <Animator
-                animation={MoveOut(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                {" "}
-                ⚖️Libra♎{" "}
+                Connect with friends
               </Animator>
               <Animator
                 animation={MoveIn(-1000, 0)}
                 style={{ fontFamily: "fantasy" }}
               >
-                🌊Aquarius♒
+                ·
               </Animator>
+
               <Animator
                 animation={MoveIn(1000, 0)}
                 style={{ fontFamily: "fantasy" }}
               >
-                🐏Aries♈
+                Get your daily fortune
               </Animator>
+
+              <Animator
+                animation={MoveIn(-1000, 0)}
+                style={{ fontFamily: "fantasy" }}
+              >
+                ·
+              </Animator>
+
+              <Animator
+                animation={MoveIn(-1000, 0)}
+                style={{ fontFamily: "fantasy" }}
+              >
+                Know your compatibilities
+              </Animator>
+
+              <Animator
+                animation={MoveIn(-1000, 0)}
+                style={{ fontFamily: "fantasy" }}
+              >
+                ·
+              </Animator>
+
               <Animator
                 animation={MoveIn(1000, 0)}
                 style={{ fontFamily: "fantasy" }}
               >
-                💸Virgo♍
-              </Animator>
-              <Animator
-                animation={MoveOut(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                {" "}
-                🦂Scorpio♏{" "}
-              </Animator>
-              <Animator
-                animation={MoveOut(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                {" "}
-                🦀Cancer♋
-              </Animator>
-              <Animator
-                animation={MoveOut(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                {" "}
-                🦁Leo♌
+                And much more!
               </Animator>
             </span>
           </div>
@@ -158,7 +129,7 @@ export const Home = () => {
         <ScrollPage>
           <Galaxy />
           <Animator animation={batch(Fade(), Sticky())}>
-            <Grid.Container gap={5}>
+            <Grid.Container gap={2}>
               <Grid>
                 <Link href="/signup">
                   <Button size="lg" color="success" auto ghost>
@@ -169,7 +140,7 @@ export const Home = () => {
 
               <Grid>
                 <Link href="/login">
-                  <Button size="lg" shadow color="primary" auto>
+                  <Button size="lg" shadow auto>
                     Already have an account? Sign In!
                   </Button>
                 </Link>

@@ -1,4 +1,4 @@
-import { Input, Tooltip } from "@nextui-org/react";
+import { Input, Loading, Tooltip } from "@nextui-org/react";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
@@ -113,10 +113,20 @@ export const MessageSection = () => {
                   </div>
                 ))
               ) : (
-                "No messages yet"
+                <div className="text-center">
+                  <h4 className="mb-3">
+                    There are no messages yet... Start a chat!
+                  </h4>
+                  <img
+                    style={{ width: "180px", opacity: "0.7" }}
+                    src="https://lens-storage.storage.googleapis.com/png/f7ca934144f847ae84a8e1757acec053"
+                  />
+                </div>
               )
             ) : (
-              <Card />
+              <div style={{ position: "absolute", left: "0" }}>
+                <Card />
+              </div>
             )}
           </div>
           <form onSubmit={handleSubmit}>
@@ -135,7 +145,9 @@ export const MessageSection = () => {
           </form>
         </div>
       ) : (
-        "loading"
+        <div style={{ position: "absolute", top: "50%", left: "50%" }}>
+          <Loading size="lg" type="points" />
+        </div>
       )}
     </div>
   );
