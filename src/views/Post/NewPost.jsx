@@ -74,6 +74,7 @@ export const NewPost = ({ refreshPosts }) => {
 
         <div className="d-flex justify-content-between border-end border-start border-bottom rounded">
           <input
+            style={{ width: "20px" }}
             aria-describedby="image"
             className="custom-file-input"
             id="image"
