@@ -38,7 +38,6 @@ export const Home = () => {
           <Animator animation={ZoomInScrollOut}>
             <span
               style={{
-                fontFamily: "fantasy",
                 fontSize: "40px",
                 color: "white",
               }}
@@ -53,7 +52,6 @@ export const Home = () => {
           <Animator animation={FadeUp}>
             <span
               style={{
-                fontFamily: "fantasy",
                 textAlign: "center",
                 fontSize: "40px",
                 color: "white",
@@ -76,53 +74,24 @@ export const Home = () => {
             }}
           >
             <span style={{ fontSize: "30px" }}>
-              <Animator
-                animation={MoveIn(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
+              <Animator animation={MoveIn(-1000, 0)}>
                 Connect with friends
               </Animator>
-              <Animator
-                animation={MoveIn(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                ·
-              </Animator>
+              <Animator animation={MoveIn(-1000, 0)}>·</Animator>
 
-              <Animator
-                animation={MoveIn(1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
+              <Animator animation={MoveIn(1000, 0)}>
                 Get your daily fortune
               </Animator>
 
-              <Animator
-                animation={MoveIn(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                ·
-              </Animator>
+              <Animator animation={MoveIn(-1000, 0)}>·</Animator>
 
-              <Animator
-                animation={MoveIn(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
+              <Animator animation={MoveIn(-1000, 0)}>
                 Know your compatibilities
               </Animator>
 
-              <Animator
-                animation={MoveIn(-1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                ·
-              </Animator>
+              <Animator animation={MoveIn(-1000, 0)}>·</Animator>
 
-              <Animator
-                animation={MoveIn(1000, 0)}
-                style={{ fontFamily: "fantasy" }}
-              >
-                And much more!
-              </Animator>
+              <Animator animation={MoveIn(1000, 0)}>And much more!</Animator>
             </span>
           </div>
         </ScrollPage>
