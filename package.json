@@ -20,6 +20,7 @@
     "mdb-react-ui-kit": "^6.0.0",
     "mdbreact": "^5.2.0",
     "moment": "^2.29.4",
+    "placeholder-loading": "^0.6.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-chat-bubble": "^0.8.7",
@@ -32,6 +33,7 @@
     "react-starfield-animation": "^1.0.1",
     "socket.io-client": "^4.6.1",
     "tailwind": "^4.0.0",
+    "vue-skeleton-loading": "^1.0.2",
     "yup": "^1.1.0"
   },
   "devDependencies": {

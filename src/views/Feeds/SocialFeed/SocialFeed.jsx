@@ -1,7 +1,7 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Posts } from "../../../components/Posts/Posts";
-import "./SocialFeed.css"
+import "./SocialFeed.css";
 import {
   deletePost,
   getAllPosts,
@@ -12,6 +12,7 @@ import { getCurrentUserLikes } from "../../../services/LikeService";
 import { NewPost } from "../../Post/NewPost";
 import "./SocialFeed.css";
 import { SearchBar } from "../../SearchBar/SearchBar";
+import { PostSk } from "../../../components/Skeletons/PostSk/PostSk";
 
 export const SocialFeed = () => {
   const { currentUser } = useContext(AuthContext);
@@ -59,24 +60,24 @@ export const SocialFeed = () => {
   }, []);
 
   return (
-
-    <div className="scroll-bg min-vh-100 container-social">
-
-
+    <div
+      className="scroll-bg min-vh-100 container-social"
+      style={{ maxWidth: "100vw", height: "100vh" }}
+    >
       <MDBContainer className=" d-flex flex-column justify-content-start align-items-center">
         <div className="content-wrapper">
-          <h1>See what's happening!</h1>
+          <h1 className="mb-4">See what's happening!</h1>
           <SearchBar />
-          <MDBRow >
+          <MDBRow>
             <NewPost
               refreshPosts={() => {
                 handleAllPosts();
               }}
             />
             <MDBCol>
-              <div>
-                {!loading
-                  ? posts.map((post) => (
+              <div style={{ maxWidth: "95vw" }}>
+                {!loading ? (
+                  posts.map((post) => (
                     <Posts
                       key={post.id}
                       img={post.user.image}
@@ -103,7 +104,9 @@ export const SocialFeed = () => {
                       )}
                     />
                   ))
-                  : "Loading Post"}
+                ) : (
+                  <PostSk />
+                )}
               </div>
             </MDBCol>
           </MDBRow>

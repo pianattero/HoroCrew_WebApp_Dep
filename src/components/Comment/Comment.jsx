@@ -31,10 +31,8 @@ export const Comment = ({
           </button>
         ) : null}
       </div>
-      <div className="my-3">
-        <p className="ms-3">
-          <small>{comment}</small>
-        </p>
+      <div className="my-2">
+        <p className="ms-3">{comment}</p>
       </div>
       <p
         className="text-muted ms-3"

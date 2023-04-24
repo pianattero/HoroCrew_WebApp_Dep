@@ -1,6 +1,6 @@
 import { Input, Tooltip } from "@nextui-org/react";
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import { getMessages, createMessage } from "../../services/MessageService";
 import { Buttons } from "../../components/Button/Button";
@@ -9,6 +9,7 @@ import "./MessageSection.css";
 import moment from "moment";
 import { useFormik } from "formik";
 import { msgSchema } from "../../utils/schemas/message.schema";
+import { Card } from "../Skeletons/Card/Card";
 
 const initialValues = {
   msg: "",
@@ -17,6 +18,8 @@ const initialValues = {
 export const MessageSection = () => {
   const { currentUser } = useContext(AuthContext);
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const [messages, setMessages] = useState();
 
@@ -59,14 +62,19 @@ export const MessageSection = () => {
 
     setInterval(() => {
       handleMessages();
-    }, 5000);
+    }, 3000);
   }, [currentUser, user]);
 
   return (
     <div>
       {user ? (
         <div>
-          <div className="d-flex align-items-center border rounded m-1 w-100">
+          <div
+            onClick={() => {
+              navigate(`/profile/${user.id}`);
+            }}
+            className="d-flex align-items-center border rounded m-1 w-100"
+          >
             <img style={{ width: "70px" }} src={user.image} />
             <h3 className="mb-0 ms-2">
               {user.firstName} {user.lastName}
@@ -76,8 +84,9 @@ export const MessageSection = () => {
             className=" overflow-scroll border rounded m-1 py-3 px-1"
             style={{ minHeight: "70vh", maxHeight: "70vh" }}
           >
-            {messages
-              ? messages.map((message) => (
+            {messages ? (
+              messages.length > 0 ? (
+                messages.map((message) => (
                   <div
                     key={message._id}
                     className={
@@ -103,7 +112,12 @@ export const MessageSection = () => {
                     </Tooltip>
                   </div>
                 ))
-              : "No messages yet"}
+              ) : (
+                "No messages yet"
+              )
+            ) : (
+              <Card />
+            )}
           </div>
           <form onSubmit={handleSubmit}>
             <div className="d-flex justify-content-end m-1">

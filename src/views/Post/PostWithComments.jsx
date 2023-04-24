@@ -84,7 +84,7 @@ export const PostWithComments = () => {
       style={{ width: "100%" }}
     >
       {postWithComments ? (
-        <div className="ms-3">
+        <div>
           <Posts
             img={postWithComments.post.user.image}
             firstName={postWithComments.post.user.firstName}

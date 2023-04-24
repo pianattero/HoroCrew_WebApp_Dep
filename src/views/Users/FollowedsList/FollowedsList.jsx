@@ -1,6 +1,7 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Card } from "../../../components/Skeletons/Card/Card";
 import { UserBrief } from "../../../components/UserBrief/UserBrief";
 import AuthContext from "../../../context/AuthContext";
 
@@ -26,11 +27,11 @@ export const FollowedsList = () => {
       .catch((err) => console.error(err));
   }, [currentUser]);
   return (
-    <div className="min-vh-100">
+    <div className="min-vh-100 position-realtive">
+      <h1>Followeds</h1>
       {!loading ? (
         currentUserFolloweds.length > 0 ? (
           <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
-            <h1>Followers</h1>
             <MDBRow>
               <MDBCol>
                 {currentUserFolloweds.map((followed) => (
@@ -49,7 +50,9 @@ export const FollowedsList = () => {
           "No followeds yet"
         )
       ) : (
-        "Loading"
+        <div style={{ width: "100vw" }}>
+          <Card />
+        </div>
       )}
     </div>
   );

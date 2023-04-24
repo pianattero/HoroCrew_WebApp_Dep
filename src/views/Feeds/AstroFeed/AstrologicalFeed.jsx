@@ -1,4 +1,4 @@
-import { NextUIProvider, Card, Text, Button } from "@nextui-org/react";
+import { NextUIProvider, Card, Text, Button, Grid } from "@nextui-org/react";
 import { AppBack } from "../../../components/Backgrounds/BackgroundSigns/Background";
 import "./AstroFeed.css";
 
@@ -7,17 +7,19 @@ import AuthContext from "../../../context/AuthContext";
 import {
   horoscopeAstroInfo as horoscopeAstroInfoService,
   horoscopeAstroTarot as horoscopeAstroTarotService,
-  horoscopeAstroDaily as horoscopeAstroDailyService,
 } from "../../../services/Apis/HoroscopeAstro";
+
+import { dailyHoro as dailyHoroService } from "../../../services/Apis/Horostory";
 import { AboutSunSign } from "../../../components/AboutSunSign/AboutSunSign";
-import { ScrollContainer, ScrollPage } from "react-scroll-motion";
+import { ScrollContainer } from "react-scroll-motion";
 import { TarotInfo } from "../../../components/TarotInfo/TarotInfo";
+import { DailyHoro } from "../../../components/DailyHoro/DailyHoro";
 
 const AstroFeed = () => {
   const { currentUser } = useContext(AuthContext);
 
-  const [horoscopeAstroDaily, setHoroscopeAstroDaily] = useState(null);
-  const [showHoroscopeAstroDaily, setShowHoroscopeAstroDaily] = useState(false);
+  const [dailyHoro, setdailyHoro] = useState(null);
+  const [showdailyHoro, setShowdailyHoro] = useState(false);
 
   const [horoscopeAstroInfo, setHoroscopeAstroInfo] = useState(null);
   const [showHoroscopeAstroInfo, setShowHoroscopeAstroInfo] = useState(false);
@@ -27,11 +29,6 @@ const AstroFeed = () => {
 
   useEffect(() => {
     if (!currentUser) return;
-    horoscopeAstroDailyService(currentUser.sunSign.name.toLowerCase())
-      .then((response) => {
-        setHoroscopeAstroDaily(response.data);
-      })
-      .catch((err) => console.error(err));
 
     horoscopeAstroInfoService(currentUser.sunSign.name.toLowerCase())
       .then((response) => {
@@ -39,9 +36,16 @@ const AstroFeed = () => {
       })
       .catch((err) => console.error(err));
 
-    horoscopeAstroTarotService()
+    horoscopeAstroTarotService(currentUser.sunSign.name.toLowerCase())
       .then((response) => {
         setHoroscopeAstroTarot(response.data.res);
+      })
+      .catch((err) => console.error(err));
+
+    dailyHoroService(currentUser.sunSign.name.toLowerCase())
+      .then((response) => {
+        console.log(response.data);
+        setdailyHoro(response.data);
       })
       .catch((err) => console.error(err));
   }, [currentUser]);
@@ -71,9 +75,14 @@ const AstroFeed = () => {
                 backgroundColor: "transparent",
               }}
             >
+              <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
+                <Text h3 color="white">
+                  Sun Sign Info
+                </Text>
+              </Card.Header>
               <Card.Body css={{ p: 0 }}>
                 <Card.Image
-                  src="https://www.iberoshow.com.es/u/fotografias/m/2022/2/27/f720x404-42996_84568_5050.jpg"
+                  src="https://nypost.com/wp-content/uploads/sites/2/2021/11/astrology-sun-moon-rising-signs-1-copy.jpg?quality=75&strip=all"
                   width="100%"
                   height="100%"
                   objectFit="cover"
@@ -98,11 +107,11 @@ const AstroFeed = () => {
                   onPress={() => {
                     setShowHoroscopeAstroInfo(!showHoroscopeAstroInfo);
                     setShowHoroscopeAstroTarot(false);
-                    setShowHoroscopeAstroDaily(false);
+                    setShowdailyHoro(false);
                   }}
                 >
                   <a className="text-dark" href="#sunInfo">
-                    Want to know more about you Sun Sign?
+                    Want to know more about your Sun Sign?
                     {showHoroscopeAstroInfo ? (
                       <i className="bi bi-caret-up-fill ms-2"></i>
                     ) : (
@@ -159,15 +168,26 @@ const AstroFeed = () => {
                   color="dark"
                   target="_blank"
                   onPress={() => {
-                    setShowHoroscopeAstroDaily(!ShowHoroscopeAstroDaily);
+                    setShowdailyHoro(!showdailyHoro);
                     setShowHoroscopeAstroInfo(false);
                     setShowHoroscopeAstroTarot(false);
                   }}
                 >
-                  Get your horoscope today
+                  <a className="text-dark" href="#daily">
+                    Get your horoscope today
+                    {showdailyHoro ? (
+                      <i className="bi bi-caret-up-fill ms-2"></i>
+                    ) : (
+                      <i className="bi bi-caret-down-fill ms-2"></i>
+                    )}
+                  </a>
                 </Button>
               </Card.Footer>
             </Card>
+          </div>
+
+          <div id="daily">
+            {showdailyHoro ? <DailyHoro horoscope={dailyHoro} /> : null}
           </div>
 
           <div>
@@ -181,7 +201,7 @@ const AstroFeed = () => {
             >
               <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                 <Text h3 color="white">
-                  Daily Tarot
+                  Tarot Draw
                 </Text>
               </Card.Header>
               <Card.Body css={{ p: 0 }}>
@@ -210,7 +230,7 @@ const AstroFeed = () => {
                   target="_blank"
                   onPress={() => {
                     setShowHoroscopeAstroTarot(!showHoroscopeAstroTarot);
-                    setShowHoroscopeAstroDaily(false);
+                    setShowdailyHoro(false);
                     setShowHoroscopeAstroInfo(false);
                   }}
                 >
@@ -228,11 +248,19 @@ const AstroFeed = () => {
           </div>
 
           <div id="tarot">
-            {showHoroscopeAstroTarot
-              ? horoscopeAstroTarot.map((tarotCard) => (
-                  <TarotInfo tarot={tarotCard} key={tarotCard.sequence} />
-                ))
-              : null}
+            <Grid.Container justify="center">
+              {showHoroscopeAstroTarot
+                ? horoscopeAstroTarot.map((tarotCard) => (
+                    <Grid xs={12} sm={4} md={4} lg={4}>
+                      <TarotInfo
+                        className=""
+                        tarot={tarotCard}
+                        key={tarotCard.sequence}
+                      />
+                    </Grid>
+                  ))
+                : null}
+            </Grid.Container>
           </div>
         </div>
       </ScrollContainer>

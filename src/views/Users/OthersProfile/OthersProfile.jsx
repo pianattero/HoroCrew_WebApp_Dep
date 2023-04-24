@@ -26,7 +26,8 @@ import {
 } from "../../../services/LikeService";
 import { horoscopeAstroCompatibility as horoscopeAstroCompatibilityService } from "../../../services/Apis/HoroscopeAstro";
 import { Posts } from "../../../components/Posts/Posts";
-import { Collapse, Text } from "@nextui-org/react";
+import { Card, Collapse, Grid, Text } from "@nextui-org/react";
+import { ProfileSk } from "../../../components/Skeletons/ProfileSk/ProfileSk";
 
 export const OthersProfile = () => {
   const { currentUser } = useContext(AuthContext);
@@ -130,20 +131,20 @@ export const OthersProfile = () => {
   }, [currentUser, user]);
 
   return (
-    <div>
+    <div
+      className="gradient-custom-2"
+      style={{
+        minHeight: "100vh",
+      }}
+    >
       {user ? (
-        <div
-          className="gradient-custom-2"
-          style={{
-            minHeight: "100vh",
-          }}
-        >
-          <MDBContainer className="py-3 h-100">
-            <MDBRow className="justify-content-center align-items-center h-100">
+        <div className="py-3 mx-2 h-100 w-100">
+          <MDBContainer>
+            <MDBRow className="h-100 w-100">
               <MDBCol>
                 <MDBCard>
                   <div
-                    className="rounded d-flex flex-row profilBg"
+                    className="rounded d-flex profilBg"
                     style={{
                       paddingBottom: "50px",
                     }}
@@ -170,16 +171,24 @@ export const OthersProfile = () => {
                               (follower) =>
                                 follower.follower.id === currentUser.id
                             ) ? (
-                              <span className="d-flex text-danger">
+                              <span className="d-flex text-dark">
                                 <p className="me-2 mb-0">Unfollow</p>
                                 <i className="bi bi-person-fill-dash"></i>
                               </span>
                             ) : (
-                              <span className="d-flex text-danger">
+                              <span className="d-flex text-white">
                                 <p className="me-2 mb-0">Follow</p>
                                 <i className="bi bi-person-fill-add"></i>
                               </span>
                             )
+                          }
+                          bg={
+                            userFollowers.some(
+                              (follower) =>
+                                follower.follower.id === currentUser.id
+                            )
+                              ? "transparent"
+                              : "#252525"
                           }
                           onClick={handleFollow}
                         />
@@ -207,31 +216,21 @@ export const OthersProfile = () => {
                 <div className="py-4 text-black">
                   <div className="d-flex justify-content-end text-center py-1">
                     <div>
-                      <MDBCardText className="mb-1 h5">
-                        {!userPosts.length ? "0" : userPosts.length}
+                      <MDBCardText className="mb-0 h5">
+                        {userPosts.length}
                       </MDBCardText>
                       <MDBCardText className="small text-muted mb-0">
                         Posts
                       </MDBCardText>
                     </div>
                     <div className="px-3">
-                      <Link
-                        to="/profile/:id/followers"
-                        className="mb-1 h5 text-decoration-none"
-                      >
-                        {!userFollowers.length ? "0" : userFollowers.length}
-                      </Link>
+                      {userFollowers.length}
                       <MDBCardText className="small text-muted mb-0">
                         Followers
                       </MDBCardText>
                     </div>
                     <div>
-                      <Link
-                        to="/profile/:id/followeds"
-                        className="mb-1 h5 text-decoration-none"
-                      >
-                        {!userFolloweds.length ? "0" : userFolloweds.length}
-                      </Link>
+                      {userFolloweds.length}
                       <MDBCardText className="small text-muted mb-0">
                         Following
                       </MDBCardText>
@@ -241,22 +240,8 @@ export const OthersProfile = () => {
 
                 <div className="d-flex justify-content-around text-center mb-3 py-2 border-top border-bottom">
                   <Buttons
-                    text={
-                      userFollowers.some(
-                        (follower) => follower.follower.id === currentUser.id
-                      ) &&
-                      userFolloweds.some(
-                        (followed) => followed.followed.id === currentUser.id
-                      ) ? (
-                        <p className="mb-0">
-                          Compatibility <i className="bi bi-unlock-fill"></i>
-                        </p>
-                      ) : (
-                        <p className="mb-0">
-                          Compatibility <i className="bi bi-lock-fill"></i>
-                        </p>
-                      )
-                    }
+                    text="Compatibility"
+                    bg={showHoroscopeAstroCompatibility ? "#8FEBE0" : null}
                     onClick={() => {
                       setShowHoroscopeAstroCompatibility(true);
                       showUserPosts && setShowUserPosts(false);
@@ -265,7 +250,8 @@ export const OthersProfile = () => {
                   />
 
                   <Buttons
-                    text="Their Posts"
+                    text="Their posts"
+                    bg={showUserPosts ? "#8FEBE0" : null}
                     onClick={() => {
                       setShowUserPosts(true);
                       showHoroscopeAstroCompatibility &&
@@ -275,7 +261,8 @@ export const OthersProfile = () => {
                   />
 
                   <Buttons
-                    text="Their Likes"
+                    text="Their likes"
+                    bg={showUserLikes ? "#8FEBE0" : null}
                     onClick={() => {
                       setShowUserLikes(true);
                       showHoroscopeAstroCompatibility &&
@@ -285,29 +272,67 @@ export const OthersProfile = () => {
                   />
                 </div>
 
-                <div>
-                  {showHoroscopeAstroCompatibility &&
-                  horoscopeAstroCompatibility ? (
-                    userFollowers.some(
-                      (follower) => follower.follower.id === currentUser.id
-                    ) &&
-                    userFolloweds.some(
-                      (followed) => followed.followed.id === currentUser.id
-                    ) ? (
-                      <Collapse.Group>
-                        {horoscopeAstroCompatibility.map((sections) => (
-                          <Collapse title={sections.header}>
-                            <Text className="text-center">{sections.text}</Text>
+                {showHoroscopeAstroCompatibility &&
+                horoscopeAstroCompatibility ? (
+                  <Grid.Container gap={3} justify="center">
+                    <Grid xs={12} sm={6} md={6} lg={6}>
+                      <Card>
+                        <div className="text-center p-3">
+                          <h5 className="mb-3">
+                            <strong>
+                              {horoscopeAstroCompatibility[0].header}
+                            </strong>
+                          </h5>
+                          <p>{horoscopeAstroCompatibility[0].text}</p>
+                        </div>
+                      </Card>
+                    </Grid>
+                    <Grid xs={12} sm={6} md={6} lg={6}>
+                      {userFollowers.some(
+                        (follower) => follower.follower.id === currentUser.id
+                      ) &&
+                      userFolloweds.some(
+                        (followed) => followed.followed.id === currentUser.id
+                      ) ? (
+                        <Collapse.Group splitted>
+                          <Collapse
+                            subtitle={horoscopeAstroCompatibility[1].header}
+                          >
+                            <Text>{horoscopeAstroCompatibility[1].text}</Text>
                           </Collapse>
-                        ))}
-                      </Collapse.Group>
-                    ) : (
-                      "Follow each other to know your compatibility!"
-                    )
-                  ) : null}
-                </div>
+                          <Collapse
+                            subtitle={horoscopeAstroCompatibility[2].header}
+                          >
+                            <Text>{horoscopeAstroCompatibility[2].text}</Text>
+                          </Collapse>
+                          <Collapse
+                            subtitle={horoscopeAstroCompatibility[3].header}
+                          >
+                            <Text>{horoscopeAstroCompatibility[3].text}</Text>
+                          </Collapse>
+                          <Collapse
+                            subtitle={horoscopeAstroCompatibility[4].header}
+                          >
+                            <Text>{horoscopeAstroCompatibility[4].text}</Text>
+                          </Collapse>
+                        </Collapse.Group>
+                      ) : (
+                        <div className="text-center">
+                          <h4 className="mb-3">
+                            Follow each other to unlock more info about your
+                            sign compatibility!
+                          </h4>
+                          <img
+                            style={{ width: "180px", opacity: "0.7" }}
+                            src="https://lens-storage.storage.googleapis.com/png/d17e798658ed41a5a8737ee6c4276299"
+                          />
+                        </div>
+                      )}
+                    </Grid>
+                  </Grid.Container>
+                ) : null}
 
-                <div style={{ width: "90vw" }}>
+                <div>
                   {showUserPosts ? (
                     userPosts.length > 0 ? (
                       <div>
@@ -335,12 +360,24 @@ export const OthersProfile = () => {
                         ))}
                       </div>
                     ) : (
-                      `${user.firstName} doesn't have any posts yet!`
+                      <div className="text-center">
+                        <h4 className="mb-3">
+                          {user.firstName} doesn't have any posts yet!
+                        </h4>
+                        <img
+                          style={{
+                            width: "180px",
+                            opacity: "0.7",
+                            filter: "grayscale(100%)",
+                          }}
+                          src="https://lens-storage.storage.googleapis.com/png/7094275a165d452686a0e44722af53c3"
+                        />
+                      </div>
                     )
                   ) : null}
                 </div>
 
-                <div style={{ width: "90vw" }}>
+                <div>
                   {showUserLikes ? (
                     userLikes.length > 0 ? (
                       <div>
@@ -369,7 +406,19 @@ export const OthersProfile = () => {
                         ))}
                       </div>
                     ) : (
-                      `${user.firstName} doesn't have any likes yet!`
+                      <div className="text-center">
+                        <h4 className="mb-3">
+                          {user.firstName} doesn't have any likes yet!
+                        </h4>
+                        <img
+                          style={{
+                            width: "180px",
+                            opacity: "0.7",
+                            filter: "grayscale(100%)",
+                          }}
+                          src="https://lens-storage.storage.googleapis.com/png/6980dfc2d7654972be6813f2bf3aa95b"
+                        />
+                      </div>
                     )
                   ) : null}
                 </div>
@@ -378,7 +427,7 @@ export const OthersProfile = () => {
           </MDBContainer>
         </div>
       ) : (
-        "Loading Profile"
+        <ProfileSk />
       )}
     </div>
   );
