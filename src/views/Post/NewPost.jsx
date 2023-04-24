@@ -53,7 +53,7 @@ export const NewPost = ({ refreshPosts }) => {
     },
   });
   return (
-    <div>
+    <div style={{ maxWidth: "95vw" }}>
       <form
         onSubmit={handleSubmit}
         className="box"

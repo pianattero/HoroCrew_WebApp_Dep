@@ -27,7 +27,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <div id="searchbar">
+    <div id="searchbar" style={{ maxWidth: "95vw" }}>
       <div className="input-group mb-2">
         <input
           type="search"
