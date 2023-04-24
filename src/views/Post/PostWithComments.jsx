@@ -14,6 +14,7 @@ import { Input } from "@nextui-org/react";
 import { commentSchema } from "../../utils/schemas/comment.schema";
 import { useFormik } from "formik";
 import { getCurrentUserLikes } from "../../services/LikeService";
+import { PostSk } from "../../components/Skeletons/PostSk";
 
 const initialValues = {
   body: "",
@@ -142,7 +143,7 @@ export const PostWithComments = () => {
           </div>
         </div>
       ) : (
-        "Loading"
+        <PostSk />
       )}
     </div>
   );
