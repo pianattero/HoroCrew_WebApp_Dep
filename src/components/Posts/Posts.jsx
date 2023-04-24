@@ -1,10 +1,11 @@
 import { MDBCard, MDBCardBody } from "mdb-react-ui-kit";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Modal, useModal, Button, Tooltip } from "@nextui-org/react";
+import { Modal, useModal } from "@nextui-org/react";
 import Carousel from "react-bootstrap/Carousel";
 import { useNavigate } from "react-router-dom";
 import { getPostComments, getPostLikes } from "../../services/PostService";
+import "./Post.css";
 
 export const Posts = ({
   img,
@@ -46,8 +47,7 @@ export const Posts = ({
   });
 
   return (
-
-    <div className="my-3">
+    <div className="my-3 mx-2 post-social">
       <MDBCard>
         <MDBCardBody>
           <div className="d-flex align-items-center justify-content-between flex-wrap">
@@ -72,28 +72,26 @@ export const Posts = ({
                 </strong>
               </p>
             </div>
-            <div>
-              <span className="d-flex  align-items-center justify-content-center pt-2">
-                <div className="pe-2">
-                  <small>
-                    <i className="bi bi-sun px-1"></i>
-                    <em>{sunSign}</em>
-                  </small>
-                </div>
-                <div className="px-2">
-                  <small>
-                    <i className="bi bi-moon px-1"></i>
-                    <em>{moonSign}</em>
-                  </small>
-                </div>
-                <div className="px-2">
-                  <small>
-                    <i className="bi bi-arrow-up px-1"></i>
-                    <em>{ascendantSign}</em>
-                  </small>
-                </div>
-              </span>
-            </div>
+            <span className="d-flex  align-items-center justify-content-center">
+              <div className="pe-2">
+                <small>
+                  <i className="bi bi-sun px-1"></i>
+                  <em>{sunSign}</em>
+                </small>
+              </div>
+              <div className="px-2">
+                <small>
+                  <i className="bi bi-moon px-1"></i>
+                  <em>{moonSign}</em>
+                </small>
+              </div>
+              <div className="px-2">
+                <small>
+                  <i className="bi bi-arrow-up px-1"></i>
+                  <em>{ascendantSign}</em>
+                </small>
+              </div>
+            </span>
           </div>
           <div>
             <p className="p-0 m-0 mt-3">{body}</p>
@@ -121,6 +119,7 @@ export const Posts = ({
             <div>
               <Modal
                 scroll
+                closeButton
                 fullScreen
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
@@ -145,21 +144,11 @@ export const Posts = ({
                     ))}
                   </Carousel>
                 </Modal.Body>
-                <Modal.Footer className="pt-0">
-                  <Button
-                    bordered
-                    color="gradient"
-                    auto
-                    onPress={() => setVisible(false)}
-                  >
-                    X
-                  </Button>
-                </Modal.Footer>
               </Modal>
             </div>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            <div className="mb-3">
+            <div className="mb-2">
               <button style={{ border: "none" }} onClick={likeFn}>
                 {isLiked ? (
                   <i

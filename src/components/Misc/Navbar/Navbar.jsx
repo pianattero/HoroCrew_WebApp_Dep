@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { logout as logoutToken } from "../../../stores/AccessTokenStore";
 import logo from "../../../assets/images/Backgrounds/logoIcon.png";
 import React, { useState } from "react";
 import "./Navbar.css";
@@ -33,32 +32,22 @@ export const Navbar = () => {
           <ul>
             <li>
               <NavLink to="/socialFeed" onClick={handleClick}>
-                Social Feed <i className="bi bi-person-video2"></i>
+                Social Feed
               </NavLink>
             </li>
             <li>
               <NavLink to="/astroFeed" onClick={handleClick}>
-                Astro Feed <i className="bi bi-brightness-low"></i>
+                Astro Feed
               </NavLink>
             </li>
             <li>
               <NavLink to="/profile" onClick={handleClick}>
-                <i className="bi bi-person-circle"></i>
+                Profile
               </NavLink>
             </li>
             <li>
               <NavLink to="/notifications" onClick={handleClick}>
                 <i className="bi bi-bell-fill"></i>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/profile/edit-profile" onClick={handleClick}>
-                <i className="bi bi-gear-fill"></i>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/" onClick={logoutToken}>
-                Logout <i className="bi bi-box-arrow-right"></i>
               </NavLink>
             </li>
           </ul>

@@ -5,7 +5,7 @@ export const Buttons = ({ text, onClick, bg, type = "button" }) => {
     <button
       className="border rounded py-1 px-2 btn-sm btn m-1"
       type={type}
-      style={{ backgroundColor: { bg } }}
+      style={{ backgroundColor: bg }}
       onClick={onClick}
     >
       {text}

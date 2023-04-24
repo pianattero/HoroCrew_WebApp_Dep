@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TarotInfo.css";
 
+import back from "../../../public/images/tarot/back.png";
 import tarot1 from "../../../public/images/tarot/tarot1.png";
 import tarot2 from "../../../public/images/tarot/tarot2.png";
 import tarot3 from "../../../public/images/tarot/tarot3.png";
@@ -12,9 +13,17 @@ export const TarotInfo = ({ tarot }) => {
   const tarotCards = [tarot1, tarot2, tarot3, tarot4, tarot5, tarot6];
   const randomCard = tarotCards[Math.floor(Math.random() * tarotCards.length)];
 
+  const [image, setImage] = useState(back);
+
   return (
-    <div className="m-3" style={{ width: "80vw" }}>
-      <img style={{ height: "300px" }} src={randomCard} />
+    <div className="my-3">
+      <img
+        style={{ height: "300px" }}
+        src={image}
+        onClick={() => {
+          setImage(randomCard);
+        }}
+      />
       <h3 className="mt-3">
         {tarot.name} || {tarot.sequence}
       </h3>

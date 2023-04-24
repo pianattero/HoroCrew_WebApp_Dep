@@ -14,6 +14,7 @@ import {
   getReadNotifications,
 } from "../../../services/NotificationService";
 import { Link, useNavigate } from "react-router-dom";
+import { Card } from "../../../components/Skeletons/Card/Card";
 
 export const Notifications = () => {
   const { currentUser } = useContext(AuthContext);
@@ -43,14 +44,14 @@ export const Notifications = () => {
   }, [currentUser]);
 
   return (
-    <div className="min-vh-100">
+    <div className="min-vh-100 position-realtive">
+      <h1>Notifications</h1>
       {notifications ? (
         <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
-          <h1>Notifications</h1>
           {notifications.map((notification) => (
             <MDBRow key={notification._id}>
               <MDBCol className="mt-2">
-                <MDBCard style={{ borderRadius: "15px", width: "400px" }}>
+                <MDBCard style={{ borderRadius: "15px" }}>
                   <MDBCardBody className="p-3">
                     <div className="d-flex align-items-center text-black">
                       <div className="flex-shrink-0 d-flex align-items-center">
@@ -106,7 +107,9 @@ export const Notifications = () => {
           ))}
         </MDBContainer>
       ) : (
-        "Loading notifications"
+        <div style={{ width: "100vw" }}>
+          <Card />
+        </div>
       )}
     </div>
   );

@@ -47,20 +47,3 @@ const options3 = {
 export const horoscopeAstroTarot = () => {
   return axios.request(options3);
 };
-
-//GET DAILY HORO
-
-const options4 = {
-  method: "GET",
-  url: "https://horoscope-astrology.p.rapidapi.com/horoscope",
-  params: { day: "today", sunsign: "libra" },
-  headers: {
-    "X-RapidAPI-Key": "6559f51934msh7dcfedf306aad75p10c4f0jsnbf280656577f",
-    "X-RapidAPI-Host": "horoscope-astrology.p.rapidapi.com",
-  },
-};
-
-export const horoscopeAstroDaily = (sunsign) => {
-  options4.params.sunsign = sunsign;
-  return axios.request(options4);
-};

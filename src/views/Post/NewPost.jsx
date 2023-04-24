@@ -59,15 +59,12 @@ export const NewPost = ({ refreshPosts }) => {
         className="box"
         encType="multipart/form-data"
       >
-        <FormControl
-          text="Make a New Post!"
-          error={touched.body && errors.body}
-          htmlFor="body"
-        >
+        <FormControl error={touched.body && errors.body} htmlFor="body">
           <Input
             id="body"
             name="body"
             type="textarea"
+            placeholder="Make a New Post!"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.body}
@@ -75,10 +72,7 @@ export const NewPost = ({ refreshPosts }) => {
           />
         </FormControl>
 
-        <div
-          style={{ textAlign: "center", verticalAlign: "middle" }}
-          className="d-flex align-items-center justify-content-center"
-        >
+        <div className="d-flex justify-content-between border-end border-start border-bottom rounded">
           <input
             aria-describedby="image"
             className="custom-file-input"
@@ -96,9 +90,14 @@ export const NewPost = ({ refreshPosts }) => {
             disabled={isSubmitting}
             text={
               isSubmitting ? (
-                <Loading type="spinner" color="currentColor" size="md" />
+                <Loading
+                  type="spinner"
+                  color="currentColor"
+                  size="md"
+                  className="pt-1"
+                />
               ) : (
-                <strong>Add New Post</strong>
+                <strong>Publish</strong>
               )
             }
           />
