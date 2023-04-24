@@ -22,7 +22,7 @@ const FadeUp = batch(Fade(), MoveIn(), MoveOut(), Sticky());
 export const Home = () => {
   return (
     <>
-      <ScrollContainer>
+      <ScrollContainer className="home-page">
         <ScrollPage page={0}>
           <Galaxy />
 
